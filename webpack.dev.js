@@ -5,6 +5,7 @@ module.exports = merge(common, {
     mode: 'development',
     devtool: 'eval-source-map',
     devServer: {
-        watchFiles: ['./src/main.js']
+        watchFiles: ['./src/main.js'],
+        open: true
     },
 });
