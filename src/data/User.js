@@ -1,13 +1,13 @@
-import { taskHolder } from "../interfaces/TaskInterface";
+import { expHolder } from "../interfaces/ExpInterface.js";
+import { taskHolder } from "../interfaces/TaskInterface.js";
 
-class User {
+export class User {
+    id = crypto.randomUUID();
     name;
-    STARTING_LEVEL = 0;
-    XP = 0
 
     constructor(name) {
         this.name = name;
-        this.taskHolder = taskHolder;
+        Object.assign(this, expHolder, taskHolder);
     }
 
     get name() {
