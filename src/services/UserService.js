@@ -1,15 +1,18 @@
-import { Task } from "../data/Task";
-
 export const UserService = (function(){
 
     const assignTask = (task, target) => {
-        target.addTask(new Task('Code', 'Finish Module 1', "10-25-2025", "High"));
+        target.addTask(task);
     }
 
-    const showTasks = (target) => {
-        target.showTasks();
+    const removeTask = (task, target) => {
+        target.removeTask(task);
+    }
+
+    // name choice is poor please refactor name lol
+    const checkTask = (task, target) => {
+        target.complete(task);
     }
 
 
-    return { assignTask, showTasks };
-})();
+    return { assignTask, checkTask };
+})();   
