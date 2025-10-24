@@ -12,15 +12,15 @@ module.exports = {
     module: {
         rules: [
             {
-                test: "/\.css$/i",
+                test: /\.css$/i,
                 use: ["style-loader", "css-loader"]
             }, 
             {
-                test: "/\.(png|svg|gif|jpeg|jpg)$/i",
+                test: /\.(png|svg|gif|jpeg|jpg)$/i,
                 use: "asset/resource"
             },
             {
-                test: "/\.(woff2|woff|otf|ttf|eot)$/i",
+                test: /\.(woff2|woff|otf|ttf|eot)$/i,
                 use: "asset/resource"
             }
         ]
