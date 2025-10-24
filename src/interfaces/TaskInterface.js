@@ -10,8 +10,8 @@ export const taskHolder = {
         return this.tasks;
     },
 
-    showTasks(tasks) {
-        tasks.forEach(task => {
+    showTasks() {
+        this.tasks.forEach(task => {
             console.log(task);
         });
     }
