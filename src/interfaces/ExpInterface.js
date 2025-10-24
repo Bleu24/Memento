@@ -1,12 +1,14 @@
-export const expHolder = {
-    xp: 0,
+export const createExpHolder = () => {
+    let xp = 0;
 
-    addXP(value) {
-        this.xp += value;
-    },
-
-    reduceXP(value) {
-        thix.xp -= value;
+    const addXP = (value) => {
+        xp += value;
     }
 
-}
+    const reduceXP = (value) => {
+        xp -= value;
+    }
+
+    return { xp, addXP, reduceXP };
+
+};
