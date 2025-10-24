@@ -6,4 +6,4 @@ const bry = new User("Bryan");
 
 UserService.assignTask(undefined, bry);
 
-UserService.showTasks(bry);
+console.log(bry.tasks);
