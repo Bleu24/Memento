@@ -1,18 +1,15 @@
-export const taskHolder = {
-    tasks: [],
+export const createTaskHolder = () => {
 
-    addTask(task) {
-        this.tasks.push(task);
-    },
+    let tasks = [];
+    let completedTasks = [];
 
-    removeTask(selectedTask) {
-        this.tasks = this.tasks.filter(task => task.id !== selectedTask.id);
-        return this.tasks;
-    },
-
-    showTasks() {
-        this.tasks.forEach(task => {
-            console.log(task);
-        });
+    const addTask = (task) => {
+        tasks.push(task);
     }
+
+    const removeTask = (selectedTask) => {
+        tasks = tasks.filter(task => task.id !== selectedTask.id);
+    }
+
+    return { tasks, completedTasks, addTask, removeTask };
 }
