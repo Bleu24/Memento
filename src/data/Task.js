@@ -14,7 +14,7 @@ export class Task {
         this.dueDate = format(dueDate, "dd-MM-yy");
         this.priority = priority;
     }
-
+    
     get title() {
         return this.title;
     }
