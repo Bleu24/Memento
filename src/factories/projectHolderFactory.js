@@ -10,7 +10,15 @@ export const createProjectHolder = () => {
         projects = projects.filter(project => project.id !== selectedProject.id);
     }
 
+    const addTasksToProject = (tasks, selectedProject) => {
+        projects.forEach(project => {
+            if(project.id === selectedProject.id) {
+                project.push(tasks);
+            }
+        });
+    }
+
     const getProjects = () => structuredClone(projects);
 
-    return { addProject, removeProject, getProjects };
+    return { addProject, removeProject, addTasksToProject, getProjects };
 }
