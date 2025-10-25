@@ -9,7 +9,7 @@ export class User {
 
     constructor(name) {
         this.name = name;
-        Object.assign(this, createExpHolder(`xp-user-${this.id}`), createProjectHolder(`project-user-${this.id}`), createTaskHolder(`task-user-${this.id}`));
+        Object.assign(this, createExpHolder(), createProjectHolder(), createTaskHolder());
     }
 
     get name() {
