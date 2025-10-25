@@ -1,3 +1,5 @@
+import { createTaskHolder } from "../factories/taskHolderFactory";
+
 export class Project {
     id = crypto.randomUUID();
     title;
@@ -6,6 +8,7 @@ export class Project {
     constructor(title, desc) {
         this.title = title;
         this.desc = desc;
+        Object.assign(this, createTaskHolder());
     }
 
     get title() {
