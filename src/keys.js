@@ -1,0 +1,1 @@
+export const storageKey = 'user__018adcb1-57d3-4c21-a2c7-d26cecb1d507';
