@@ -12,6 +12,14 @@ export class User {
         Object.assign(this, createExpHolder(), createProjectHolder(), createTaskHolder());
     }
 
+    get id() {
+        return this.id;
+    }
+
+    set id(id) {
+        this.id = id;
+    }
+
     get name() {
         return this.name;
     }
