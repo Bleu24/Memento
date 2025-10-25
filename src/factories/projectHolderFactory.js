@@ -1,4 +1,4 @@
-export const createProjectHolder = (storageKey = "defaultProjects") => {
+export const createProjectHolder = () => {
 
     let projects = [];
 
@@ -10,17 +10,7 @@ export const createProjectHolder = (storageKey = "defaultProjects") => {
         projects = projects.filter(project => project.id !== selectedProject.id);
     }
 
-    const saveProjects = () => {
-        const stringify = JSON.stringify(projects);
-        localStorage.setItem(storageKey, stringify);
-    }
-
-    const loadProjects = () => {
-        const savedProjects = localStorage.getItem(storageKey);
-        projects = JSON.parse(savedProjects);
-    }
-
     const getProjects = () => structuredClone(projects);
 
-    return { addProject, removeProject, saveProjects, loadProjects, getProjects };
+    return { addProject, removeProject, getProjects };
 }
