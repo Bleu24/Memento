@@ -1,5 +1,5 @@
-export const createExpHolder = () => {
-    let xp = 0;
+export const createExpHolder = (initialXp = 0) => {
+    let xp = initialXp;
 
     const addXP = (value) => {
         xp += value;
@@ -13,10 +13,6 @@ export const createExpHolder = () => {
         return xp;
     }
 
-    const setXP = (value) => {
-        xp = value;
-    }
-
-    return { addXP, reduceXP, getXP, setXP };
+    return { addXP, reduceXP, getXP };
 
 };
