@@ -1,4 +1,4 @@
-export const createExpHolder = (storageKey = "defaultExp") => {
+export const createExpHolder = () => {
     let xp = 0;
 
     const addXP = (value) => {
@@ -9,16 +9,6 @@ export const createExpHolder = (storageKey = "defaultExp") => {
         xp -= value;
     }
 
-    const saveXP = () => {
-        const stringify = JSON.stringify(xp);
-        localStorage.setItem(storageKey, stringify);
-    }
-
-    const loadXP = () => {
-        const savedXP = localStorage.getItem(storageKey);
-        xp = JSON.parse(savedXP);
-    }
-
-    return { xp, addXP, reduceXP, saveXP, loadXP };
+    return { addXP, reduceXP };
 
 };
