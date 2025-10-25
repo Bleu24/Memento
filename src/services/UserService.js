@@ -10,9 +10,13 @@ export const UserService = (function(){
 
     // name choice is poor please refactor name lol
     const checkTask = (task, target) => {
-        target.complete(task);
+        target.completeTask(task);
+    }
+
+    const saveTasksToStorage = (target) => {
+        target.save();
     }
 
 
-    return { assignTask, checkTask };
+    return { assignTask, removeTask, checkTask };
 })();   
