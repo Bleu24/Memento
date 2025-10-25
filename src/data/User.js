@@ -4,20 +4,20 @@ import { createTaskHolder } from "../factories/taskHolderFactory.js";
 
 
 export class User {
-    name;
+    #name;
 
     constructor(name, id = crypto.randomUUID(), xp = 0) {
         this.id = id;
-        this.name = name;
+        this.#name = name;
         Object.assign(this, createExpHolder(xp), createProjectHolder(), createTaskHolder());
     }
 
     get name() {
-        return this.name;
+        return this.#name;
     }
 
     set name(name) {
-        this.name = name;
+        this.#name = name;
     }
 
 }
