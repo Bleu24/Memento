@@ -13,10 +13,14 @@ export const UserService = (function(){
         target.completeTask(task);
     }
 
-    const saveTasksToStorage = (target) => {
-        target.save();
+    const saveProfileToStorage = (repo, target) => {
+        repo.save(target);
+    }
+
+    const loadProfileFromStorage = (repo) => {
+        return repo.load();
     }
 
 
-    return { assignTask, removeTask, checkTask };
+    return { assignTask, removeTask, checkTask, saveProfileToStorage, loadProfileFromStorage };
 })();   
