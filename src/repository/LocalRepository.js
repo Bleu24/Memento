@@ -1,14 +1,14 @@
 import { User } from "../data/User";
-import { UserService } from "../services/UserService";
 
 export const LocalRepository = (function () {
 
     const save = (target) => {
         const state = {
             id: target.id,
-            target,
+            name: target.name,
+            xp: target.getXP(),
             projects: target.getProjects(),
-            task: target.getTasks()
+            tasks: target.getTasks()
         }
 
         const stringify = JSON.stringify(state);
@@ -19,8 +19,10 @@ export const LocalRepository = (function () {
     const load = () => {
         const savedState = localStorage.getItem(`user__${target.id}`);
         const parsedState = JSON.parse(savedState);
-        const user = new User(parsedState.target.name);
-        parsedState.task.forEach(t => user.addTask(t));
+        const user = new User(parsedState.name);
+        user.id = parsedState.id;
+        user.setXP(parsedState.xp);
+        parsedState.tasks.forEach(t => user.addTask(t));
         parsedState.projects.forEach(p => user.addProject(p));
         return user;
     }
