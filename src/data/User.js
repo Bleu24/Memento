@@ -1,5 +1,7 @@
-import { createExpHolder } from "../interfaces/ExpInterface.js";
-import { createTaskHolder } from "../interfaces/TaskInterface.js";
+import { createProjectHolder } from "../factories/projectHolderFactory.js";
+import { createExpHolder } from "../factories/expHolderFactory.js";
+import { createTaskHolder } from "../factories/taskHolderFactory.js";
+
 
 export class User {
     id = crypto.randomUUID();
@@ -7,7 +9,7 @@ export class User {
 
     constructor(name) {
         this.name = name;
-        Object.assign(this, createExpHolder(), createTaskHolder());
+        Object.assign(this, createExpHolder(`xp-user-${this.id}`), createProjectHolder(`project-user-${this.id}`), createTaskHolder(`task-user-${this.id}`));
     }
 
     get name() {
