@@ -8,8 +8,7 @@ export const UserService = (function(){
         target.removeTask(task);
     }
 
-    // name choice is poor please refactor name lol
-    const checkTask = (task, target) => {
+    const completeTask = (task, target) => {
         target.completeTask(task);
     }
 
@@ -22,5 +21,7 @@ export const UserService = (function(){
     }
 
 
-    return { assignTask, removeTask, checkTask, saveProfileToStorage, loadProfileFromStorage };
+
+
+    return { assignTask, removeTask, completeTask, saveProfileToStorage, loadProfileFromStorage };
 })();   
