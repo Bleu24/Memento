@@ -21,9 +21,9 @@ export const createTaskHolder = () => {
         });
     }
 
-    const completeTask = (selectedTask) => {
-        completedTasks.push(selectedTask);
-        tasks = tasks.filter(task => task.id !== selectedTask.id);
+    const completeTask = (completedTask) => {
+        completedTasks.push(completedTask);
+        tasks = tasks.filter(task => task.id !== completedTask.id);
     }
 
     const getTasks = () => structuredClone(tasks);
