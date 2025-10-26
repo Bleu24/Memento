@@ -1,7 +1,13 @@
+import { Task } from "../classes/Task";
+
 export const createTaskHolder = () => {
 
     let tasks = [];
     let completedTasks = [];
+
+    const createTask = () => {
+        return new Task()
+    }
 
     const addTask = (task) => {
         tasks.push(task);
