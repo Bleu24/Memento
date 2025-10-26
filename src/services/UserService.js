@@ -1,4 +1,7 @@
+import { Notifications } from "../classes/Notifications";
+
 export const UserService = (function(){
+
 
     const assignTask = (task, target) => {
         target.addTask(task);
