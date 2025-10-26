@@ -23,4 +23,12 @@ export class Notifications {
         this.listeners[event] = this.listeners[event].filter(cb => cb !== callback);
     }
 
+    static once(event, callback) {
+        const wrapper = (data) => {
+            callback(data);
+            this.unsubscribe(event, wrapper);
+        }
+        this.subscribe(event, wrapper);
+    }
 }
+
