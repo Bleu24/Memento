@@ -1,4 +1,4 @@
-export const createExpHolder = (initialXp = 0) => {
+export const createExpHolder = (initialXp) => {
     let xp = initialXp;
 
     const addXP = (value) => {
