@@ -1,12 +1,12 @@
-import { Task } from "../classes/Task";
+import { Task } from "../classes/Task.js";
 
 export const createTaskHolder = () => {
 
     let tasks = [];
     let completedTasks = [];
 
-    const createTask = () => {
-        return new Task()
+    const createTask = (title, description, dueDate, priority) => {
+        return new Task(null, title, description, dueDate, priority)
     }
 
     const addTask = (task) => {
@@ -19,8 +19,8 @@ export const createTaskHolder = () => {
 
     const editTask = (selectedTask, changes) => {
         tasks.forEach(task => {
-            if(task.id === selectedTask.id) {
-                for (const key in task ) {
+            if (task.id === selectedTask.id) {
+                for (const key in task) {
                     task[key] = changes[key];
                 }
             }
@@ -35,5 +35,5 @@ export const createTaskHolder = () => {
     const getTasks = () => structuredClone(tasks);
     const getCompletedTasks = () => structuredClone(completedTasks);
 
-    return { addTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks };
+    return { createTask, addTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks };
 }
