@@ -1,5 +1,5 @@
 import { format } from "date-fns";
-import { Notifications } from "./Notifications";
+import { Notifications } from "./Notifications.js";
 
 export class Task {
     #id;
