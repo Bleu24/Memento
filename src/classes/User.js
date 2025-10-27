@@ -8,13 +8,13 @@ export class User {
     #name;
     #id;
 
-    constructor( id, name, xp, level) {
-        const invalidXp = typeof xp !== number || xp > 0 || Number.isNaN(xp);
-        const invalidLevel = typeof level !== number || level > 0 || Number.isNaN(level);
-        const xpHolder = createExpHolder(xp);
+    constructor(id, name, xp, level) {
+        const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
+        const invalidLevel = typeof level !== "number" || level < 0 || Number.isNaN(level);
         if (invalidXp) xp = 0;
-        if(invalidLevel) level = 0
-        this.id = id ? id : crypto.randomUUID();
+        if (invalidLevel) level = 0;
+        const xpHolder = createExpHolder(xp);
+        this.#id = id ? id : crypto.randomUUID();
         this.#name = name;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
     }
@@ -33,5 +33,6 @@ export class User {
     get id() {
         return this.#id;
     }
+
 
 }
