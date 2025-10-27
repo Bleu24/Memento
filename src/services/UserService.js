@@ -1,6 +1,6 @@
 import { Notifications } from "../classes/Notifications";
 
-export const UserService = (function(){
+export const UserService = (function () {
 
 
     const assignTask = (task, target) => {
@@ -23,8 +23,13 @@ export const UserService = (function(){
         return repo.load();
     }
 
+    const createTaskForUser = (target, task) => {
+        target.createTask(...task);
+        Notifications.emit("task:created", { ...task });
+    }
 
 
 
-    return { assignTask, removeTask, completeTask, saveProfileToStorage, loadProfileFromStorage };
+
+    return { assignTask, removeTask, completeTask, saveProfileToStorage, loadProfileFromStorage, createTaskForUser };
 })();   
