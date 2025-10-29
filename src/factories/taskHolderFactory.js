@@ -5,12 +5,17 @@ export const createTaskHolder = () => {
     let tasks = [];
     let completedTasks = [];
 
+    const serialize = (task) => {
+        const { addXP, reduceXP, getXP, ...rest } = task;
+        return structuredClone(rest);
+    }
+
     const createTask = (title, description, dueDate, priority) => {
         return new Task(null, title, description, dueDate, priority)
     }
 
     const addTask = (task) => {
-        tasks.push(task);
+        tasks.push(serialize(task));
     }
 
     const removeTask = (selectedTask) => {
@@ -27,10 +32,10 @@ export const createTaskHolder = () => {
         });
     }
 
-    
+
 
     const completeTask = (completedTask) => {
-        completedTasks.push(completedTask);
+        completedTasks.push(serialize(completedTask));
         tasks = tasks.filter(task => task.id !== completedTask.id);
     }
 
