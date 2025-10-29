@@ -27,6 +27,8 @@ export const createTaskHolder = () => {
         });
     }
 
+    
+
     const completeTask = (completedTask) => {
         completedTasks.push(completedTask);
         tasks = tasks.filter(task => task.id !== completedTask.id);
