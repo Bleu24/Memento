@@ -1,31 +1,33 @@
-import { Notifications } from "../classes/Notifications";
+import { Notifications } from "../classes/Notifications.js";
 
 export const UserService = (function () {
 
 
-    const assignTask = (task, target) => {
-        target.addTask(task);
+    const assignTask = (task, user) => {
+        user.addTask(task);
     }
 
-    const removeTask = (task, target) => {
-        target.removeTask(task);
+    const removeTask = (task, user) => {
+        user.removeTask(task);
     }
 
-    const completeTask = (task, target) => {
-        target.completeTask(task);
+    const completeTask = (task, user) => {
+        user.completeTask(task);
+        Notifications.emit("task:completed", { task, user });
     }
 
-    const saveProfileToStorage = (repo, target) => {
-        repo.save(target);
+    const saveProfileToStorage = (repo, user) => {
+        repo.save(user);
     }
 
     const loadProfileFromStorage = (repo) => {
         return repo.load();
     }
 
-    const createTaskForUser = (target, task) => {
-        target.createTask(...task);
-        Notifications.emit("task:created", { ...task });
+    const createTaskForUser = (user, props) => {
+        const task = user.createTask(...props);
+        Notifications.emit("task:created", task);
+        return task;
     }
 
 
