@@ -1,22 +1,28 @@
 export const createLevelHolder = (xpHolder) => {
 
+    const MAX_LEVEL = 50; //tweakable
     const threshold = 100;
     const leftoverXp = 0;
     const runningXp = 0;
     let level = 0;
 
     const onLevelUp = () => {
+        const isMaxLevel = level >= MAX_LEVEL;
+
+        if (isMaxLevel) return;
+
         threshold += 100;
         level += 1;
     }
 
     const computeXP = () => {
-        if (xpHolder.getXP() >= threshold) {
-            leftoverXp = threshold - xpHolder.getXP();
-            runningXp = runningXp + xpHolder.getXP() + leftoverXp;
+        const xp = xpHolder.getXP();
+        if (xp >= threshold) {
+            leftoverXp = xp - threshold;
+            runningXp = runningXp + xp + leftoverXp;
             onLevelUp();
         } else {
-            runningXp += xpHolder.getXP();
+            runningXp += xp;
         }
     }
 
