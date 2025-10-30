@@ -12,7 +12,7 @@ export const createProjectHolder = () => {
 
     const addTasksToProject = (tasks, selectedProject) => {
         projects.forEach(project => {
-            if(project.id === selectedProject.id) {
+            if (project.id === selectedProject.id) {
                 project.push(tasks);
             }
         });
