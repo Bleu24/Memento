@@ -38,7 +38,7 @@ const onTaskCompleted = (data) => {
     user.addXP(xp)
 
     console.log(`User Obtained: ${user.getXP()} XP`);
-    console.log(`Completed Tasks: ${user.getCompletedTasks()}`)
+    console.log(`Completed Tasks:`, user.getCompletedTasks())
 }
 
 
