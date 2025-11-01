@@ -10,6 +10,7 @@ export const Home = (function () {
     const heroButton = document.createElement("button");
 
     home.dataset.page = "home";
+    home.dataset.status = "active";
     home.className = "home";
     heroBackground.className = "hero__bg";
     heroContainer.className = "hero";
