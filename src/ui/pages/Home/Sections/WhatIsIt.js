@@ -24,10 +24,10 @@ export const WhatIsItSection = (function () {
 
     const icons = [Zap, ListTodo, Clock];
     const cardTexts = [
-        ["Gamify Tasks", "Earn XP and level up as you accomplish your tasks!"],
-        ["Persistent To-Do List", "Your tasks are saved locally, so you can access them anytime."],
-        ["Mindful Living", "Your time is precious and so your purpose."]
-    ]
+        ["Gamify Tasks", "Turn productivity into play. Every completed task earns you XP, helping you level up and track your progress like a true achievement system. Stay motivated, celebrate wins, and make your to-do list feel like a game worth mastering."],
+        ["Persistent To-Do List", "Your tasks stay with you, securely stored on your device for instant access, even offline. No logins, no syncing delays. Just a reliable, always-there list that respects your flow and keeps your goals within reach."],
+        ["Mindful Living", "This isn’t just about getting things done, it’s about doing what matters. Prioritize with intention, reflect on your progress, and align your tasks with your deeper purpose. Because your time deserves meaning, not just management."]
+    ];
 
     for (let i = 0; i < 3; i++) {
         cardContainer.appendChild(createCard(icons[i], ...cardTexts[i]));
@@ -35,20 +35,6 @@ export const WhatIsItSection = (function () {
 
 
     whatIsItSection.appendChild(cardContainer);
-
-    const cards = whatIsItSection.querySelectorAll(".card");
-
-    const firstCard = cards[0];
-    // Or using querySelector for more specific targeting
-    const firstTitle = firstCard.querySelector('.card__heading');
-    const firstContent = firstCard.querySelector('.card__body');
-
-
-
-
-
-
-
 
     return whatIsItSection;
 })();
