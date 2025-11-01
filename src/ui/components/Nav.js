@@ -12,6 +12,7 @@ export const Nav = (function () {
 
     navButtonsArr.forEach(button => {
         const navButton = document.createElement("button");
+        navButton.dataset.page = button.toLowerCase();  
         navButton.textContent = button;
         navButton.className = "nav__link";
         navButtons.appendChild(navButton);
