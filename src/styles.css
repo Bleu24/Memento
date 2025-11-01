@@ -253,8 +253,8 @@ h1, p {
 }
 
 .card {
-    width: 25%;
-    height: 60%;
+    width: min(25%, 600px);
+    height: min(60%, 300px);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -284,4 +284,29 @@ h1, p {
 }
 
 
+.nav__cta:hover {
+    stroke: var(--primary-color);
+    cursor: pointer;
+    color: var(--primary-color);
+}
+
+.signUp {
+    grid-column: 1 / -1;
+    grid-row: 2 / 3;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.form {
+    background-color: var(--secondary-background-color);
+    border-radius: 1rem;
+    padding: 0.8rem;
+    display: grid;
+    height: max(20%, 500px);
+    width: max(30%, 300px);
+    grid-template-rows: minmax(min-content, max-content) 1fr 1fr;
+}
 
