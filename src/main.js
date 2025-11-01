@@ -1,30 +1,52 @@
 import 'normalize.css';
 import './styles.css';
 import './utils/subscriptions.js';
-import { Home } from './ui/pages/Home/Home.js';
 import { Nav } from './ui/components/Nav.js';
-import { renderPage } from './utils/renderPage.js';
+import { render } from './utils/render.js';
 
 
 document.body.appendChild(Nav);
-document.body.appendChild(Home);
+const savedTab = localStorage.getItem("activeTab");
+render(savedTab || "home");
+
+
 
 document.body.addEventListener("click", (e) => {
     const selectedLink = e.target.closest(".nav__link");
-    if (!selectedLink) return;
+    const selectedCta = e.target.closest(".nav__cta");
 
-    const navLinks = document.querySelectorAll(".nav__link");
+    if (selectedLink) {
+        const navLinks = document.querySelectorAll(".nav__link");
 
-    navLinks.forEach(link => {
-        if (link === selectedLink) {
-            link.classList.add("active");
-            const pageIsActive = document.querySelector(`div[data-status="active"]`);
-            if (pageIsActive) {
-                document.body.removeChild(pageIsActive);
+        navLinks.forEach(link => {
+            if (link === selectedLink) {
+                link.classList.add("active");
+                localStorage.setItem("activeTab", selectedLink.dataset.page);
+                const pageIsActive = document.querySelector(`div[data-status="active"]`);
+                if (pageIsActive) {
+                    document.body.removeChild(pageIsActive);
+                }
+                render(selectedLink.dataset.page);
+            } else {
+                link.classList.remove("active");
             }
-            renderPage(selectedLink.dataset.page);
-        } else {
+        });
+    }
+
+    if (selectedCta) {
+        selectedCta.classList.add("active");
+        const navLinks = document.querySelectorAll(".nav__link");
+        navLinks.forEach(link => {
             link.classList.remove("active");
+        });
+        const pageIsActive = document.querySelector(`div[data-status="active"]`);
+        localStorage.setItem("activeTab", selectedCta.dataset.page);
+        if (pageIsActive) {
+            document.body.removeChild(pageIsActive);
         }
-    });
+        render(selectedCta.dataset.page)
+
+    }
+
+
 });
