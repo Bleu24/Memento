@@ -1,16 +1,23 @@
+import { Home } from "../ui/pages/Home/Home.js";
+import { About } from "../ui/pages/About.js";
+import { Contact } from "../ui/pages/Contact.js";
+
 export const renderPage = (page) => {
     if (!page || typeof page !== "string") {
         throw new Error("Invalid page");
     }
-
     switch (page) {
         case "home":
-            return Home;
+            document.body.appendChild(Home);
+            break;
         case "about":
-            return About;
+            document.body.appendChild(About);
+            break;
         case "contact":
-            return Contact;
+            document.body.appendChild(Contact);
+            break;
         default:
-            return Home;
+            document.body.appendChild(Home);
+            break;
     }
 }
