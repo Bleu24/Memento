@@ -20,6 +20,7 @@ export const Nav = (function () {
 
     ctaButtonsArr.forEach(button => {
         const ctaButton = document.createElement("button");
+        ctaButton.dataset.page = button.toLowerCase();
         const textNode = document.createElement("span");
         textNode.textContent = button;
         ctaButton.append(signUpIcon, textNode);
