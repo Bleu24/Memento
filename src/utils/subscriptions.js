@@ -44,7 +44,3 @@ const onTaskCompleted = (data) => {
 
 Notifications.subscribe("task:created", onTaskCreated);
 Notifications.subscribe("task:completed", onTaskCompleted);
-
-const firstUser = new User(null, "Bryan", 0, 0);
-const firsttask = UserService.createTaskForUser(firstUser, ["coding", "add module", new Date(24, 7, 2025), "medium"]);
-UserService.completeTask(firsttask, firstUser);
