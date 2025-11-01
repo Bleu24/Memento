@@ -6,6 +6,7 @@ export function createCard(icon, heading, body) {
     const title = document.createElement("h2");
     const text = document.createElement("p");
 
+    svg.classList.add("card__icon");
     card.className = "card";
     title.className = "card__heading";
     text.className = "card__body";
