@@ -41,6 +41,10 @@
   font-style: italic;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 :root {
     --primary-background-color: #0E0E10;
     --primary-glass: rgba(14, 14, 16, 0.562);
@@ -100,8 +104,11 @@ h1, p {
     margin: 0;
     grid-column: 2 / 4;
     text-align: center;
-    font-size: 3rem;
+    width: max-content;
+    font-size: clamp(1.5rem, 2vw, 9rem);
     color: var(--primary-text-color);
+    display: flex;
+    align-items: center;
     
 }
 
@@ -305,8 +312,16 @@ h1, p {
     border-radius: 1rem;
     padding: 0.8rem;
     display: grid;
-    height: max(20%, 500px);
-    width: max(30%, 300px);
-    grid-template-rows: minmax(min-content, max-content) 1fr 1fr;
+    height: min(40%, 500px);
+    width: max(20vw, 300px);
+    grid-template-rows: 100px 100px max-content;
+}
+
+.form__group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8rem;
+    height: 20%;
 }
 
