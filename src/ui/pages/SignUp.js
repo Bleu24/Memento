@@ -1,3 +1,7 @@
+import { User } from "../../classes/User.js";
+import { UserService } from "../../services/UserService.js";
+import { LocalRepository } from "../../repository/LocalRepository.js";
+
 export const SignUp = (function () {
     const signUp = document.createElement("div");
     const form = document.createElement("form");
@@ -63,6 +67,16 @@ export const SignUp = (function () {
 
     signUp.appendChild(heading);
     signUp.appendChild(form);
+
+
+
+    form.addEventListener("submit", (e) => {
+        const formData = new FormData(e.target);
+        const email = formData.get("email");
+        const name = formData.get("name");
+        const user = new User(null, email, name, 0, 0);
+        UserService.saveProfileToStorage(LocalRepository, user);
+    });
 
     return signUp;
 
