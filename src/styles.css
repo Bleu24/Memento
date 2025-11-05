@@ -310,18 +310,32 @@ h1, p {
 .form {
     background-color: var(--secondary-background-color);
     border-radius: 1rem;
-    padding: 0.8rem;
+    padding: 1rem;
     display: grid;
-    height: min(40%, 500px);
     width: max(20vw, 300px);
-    grid-template-rows: 100px 100px max-content;
+    height: max(20vh, 300px);
+    grid-template-rows: 1fr 1fr auto;
 }
 
 .form__group {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    gap: 0.8rem;
-    height: 20%;
+    height: 30%;
+    gap: 0.3rem;
 }
 
+.form__input {
+    height: 50px;
+    padding: 2px 5px;
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--secondary-background-color);
+    color: var(--primary-text-color);
+}
+
+.form__button {
+    height: 40px;   
+    border-radius: 0.5rem;
+
+}
