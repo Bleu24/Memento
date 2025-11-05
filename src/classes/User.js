@@ -15,8 +15,8 @@ export class User {
         if (invalidXp) xp = 0;
         if (invalidLevel) level = 0;
         const xpHolder = createExpHolder(xp);
-        this.#email = email;
         this.#id = id ? id : crypto.randomUUID();
+        this.#email = email;
         this.#name = name;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
     }
