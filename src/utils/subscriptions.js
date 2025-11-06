@@ -1,8 +1,6 @@
 import { Notifications } from "../classes/Notifications.js";
-import { Task } from "../classes/Task.js";
-import { User } from "../classes/User.js";
 import { createExpHolder } from "../factories/expHolderFactory.js";
-import { UserService } from "../services/UserService.js";
+
 
 const onTaskCreated = (task) => {
     let BASE_XP = null;
@@ -39,6 +37,10 @@ const onTaskCompleted = (data) => {
 
     console.log(`User Obtained: ${user.getXP()} XP`);
     console.log(`Completed Tasks:`, user.getCompletedTasks())
+}
+
+const onUserCreated = (user) => {
+
 }
 
 
