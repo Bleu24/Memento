@@ -21,11 +21,6 @@ document.body.addEventListener("click", (e) => {
         navLinks.forEach(link => {
             if (link === selectedLink) {
                 link.classList.add("active");
-                localStorage.setItem("activeTab", selectedLink.dataset.page);
-                const pageIsActive = document.querySelector(`div[data-status="active"]`);
-                if (pageIsActive) {
-                    document.body.removeChild(pageIsActive);
-                }
                 render(selectedLink.dataset.page);
             } else {
                 link.classList.remove("active");
@@ -39,11 +34,6 @@ document.body.addEventListener("click", (e) => {
         navLinks.forEach(link => {
             link.classList.remove("active");
         });
-        const pageIsActive = document.querySelector(`div[data-status="active"]`);
-        localStorage.setItem("activeTab", selectedCta.dataset.page);
-        if (pageIsActive) {
-            document.body.removeChild(pageIsActive);
-        }
         render(selectedCta.dataset.page)
 
     }
