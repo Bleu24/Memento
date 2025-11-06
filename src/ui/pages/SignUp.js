@@ -1,6 +1,7 @@
 import { User } from "../../classes/User.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
+import { render } from "../../utils/render.js";
 
 export const SignUp = (function () {
     const signUp = document.createElement("div");
@@ -76,6 +77,7 @@ export const SignUp = (function () {
         const name = formData.get("name");
         const user = new User(null, email, name, 0, 0);
         UserService.saveProfileToStorage(LocalRepository, user);
+        render("app");
     });
 
     return signUp;
