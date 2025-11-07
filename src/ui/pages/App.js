@@ -1,6 +1,7 @@
 export const App = (function () {
     const app = document.createElement("div");
-
+    const leftPanel = document.createElement("div");
+    
     
 
 
