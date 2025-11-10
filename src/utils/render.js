@@ -4,6 +4,8 @@ import { Contact } from "../ui/pages/Contact.js";
 import { SignUp } from "../ui/pages/SignUp.js";
 import { App } from "../ui/pages/App.js";
 import { Nav } from "../ui/components/Nav.js";
+
+
 export const render = (page) => {
     if (!page || typeof page !== "string") {
         throw new Error("Invalid page");
