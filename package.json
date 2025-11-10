@@ -1,7 +1,7 @@
 {
-  "name": "game",
+  "name": "memento",
   "version": "1.0.0",
-  "description": "",
+  "description": "To-Do App",
   "main": "main.js",
   "scripts": {
     "dev": "webpack serve --open --config webpack.dev.js",
