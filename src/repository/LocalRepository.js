@@ -1,4 +1,5 @@
-import { User } from "../classes/User";
+import { User } from "../classes/User.js";
+import { storageKey } from "../utils/keys.js";
 
 export const LocalRepository = (function () {
 
@@ -18,8 +19,8 @@ export const LocalRepository = (function () {
 
     }
 
-    const load = () => {
-        const savedState = localStorage.getItem(`user__${target.id}`);
+    const load = (target) => {
+        const savedState = localStorage.getItem(`user__${storageKey}`);
         const parsedState = JSON.parse(savedState);
         const user = new User(parsedState.id, parsedState.email, parsedState.name, parsedState.xp, parsedState.level);
         parsedState.tasks.forEach(t => user.addTask(t));
