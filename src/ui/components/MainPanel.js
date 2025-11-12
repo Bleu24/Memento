@@ -1,6 +1,8 @@
 export const MainPanel = (function () {
 
-    const div = document.c
+    const main = document.createElement('div');
+    
 
 
+    return main;
 })();
