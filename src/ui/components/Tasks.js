@@ -1,4 +1,4 @@
-import { createElement, Dot } from "lucide";
+import { createElement, Dot, Ellipsis } from "lucide";
 
 export function displayTasks(tasks) {
     const tasksDiv = document.createElement("div");
@@ -27,6 +27,10 @@ export function displayTasks(tasks) {
         const leftSideOfItem = document.createElement('div');
         const rightSideOfItem = document.createElement('div');
 
+        taskItem.className = "taskList__item";
+        leftSideOfItem.className = "item__left";
+        rightSideOfItem.className = "item__right";
+
         //left side elements
         const checkBox = document.createElement('input');
         checkBox.type = 'checkbox';
@@ -38,6 +42,8 @@ export function displayTasks(tasks) {
         dueDate.textContent = task.dueDate;
 
         const prio = createElement(Dot);
+        const edit = createElement(Ellipsis);
+
 
         for (const arr of prioMap) {
             if (arr[0] === task.priority) {
@@ -48,7 +54,7 @@ export function displayTasks(tasks) {
         // append nodes to corresponding parents
 
         leftSideOfItem.append(checkBox, taskTitle);
-        rightSideOfItem.append(dueDate, prio);
+        rightSideOfItem.append(dueDate, prio, edit);
 
         taskItem.append(leftSideOfItem, rightSideOfItem);
 
