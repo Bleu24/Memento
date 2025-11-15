@@ -4,8 +4,7 @@ div[data-page="app"] {
     grid-column: 1 / -1;
     grid-template-columns: subgrid;
     grid-template-rows: auto 1fr;
-    background: radial-gradient(circle at top right, var(--primary-color) 0%, transparent 30%), 
-                radial-gradient(circle at bottom left, var(--primary-color) 0%, transparent 30%);
+    background-color: var(--primary-background-color);
 }
 
 .header__logoDiv {
@@ -95,4 +94,28 @@ button > p {
     justify-self: start;
     align-self: center;
     font-size: 1.2rem;
+}
+
+.mainPanel {
+    grid-column: span 10;
+    
+}
+
+.taskList__item {
+    display: flex;
+    gap: 8px;
+}
+
+.item__left {
+    display: flex;
+    align-items: center;
+}
+
+.item__right {
+    display: flex;
+    align-items: center;
+}
+
+.item__left, .item__right {
+    gap: 8px;
 }
