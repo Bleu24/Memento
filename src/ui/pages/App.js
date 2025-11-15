@@ -1,5 +1,7 @@
 import { LeftPanel } from "../components/LeftPanel.js";
 import { AppNav } from "../components/AppNav.js";
+import { MainPanel } from "../components/MainPanel.js";
+
 export const App = (function () {
     const app = document.createElement("div");
     app.dataset.page = "app";
@@ -8,5 +10,6 @@ export const App = (function () {
 
     app.appendChild(AppNav);
     app.appendChild(LeftPanel);
+    app.appendChild(MainPanel);
     return app;
 })(); 
