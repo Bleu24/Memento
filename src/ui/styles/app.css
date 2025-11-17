@@ -104,6 +104,8 @@ button > p {
 .taskList__item {
     display: flex;
     gap: 8px;
+    justify-content: space-between;
+    font-size: 20px;
 }
 
 .item__left {
@@ -111,11 +113,47 @@ button > p {
     align-items: center;
 }
 
+.item__left > input {
+    background-color: var(--primary-background-color);
+}
+
 .item__right {
     display: flex;
     align-items: center;
 }
 
+.item__right > svg {
+    width: 32px;
+    height: 32px;
+}
+
 .item__left, .item__right {
     gap: 8px;
 }
+
+.tasksContainer {
+    height: 100%;
+    padding: 1% 2%;
+}
+
+.taskHeader {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+    margin-bottom: 2%;
+}
+
+.taskHeader > span {
+    font-size: 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 99px;
+    text-align: center;
+    width: 2%;
+}
+
+.tasksContainer__taskCounter {
+    width: 16px;
+    height: 100%;
+}
+
