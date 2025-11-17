@@ -2,11 +2,13 @@ import { createElement, Dot, Ellipsis } from "lucide";
 
 export function displayTasks(tasks) {
     const tasksDiv = document.createElement("div");
+    const header = document.createElement('header');
     const heading = document.createElement("h2");
-    const taskCounter = document.createElement("h6");
+    const taskCounter = document.createElement("span");
     const taskList = document.createElement("ul");
 
 
+    header.className = "taskHeader";
     tasksDiv.className = "tasksContainer";
     heading.className = "tasksContainer__heading";
     taskCounter.className = "tasksContainer__taskCounter";
@@ -34,8 +36,11 @@ export function displayTasks(tasks) {
         //left side elements
         const checkBox = document.createElement('input');
         checkBox.type = 'checkbox';
-        const taskTitle = document.createElement('p');
+        checkBox.id = 'user__task';
+        checkBox.name = 'user__task';
+        const taskTitle = document.createElement('label');
         taskTitle.textContent = task.title;
+        taskTitle.setAttribute("for", checkBox.id);
 
         //right side elements
         const dueDate = document.createElement('time');
@@ -61,9 +66,11 @@ export function displayTasks(tasks) {
         taskList.appendChild(taskItem);
     });
 
+    taskCounter.textContent = tasks.length;
 
-    tasksDiv.appendChild(heading);
-    tasksDiv.appendChild(taskCounter);
+
+    header.append(heading, taskCounter);
+    tasksDiv.appendChild(header);
     tasksDiv.appendChild(taskList);
 
 
