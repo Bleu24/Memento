@@ -1,4 +1,5 @@
-import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt } from "lucide";
+import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home } from "lucide";
+import { render } from "../../utils/render.js";
 
 export const LeftPanel = (function () {
     const panel = document.createElement("div");
@@ -10,6 +11,7 @@ export const LeftPanel = (function () {
         { icon: createElement(LayoutDashboard), name: "Dashboard" },
         { icon: createElement(ListTodo), name: "Tasks" },
         { icon: createElement(FolderClosed), name: "Projects" },
+        { icon: createElement(Home), name: "Home" },
         { icon: createElement(Bolt), name: "Settings" }
     ]
 
@@ -34,6 +36,22 @@ export const LeftPanel = (function () {
         lowerBtnsDiv.appendChild(node);
     });
 
+    const navigate = (e) => {
+        if (e.target.closest(".home")) {
+            render("home");
+        }
+    }
+
+    panel.addEventListener('click', navigate);
+
+
+
+
+
+
+
+
+
 
     upperBtnsDiv.className = "leftPanel__upperBtns";
     lowerBtnsDiv.className = "leftPanel__lowerBtns";
@@ -47,3 +65,5 @@ export const LeftPanel = (function () {
 
     return panel;
 })();
+
+
