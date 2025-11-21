@@ -21,6 +21,7 @@ div[data-page="app"] {
 .header {
     position: sticky;
     top: 0;
+    z-index: 1;
     grid-column: 1 / -1;
     height: 10dvh;
     display: grid;
@@ -48,7 +49,9 @@ div[data-page="app"] {
     font-size: 0.8rem;
 }
 
-.header__tabLabel, .header__suppLabel, .header__logo {
+.header__tabLabel,
+.header__suppLabel,
+.header__logo {
     margin: 0;
 }
 
@@ -77,20 +80,37 @@ div[data-page="app"] {
     width: 100%;
 }
 
-.dashboard, .tasks, .projects, .settings {
+.dashboard,
+.tasks,
+.projects,
+.home,
+.settings {
     padding: 0;
     border: 0;
     display: grid;
     height: 50px;
     grid-template-columns: 1fr 3fr;
+    background-color: transparent;
+    color: var(--primary-text-color);
+    transition:
+        background-color 0.125s ease 0.1s,
+        color 0.3s ease 0.1s;
+    /* delay = 0.2s */
 }
 
-button > svg {
+.leftPanel__upperBtns button:hover,
+.leftPanel__lowerBtns button:hover {
+    background-color: var(--hover-color);
+    cursor: pointer;
+    color: var(--primary-background-color);
+}
+
+button>svg {
     justify-self: center;
     align-self: center;
 }
 
-button > p {
+button>p {
     justify-self: start;
     align-self: center;
     font-size: 1.2rem;
@@ -98,7 +118,7 @@ button > p {
 
 .mainPanel {
     grid-column: span 10;
-    
+
 }
 
 .taskList__item {
@@ -113,7 +133,7 @@ button > p {
     align-items: center;
 }
 
-.item__left > input {
+.item__left>input {
     background-color: var(--primary-background-color);
 }
 
@@ -122,12 +142,13 @@ button > p {
     align-items: center;
 }
 
-.item__right > svg {
+.item__right>svg {
     width: 32px;
     height: 32px;
 }
 
-.item__left, .item__right {
+.item__left,
+.item__right {
     gap: 8px;
 }
 
@@ -144,7 +165,7 @@ button > p {
     margin-bottom: 2%;
 }
 
-.taskHeader > span {
+.taskHeader>span {
     font-size: 1.25rem;
     border: 1px solid var(--border-color);
     border-radius: 99px;
@@ -156,4 +177,3 @@ button > p {
     width: 16px;
     height: 100%;
 }
-
