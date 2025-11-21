@@ -5,8 +5,6 @@ import './utils/subscriptions.js';
 import { Nav } from './ui/components/Nav.js';
 import { render } from './utils/render.js';
 
-
-document.body.appendChild(Nav);
 const savedTab = localStorage.getItem("activeTab");
 render(savedTab || "home");
 
