@@ -7,6 +7,8 @@ import { Nav } from "../ui/components/Nav.js";
 
 
 export const render = (page) => {
+    document.body.appendChild(Nav);
+
     if (!page || typeof page !== "string") {
         throw new Error("Invalid page");
     }
