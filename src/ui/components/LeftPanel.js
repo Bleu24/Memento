@@ -6,6 +6,9 @@ export const LeftPanel = (function () {
     const sideNav = document.createElement("nav");
     const upperBtnsDiv = document.createElement("div");
     const lowerBtnsDiv = document.createElement("div");
+    const userInfo = document.createElement("div");
+    const userName = document.createElement("h5");
+    const userEmail = document.createElement("p");
 
     const navButtons = [
         { icon: createElement(LayoutDashboard), name: "Dashboard" },
