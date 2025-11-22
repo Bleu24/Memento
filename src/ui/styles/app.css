@@ -177,3 +177,10 @@ button>p {
     width: 16px;
     height: 100%;
 }
+
+.userInfo {
+    height: 50px;
+    display: grid;
+    grid-template-rows: 2fr 1fr;
+    grid-template-columns: 1fr;
+}
