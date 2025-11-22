@@ -18,6 +18,8 @@ export const LeftPanel = (function () {
         { icon: createElement(Bolt), name: "Settings" }
     ]
 
+    //TODO: display user info
+
     const inMemBtns = [];
 
     navButtons.forEach(btn => {
@@ -53,6 +55,10 @@ export const LeftPanel = (function () {
 
 
 
+    userInfo.className = "userInfo";
+    userName.className = "userName";
+    userEmail.className = "userEmail";
+
 
 
 
@@ -61,8 +67,12 @@ export const LeftPanel = (function () {
     sideNav.className = "leftPanel__sideNav";
     panel.className = "leftPanel";
 
+    userInfo.append(userName, userEmail);
+
     sideNav.appendChild(upperBtnsDiv);
     sideNav.appendChild(lowerBtnsDiv);
+    sideNav.appendChild(userInfo);
+
 
     panel.appendChild(sideNav);
 
