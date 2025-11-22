@@ -1,6 +1,7 @@
 import { User } from "../classes/User.js";
 import { storageKey } from "../utils/keys.js";
 
+//TODO: refactor to reshape key as array
 export const LocalRepository = (function () {
 
     const save = (target) => {
@@ -11,11 +12,11 @@ export const LocalRepository = (function () {
             xp: target.getXP(),
             level: target.getLevel(),
             projects: target.getProjects(),
-            tasks: target.getTasks()
+            tasks: target.getTasks(),
         }
 
         const stringify = JSON.stringify(state);
-        localStorage.setItem(`user__${target.id}`, stringify);
+        localStorage.setItem(`user${target.id}active`, stringify);
 
     }
 
