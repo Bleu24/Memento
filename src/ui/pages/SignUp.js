@@ -2,6 +2,43 @@ import { User } from "../../classes/User.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { render } from "../../utils/render.js";
+import { createElement, ClipboardCopy, ClipboardCheck, Footprints } from "lucide";
+
+const displayIdModal = (id) => {
+    const bg = document.createElement('div');
+    const container = document.createElement('div');
+    const heading = document.createElement('div');
+    const mainText = document.createElement('h3');
+    const supportingText = document.createElement('p');
+    const idContainer = document.createElement('div');
+    const token = document.createElement('p');
+    const clipboard = createElement(ClipboardCopy);
+    const copySuccess = createElement(ClipboardCheck);
+
+    bg.className = "overlay";
+    container.className = "copy__container";
+    heading.className = "copy__heading";
+    mainText.className = "copy__main";
+    supportingText.className = "copy__text";
+    idContainer.className = "copy__idContainer";
+    token.className = "copy__token";
+    clipboard.classList.add("copy__svg");
+    copySuccess.classList.add("copy__svg--success");
+
+    bg.appendChild(container);
+    container.append(heading, idContainer);
+    heading.append(mainText, supportingText);
+    idContainer.append(token, clipboard);
+    document.body.appendChild(bg);
+
+    mainText.textContent = "Successfully Signed Up!";
+    supportingText.textContent = "Please copy the token and save it for login purposes";
+    token.textContent = id;
+
+    return { bg, copySuccess };
+}
+
+
 
 export const SignUp = (function () {
     const signUp = document.createElement("div");
@@ -77,10 +114,39 @@ export const SignUp = (function () {
         const formData = new FormData(e.target);
         const email = formData.get("email");
         const name = formData.get("name");
-        const user = new User(null, email, name, 0, 0);
+        const id = crypto.randomUUID();
+        const user = new User(id, email, name, 0, 0);
         UserService.saveProfileToStorage(LocalRepository, user);
-        render("app");
+
+        const modal = displayIdModal(id);
+
+        modal.bg.addEventListener('click', e => {
+            e.stopPropagation();
+            const isClipboardClicked = e.target.closest('.copy__svg');
+
+            if (!isClipboardClicked) {
+                return;
+            }
+
+            try {
+                navigator.clipboard.writeText(id);
+                const idContainer = document.querySelector(".copy__idContainer");
+                const svg = document.querySelector(".copy__svg");
+                svg.remove();
+                idContainer.appendChild(modal.copySuccess);
+                setTimeout(() => {
+                    modal.bg.remove();
+                    render("app");
+                }, 1500);
+            } catch (e) {
+                console.error(e);
+            }
+
+        })
+
     });
+
+
 
     return signUp;
 
