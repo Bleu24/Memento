@@ -4,7 +4,7 @@ import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 
 export const LeftPanel = (function () {
-    // const user = UserService.loadProfileFromStorage(LocalRepository);
+    const user = UserService.loadProfileFromStorage(LocalRepository);
 
     const panel = document.createElement("div");
     const sideNav = document.createElement("nav");
