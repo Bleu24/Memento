@@ -20,8 +20,8 @@ export const UserService = (function () {
         repo.save(user);
     }
 
-    const loadProfileFromStorage = (repo, user) => {
-        return repo.load(user);
+    const loadProfileFromStorage = (repo) => {
+        return repo.load();
     }
 
     const createTaskForUser = (user, props) => {
@@ -45,15 +45,15 @@ export const UserService = (function () {
 
 
 
-    return { 
-        assignTask, 
-        removeTask, 
-        completeTask, 
-        saveProfileToStorage, 
-        loadProfileFromStorage, 
-        createTaskForUser, 
-        getTasksForUser, 
-        getCompletedTasksForUser, 
-        getProjectsForUser 
+    return {
+        assignTask,
+        removeTask,
+        completeTask,
+        saveProfileToStorage,
+        loadProfileFromStorage,
+        createTaskForUser,
+        getTasksForUser,
+        getCompletedTasksForUser,
+        getProjectsForUser
     };
 })();   
