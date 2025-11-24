@@ -1,3 +1,4 @@
+import { parse } from "date-fns";
 import { User } from "../classes/User.js";
 
 //TODO: refactor to reshape key as array
@@ -19,12 +20,19 @@ export const LocalRepository = (function () {
 
     }
 
-    const load = (key) => {
-        const savedState = localStorage.getItem(`user__${key}`);
-        const parsedState = JSON.parse(savedState);
-        const user = new User(parsedState.id, parsedState.email, parsedState.name, parsedState.xp, parsedState.level);
-        parsedState.tasks.forEach(t => user.addTask(t));
-        parsedState.projects.forEach(p => user.addProject(p));
+    const load = () => {
+
+        const users = [];
+        const localKeys = Object.keys(localStorage);
+
+        localKeys.forEach(key => {
+            loadedObj = localStorage.getItem(`user__${key}`);
+            parsedObj = JSON.parse(loadedObj);
+            users.push(new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level));
+            parsedState.tasks.forEach(t => user.addTask(t));
+            parsedState.projects.forEach(p => user.addProject(p));
+        })
+
         return user;
     }
 
