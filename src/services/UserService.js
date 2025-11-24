@@ -24,6 +24,10 @@ export const UserService = (function () {
         return repo.load();
     }
 
+    const loadAllProfiles = (repo) => {
+        return repo.loadAll();
+    }
+
     const createTaskForUser = (user, props) => {
         const task = user.createTask(...props);
         Notifications.emit("task:created", task);
@@ -51,6 +55,7 @@ export const UserService = (function () {
         completeTask,
         saveProfileToStorage,
         loadProfileFromStorage,
+        loadAllProfiles,
         createTaskForUser,
         getTasksForUser,
         getCompletedTasksForUser,
