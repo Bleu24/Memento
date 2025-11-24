@@ -8,6 +8,7 @@ export class User {
     #email;
     #name;
     #id;
+    #isLoggedIn;
 
     constructor(id, email, name, xp, level) {
         const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
@@ -18,6 +19,7 @@ export class User {
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
+        this.isLoggedIn = false;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
     }
 
@@ -38,5 +40,13 @@ export class User {
 
     get email() {
         return this.#email;
+    }
+
+    set isLoggedIn(val) {
+        this.isLoggedIn = val;
+    }
+
+    get isLoggedIn() {
+        return this.isLoggedIn;
     }
 }
