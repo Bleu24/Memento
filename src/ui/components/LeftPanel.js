@@ -4,7 +4,7 @@ import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 
 export const LeftPanel = (function () {
-    const user = UserService.loadProfileFromStorage(LocalRepository);
+
 
     const panel = document.createElement("div");
     const sideNav = document.createElement("nav");
@@ -53,18 +53,15 @@ export const LeftPanel = (function () {
 
     panel.addEventListener('click', navigate);
 
+    const renderUserInfo = (props) => {
+        userName.textContent = props.name;
+        userEmail.textContent = props.email;
 
-
-
-
-
+    }
 
     userInfo.className = "userInfo";
     userName.className = "userName";
     userEmail.className = "userEmail";
-
-
-
 
     upperBtnsDiv.className = "leftPanel__upperBtns";
     lowerBtnsDiv.className = "leftPanel__lowerBtns";
@@ -80,7 +77,7 @@ export const LeftPanel = (function () {
 
     panel.appendChild(sideNav);
 
-    return panel;
+    return { el: panel, render: renderUserInfo };
 })();
 
 
