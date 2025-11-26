@@ -2,7 +2,9 @@ import { User } from "../../classes/User.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { render } from "../../utils/render.js";
-import { createElement, ClipboardCopy, ClipboardCheck, Footprints } from "lucide";
+import { createElement, ClipboardCopy, ClipboardCheck } from "lucide";
+import { Notifications } from "../../classes/Notifications.js";
+import { LeftPanel } from "../components/LeftPanel.js";
 
 const displayIdModal = (id) => {
     const bg = document.createElement('div');
@@ -136,6 +138,10 @@ export const SignUp = (function () {
                 idContainer.appendChild(modal.copySuccess);
                 setTimeout(() => {
                     modal.bg.remove();
+                    Notifications.subscribe("user:created", (user) => {
+                        LeftPanel.render(user);
+                    });
+                    Notifications.emit("user:created", user);
                     render("app");
                 }, 1500);
             } catch (e) {
