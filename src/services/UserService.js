@@ -20,8 +20,8 @@ export const UserService = (function () {
         repo.save(user);
     }
 
-    const loadProfileFromStorage = (repo) => {
-        return repo.load();
+    const loadProfileFromStorage = (repo, id) => {
+        return repo.load(id);
     }
 
     const loadAllProfiles = (repo) => {
