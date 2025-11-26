@@ -39,9 +39,6 @@ const onTaskCompleted = (data) => {
     console.log(`Completed Tasks:`, user.getCompletedTasks())
 }
 
-const onUserCreated = (user) => {
-
-}
 
 
 Notifications.subscribe("task:created", onTaskCreated);
