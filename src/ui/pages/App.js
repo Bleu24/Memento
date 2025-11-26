@@ -9,7 +9,7 @@ export const App = (function () {
 
 
     app.appendChild(AppNav);
-    app.appendChild(LeftPanel);
+    app.appendChild(LeftPanel.el);
     app.appendChild(MainPanel);
     return app;
 })(); 
