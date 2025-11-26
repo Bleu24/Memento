@@ -19,7 +19,7 @@ export class User {
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
-        this.isLoggedIn = false;
+        this.#isLoggedIn = false;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
     }
 
@@ -43,10 +43,10 @@ export class User {
     }
 
     set isLoggedIn(val) {
-        this.isLoggedIn = val;
+        this.#isLoggedIn = val;
     }
 
     get isLoggedIn() {
-        return this.isLoggedIn;
+        return this.#isLoggedIn;
     }
 }
