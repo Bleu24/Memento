@@ -1,11 +1,8 @@
 import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home } from "lucide";
 import { render } from "../../utils/render.js";
-import { UserService } from "../../services/UserService.js";
-import { LocalRepository } from "../../repository/LocalRepository.js";
+
 
 export const LeftPanel = (function () {
-
-
     const panel = document.createElement("div");
     const sideNav = document.createElement("nav");
     const upperBtnsDiv = document.createElement("div");
@@ -79,5 +76,4 @@ export const LeftPanel = (function () {
 
     return { el: panel, render: renderUserInfo };
 })();
-
 
