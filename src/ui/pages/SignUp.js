@@ -4,7 +4,6 @@ import { LocalRepository } from "../../repository/LocalRepository.js";
 import { render } from "../../utils/render.js";
 import { createElement, ClipboardCopy, ClipboardCheck } from "lucide";
 import { Notifications } from "../../classes/Notifications.js";
-import { LeftPanel } from "../components/LeftPanel.js";
 
 const displayIdModal = (id) => {
     const bg = document.createElement('div');
@@ -118,7 +117,6 @@ export const SignUp = (function () {
         const name = formData.get("name");
         const id = crypto.randomUUID();
         const user = new User(id, email, name, 0, 0);
-        UserService.saveProfileToStorage(LocalRepository, user);
 
         const modal = displayIdModal(id);
 
@@ -136,23 +134,21 @@ export const SignUp = (function () {
                 const svg = document.querySelector(".copy__svg");
                 svg.remove();
                 idContainer.appendChild(modal.copySuccess);
+                user.isLoggedIn = true;
+                Notifications.emit("app:hydrate", user);
                 setTimeout(() => {
                     modal.bg.remove();
-                    Notifications.subscribe("user:created", (user) => {
-                        LeftPanel.render(user);
-                    });
-                    Notifications.emit("user:created", user);
                     render("app");
                 }, 1500);
             } catch (e) {
                 console.error(e);
             }
 
-        })
+        });
+
+        UserService.saveProfileToStorage(LocalRepository, user);
 
     });
-
-
 
     return signUp;
 
