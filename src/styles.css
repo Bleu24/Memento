@@ -289,7 +289,7 @@ p {
 .card__heading {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     gap: 0.8rem;
     font-family: var(--heading-font);
 }
