@@ -2,7 +2,6 @@ import 'normalize.css';
 import './styles.css';
 import './ui/styles/app.css';
 import './utils/subscriptions.js';
-import { Nav } from './ui/components/Nav.js';
 import { render } from './utils/render.js';
 
 const savedTab = localStorage.getItem("activeTab");
