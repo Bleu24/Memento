@@ -6,6 +6,12 @@ export const AppNav = (function () {
     const tabLabel = document.createElement('h4');
     const suppLabel = document.createElement('p');
 
+    const render = (props) => {
+        const { title, subTitle } = props;
+        tabLabel.textContent = title;
+        suppLabel.textContent = subTitle;
+    }
+
 
     header.className = "header";
     logoDiv.className = "header__logoDiv";
@@ -28,5 +34,5 @@ export const AppNav = (function () {
     header.appendChild(logoDiv);
     header.appendChild(tabContainer);
 
-    return header;
+    return { el: header, render };
 })();
