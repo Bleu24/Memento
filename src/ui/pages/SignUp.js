@@ -116,8 +116,7 @@ export const SignUp = (function () {
         const email = formData.get("email");
         const name = formData.get("name");
         const id = crypto.randomUUID();
-        const user = new User(id, email, name, 0, 0);
-
+        const user = new User(id, email, name, 0, 0, true);
         const modal = displayIdModal(id);
 
         modal.bg.addEventListener('click', e => {
@@ -134,7 +133,6 @@ export const SignUp = (function () {
                 const svg = document.querySelector(".copy__svg");
                 svg.remove();
                 idContainer.appendChild(modal.copySuccess);
-                user.isLoggedIn = true;
                 Notifications.emit("app:hydrate", user);
                 setTimeout(() => {
                     modal.bg.remove();
