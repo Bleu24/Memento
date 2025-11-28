@@ -8,8 +8,16 @@ export const MainPanel = (function () {
     main.className = 'mainPanel';
 
     const render = (user) => {
-        const displayedTasks = displayTasks("All Tasks", user.getTasks());
-        const displayedCompleteTasks = displayCompleteTasks("Completed Tasks", user.getCompleteTasks());
+        const userTasks = user.getTasks();
+        const userCompletedTasks = user.getCompletedTasks();
+
+        const displayedTasks = displayTasks("All Tasks", userTasks);
+        const displayedCompleteTasks = displayCompleteTasks("Completed Tasks", userCompletedTasks);
+
+        if (userTasks.length <= 0) console.log("No tasks yet!");
+
+        if (userCompletedTasks.length <= 0) console.log("Work your ass off!");
+
         main.appendChild(displayedTasks);
         main.appendChild(displayedCompleteTasks);
     }
