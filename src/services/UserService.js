@@ -24,6 +24,10 @@ export const UserService = (function () {
         return repo.load(id);
     }
 
+    const loadLoggedInProfile = (repo) => {
+        return repo.loadLoggedInUser();
+    }
+
     const loadAllProfiles = (repo) => {
         return repo.loadAll();
     }
@@ -55,6 +59,7 @@ export const UserService = (function () {
         completeTask,
         saveProfileToStorage,
         loadProfileFromStorage,
+        loadLoggedInProfile,
         loadAllProfiles,
         createTaskForUser,
         getTasksForUser,
