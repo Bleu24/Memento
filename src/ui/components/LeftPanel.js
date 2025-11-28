@@ -72,10 +72,7 @@ export const LeftPanel = (function () {
 
         if (!props) {
             try {
-                const loadedUser = UserService.loadLoggedInProfile(LocalRepository);
-                userName.textContent = loadedUser.name;
-                userEmail.textContent = loadedUser.email;
-                return;
+                props = UserService.loadLoggedInProfile(LocalRepository);
             } catch (e) {
                 console.error("User loaded unsuccesfully:", e);
             }
@@ -84,10 +81,10 @@ export const LeftPanel = (function () {
         if (props) {
             userName.textContent = props.name;
             userEmail.textContent = props.email;
+        } else {
+            userName.textContent = "Guest";
+
         }
-
-
-
     }
 
     window.addEventListener('load', e => {
