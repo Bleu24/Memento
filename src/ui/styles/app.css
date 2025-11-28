@@ -178,9 +178,32 @@ button>p {
     height: 100%;
 }
 
-.userInfo {
-    height: 50px;
+.userContainer {
+    padding: 0;
+    border: 0;
     display: grid;
-    grid-template-rows: 2fr 1fr;
-    grid-template-columns: 1fr;
+    height: 50px;
+    grid-template-columns: 1fr 3fr;
+    background-color: transparent;
+    color: var(--primary-text-color);
+}
+
+.userContainer>svg {
+    align-self: center;
+    justify-self: center;
+}
+
+.userInfo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 4px;
+}
+
+.userName {
+    font-size: 16px;
+}
+
+.userEmail {
+    font-size: 12px;
 }
