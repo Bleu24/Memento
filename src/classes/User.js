@@ -10,7 +10,7 @@ export class User {
     #id;
     #isLoggedIn;
 
-    constructor(id, email, name, xp, level) {
+    constructor(id, email, name, xp, level, isLoggedIn) {
         const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
         const invalidLevel = typeof level !== "number" || level < 0 || Number.isNaN(level);
         if (invalidXp) xp = 0;
@@ -19,7 +19,7 @@ export class User {
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
-        this.#isLoggedIn = false;
+        this.#isLoggedIn = isLoggedIn;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
     }
 
