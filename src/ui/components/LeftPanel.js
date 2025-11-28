@@ -1,4 +1,4 @@
-import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home } from "lucide";
+import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home, CircleUser } from "lucide";
 import { render } from "../../utils/render.js";
 import { UIService } from "../../services/UIService.js";
 import { AppNav } from "./AppNav.js";
@@ -11,9 +11,12 @@ export const LeftPanel = (function () {
     const sideNav = document.createElement("nav");
     const upperBtnsDiv = document.createElement("div");
     const lowerBtnsDiv = document.createElement("div");
+    const userContainer = document.createElement("div");
     const userInfo = document.createElement("div");
     const userName = document.createElement("h5");
     const userEmail = document.createElement("p");
+
+    const userIcon = createElement(CircleUser);
 
     const navButtons = [
         { icon: createElement(LayoutDashboard), name: "Dashboard" },
@@ -47,7 +50,10 @@ export const LeftPanel = (function () {
     });
 
     const navigate = (e) => {
-        const clickedButton = e.target;
+        const clickedButton = e.target.closest('button');
+
+        if (!(clickedButton instanceof HTMLButtonElement)) return;
+
         const classString = clickedButton.className;
 
         switch (classString) {
@@ -62,6 +68,10 @@ export const LeftPanel = (function () {
                 break;
             case "projects":
                 UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
+                break;
+            case "settings":
+                UIService.render(AppNav, { title: "Settings", subTitle: "Settings Tab" });
+            default:
                 break;
         }
     }
@@ -91,6 +101,7 @@ export const LeftPanel = (function () {
         renderUserInfo();
     });
 
+    userContainer.className = "userContainer";
     userInfo.className = "userInfo";
     userName.className = "userName";
     userEmail.className = "userEmail";
@@ -100,11 +111,12 @@ export const LeftPanel = (function () {
     sideNav.className = "leftPanel__sideNav";
     panel.className = "leftPanel";
 
+    userContainer.append(userIcon, userInfo);
     userInfo.append(userName, userEmail);
 
     sideNav.appendChild(upperBtnsDiv);
     sideNav.appendChild(lowerBtnsDiv);
-    sideNav.appendChild(userInfo);
+    sideNav.appendChild(userContainer);
 
 
     panel.appendChild(sideNav);
