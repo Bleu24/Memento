@@ -1,5 +1,9 @@
 import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home } from "lucide";
 import { render } from "../../utils/render.js";
+import { UIService } from "../../services/UIService.js";
+import { AppNav } from "./AppNav.js";
+import { UserService } from "../../services/UserService.js";
+import { LocalRepository } from "../../repository/LocalRepository.js";
 
 
 export const LeftPanel = (function () {
@@ -43,18 +47,52 @@ export const LeftPanel = (function () {
     });
 
     const navigate = (e) => {
-        if (e.target.closest(".home")) {
-            render("home");
+        const clickedButton = e.target;
+        const classString = clickedButton.className;
+
+        switch (classString) {
+            case "home":
+                render("home");
+                break;
+            case "dashboard":
+                UIService.render(AppNav, { title: "Dashboard", subTitle: "This is a dashboard tab" });
+                break;
+            case "tasks":
+                UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
+                break;
+            case "projects":
+                UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
+                break;
         }
     }
 
     panel.addEventListener('click', navigate);
 
     const renderUserInfo = (props) => {
-        userName.textContent = props.name;
-        userEmail.textContent = props.email;
+
+        if (!props) {
+            try {
+                const loadedUser = UserService.loadLoggedInProfile(LocalRepository);
+                userName.textContent = loadedUser.name;
+                userEmail.textContent = loadedUser.email;
+                return;
+            } catch (e) {
+                console.error("User loaded unsuccesfully:", e);
+            }
+        }
+
+        if (props) {
+            userName.textContent = props.name;
+            userEmail.textContent = props.email;
+        }
+
+
 
     }
+
+    window.addEventListener('load', e => {
+        renderUserInfo();
+    });
 
     userInfo.className = "userInfo";
     userName.className = "userName";
