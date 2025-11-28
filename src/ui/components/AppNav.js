@@ -21,10 +21,6 @@ export const AppNav = (function () {
     suppLabel.className = "header__suppLabel";
 
     logo.textContent = "Memento";
-    tabLabel.textContent = "Dummy Tab";
-    suppLabel.textContent = "This is a dummy tab";
-
-
 
     logoDiv.appendChild(logo);
 
