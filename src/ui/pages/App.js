@@ -13,7 +13,8 @@ export const App = (function () {
     window.addEventListener('load', (e) => {
         const loadedProfile = UserService.loadLoggedInProfile(LocalRepository);
         Notifications.emit("app:hydrate", loadedProfile);
-    })
+    });
+
     app.appendChild(AppNav.el);
     app.appendChild(LeftPanel.el);
     app.appendChild(MainPanel.el);
