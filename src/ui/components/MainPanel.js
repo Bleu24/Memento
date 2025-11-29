@@ -7,6 +7,8 @@ export const MainPanel = (function () {
     const main = document.createElement('div');
     main.className = 'mainPanel';
 
+
+    //Refactor Main Panel divide to 4 parts
     const render = (user) => {
         const userTasks = user.getTasks();
         const userCompletedTasks = user.getCompletedTasks();
