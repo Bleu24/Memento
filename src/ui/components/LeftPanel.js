@@ -1,5 +1,5 @@
 import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home, CircleUser } from "lucide";
-import { render } from "../../utils/render.js";
+import { render } from "../../utils/pageRouter.js";
 import { UIService } from "../../services/UIService.js";
 import { AppNav } from "./AppNav.js";
 import { UserService } from "../../services/UserService.js";
@@ -65,6 +65,7 @@ export const LeftPanel = (function () {
                 break;
             case "tasks":
                 UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
+                UIService.render(AppNav, {})
                 break;
             case "projects":
                 UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
