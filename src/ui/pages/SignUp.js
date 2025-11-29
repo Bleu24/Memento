@@ -1,7 +1,7 @@
 import { User } from "../../classes/User.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
-import { render } from "../../utils/render.js";
+import { render } from "../../utils/pageRouter.js";
 import { createElement, ClipboardCopy, ClipboardCheck } from "lucide";
 import { Notifications } from "../../classes/Notifications.js";
 
