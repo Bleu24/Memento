@@ -2,7 +2,7 @@ import 'normalize.css';
 import './styles.css';
 import './ui/styles/app.css';
 import './utils/subscriptions.js';
-import { render } from './utils/render.js';
+import { render } from './utils/pageRouter.js';
 
 const savedTab = localStorage.getItem("activeTab");
 render(savedTab || "home");
