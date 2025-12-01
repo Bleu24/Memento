@@ -4,6 +4,7 @@ import { UIService } from "../../services/UIService.js";
 import { AppNav } from "./AppNav.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
+import { AuthenticationService } from "../../services/AuthenticationService.js";
 
 
 export const LeftPanel = (function () {
@@ -73,6 +74,9 @@ export const LeftPanel = (function () {
                 break;
             case "settings":
                 UIService.render(AppNav, { title: "Settings", subTitle: "Settings Tab" });
+            case "logout":
+                AuthenticationService.clearSession(UserService.loadLoggedInProfile(LocalRepository));
+                render("home");
             default:
                 break;
         }
@@ -108,7 +112,7 @@ export const LeftPanel = (function () {
 
 
     userContainer.className = "userContainer";
-    logOutContainer.className = "logoutContainer";
+    logOutContainer.className = "logout";
     userInfo.className = "userInfo";
     userName.className = "userName";
     userEmail.className = "userEmail";
