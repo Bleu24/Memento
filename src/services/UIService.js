@@ -2,10 +2,12 @@ export const UIService = (function () {
 
     const render = (el, props) => {
 
-        if (typeof props !== "object") console.error("props is not an object");
-
+        if (typeof props !== "object") {
+            console.error("props is not an object");
+            return;
+        }
         el.render(props);
-    }
+    };
 
 
 
