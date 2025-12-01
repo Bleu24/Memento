@@ -56,6 +56,8 @@ export const SignUp = (function () {
     const nameGroup = document.createElement("div");
     const heading = document.createElement("h1");
 
+    const login = document.createElement('p');
+
     signUp.dataset.status = "active";
 
     signUp.className = "signUp";
@@ -69,13 +71,22 @@ export const SignUp = (function () {
     emailInput.className = "form__input";
     nameInput.className = "form__input";
     submitButton.className = "form__button";
+    heading.className = "signUp__heading";
+    login.className = "form__login";
 
-
+    heading.textContent = "Sign up now to Memento";
     emailLabel.textContent = "Email";
     nameLabel.textContent = "Name";
     submitButton.textContent = "Sign Up";
-    heading.textContent = "Sign up now to Memento";
-    heading.className = "signUp__heading";
+
+    login.innerHTML = "Already have an account? <a class=\"form__loginLink\">Login</a> here";
+
+    const loginLink = login.querySelector("a.form__loginLink");
+
+    loginLink.addEventListener('click', (e) => {
+        render("login");
+    });
+
 
     emailInput.type = "email";
     nameInput.type = "text";
@@ -83,7 +94,7 @@ export const SignUp = (function () {
 
     emailInput.placeholder = "johndoe@example.com";
     nameInput.placeholder = "John Doe";
-
+                      
     form.appendChild(emailGroup);
     emailGroup.appendChild(emailLabel);
     emailGroup.appendChild(emailInput);
@@ -106,6 +117,7 @@ export const SignUp = (function () {
 
     signUp.appendChild(heading);
     signUp.appendChild(form);
+    signUp.appendChild(login);
 
 
 
