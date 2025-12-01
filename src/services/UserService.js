@@ -25,7 +25,7 @@ export const UserService = (function () {
     }
 
     const loadLoggedInProfile = (repo) => {
-        return repo.loadLoggedInUser();
+        return repo.loadCurrentUser();
     }
 
     const loadAllProfiles = (repo) => {
