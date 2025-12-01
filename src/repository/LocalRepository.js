@@ -6,7 +6,7 @@ export const LocalRepository = (function () {
 
     const save = (target) => {
 
-        if (!(target instanceof User) || !target) return;
+        if (!target) return;
 
 
         const state = {
@@ -74,10 +74,19 @@ export const LocalRepository = (function () {
     }
 
     const loadCurrentUser = () => {
-        const raw = localStorage.getItem("currentUser");
-        const loggedInUser = JSON.parse(raw);
+        const loadedObj = localStorage.getItem('currentUser');
+        if (!loadedObj) return null;
 
-        return loggedInUser;
+        try {
+            const parsedObj = JSON.parse(loadedObj);
+            const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
+            parsedObj.tasks.forEach(t => user.addTask(t));
+            parsedObj.projects.forEach(p => user.addProject(p));
+            return user;
+
+        } catch (error) {
+            console.error("LocalRepository: failed to load user", error);
+        }
     }
 
 
