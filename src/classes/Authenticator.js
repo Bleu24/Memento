@@ -9,7 +9,7 @@ export class Authenticator {
 
     login(user) {
         let success = false;
-        if (this.isExistingUser(user.id)) {
+        if (this.isExistingUser(user)) {
             success = true;
             const loadedUser = this.repo.load(user.id);
             loadedUser.isLoggedIn = success;
@@ -20,19 +20,28 @@ export class Authenticator {
         }
     }
 
-    isExistingUser(userId) {
+    isExistingUser(user) {
         let isExisting = false;
-        const target = this.repo.load(userId);
+        const target = this.repo.load(user.id);
 
-        if (target) {
-            isExisting = true;
+        if (!target) return;
+
+        try {
+            if (target.id === user.id && target.name === user.name) {
+                isExisting = true;
+                return isExisting;
+            } else {
+                return isExisting;
+            }
+        } catch (error) {
+            console.error("Failed to find user: ", target, error);
         }
-        return isExisting;
+
     }
 
     logout(user) {
         let success = false;
-        if (this.isExistingUser(user.id)) {
+        if (this.isExistingUser(user)) {
             user.isLoggedIn = false;
             UserService.saveProfileToStorage(this.repo, user);
             success = true;
