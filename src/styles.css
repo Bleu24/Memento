@@ -414,3 +414,12 @@ p {
 .copy__svg--success {
     stroke: var(--primary-color);
 }
+
+.form__signUpLink,
+.form__loginLink {
+    text-decoration: underline;
+}
+
+.signUp a:hover {
+    cursor: pointer;
+}
