@@ -2,7 +2,7 @@ import { User } from "../classes/User.js";
 
 export const LocalRepository = (function () {
 
-    const getKey = (id) => `user__${id}`;
+    const getUserKey = (id) => `user__${id}`;
 
     const save = (target) => {
 
@@ -21,7 +21,8 @@ export const LocalRepository = (function () {
         }
 
         const stringify = JSON.stringify(state);
-        localStorage.setItem(getKey(target.id), stringify);
+        localStorage.setItem(getUserKey(target.id), stringify);
+        localStorage.setItem('currentUser', stringify);
 
     };
 
@@ -56,7 +57,7 @@ export const LocalRepository = (function () {
 
         if (!id || typeof id !== 'string') return null;
 
-        const loadedObj = localStorage.getItem(getKey(id));
+        const loadedObj = localStorage.getItem(getUserKey(id));
         if (!loadedObj) return null;
 
         try {
@@ -67,18 +68,18 @@ export const LocalRepository = (function () {
             return user;
 
         } catch (error) {
-            console.error("LocalRepository: failed to load user", getKey(id), error)
+            console.error("LocalRepository: failed to load user", getUserKey(id), error);
         }
 
     }
 
-    const loadLoggedInUser = () => {
-        const users = loadAll();
-        const loggedInUser = users.find(user => user.isLoggedIn === true);
+    const loadCurrentUser = () => {
+        const raw = localStorage.getItem("currentUser");
+        const loggedInUser = JSON.parse(raw);
 
         return loggedInUser;
     }
 
 
-    return { save, loadAll, load, loadLoggedInUser };
+    return { save, loadAll, load, loadCurrentUser, getUserKey };
 })();
