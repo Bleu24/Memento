@@ -2,6 +2,7 @@ import { Home } from "../ui/pages/Home/Home.js";
 import { About } from "../ui/pages/About.js";
 import { Contact } from "../ui/pages/Contact.js";
 import { SignUp } from "../ui/pages/SignUp.js";
+import { Login } from "../ui/pages/Login.js";
 import { App } from "../ui/pages/App.js";
 import { Nav } from "../ui/components/Nav.js";
 
@@ -31,6 +32,9 @@ export const render = (page) => {
             break;
         case "sign up":
             document.body.appendChild(SignUp);
+            break;
+        case "login":
+            document.body.appendChild(Login);
             break;
         case "app":
             document.body.removeChild(Nav);
