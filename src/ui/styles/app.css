@@ -103,7 +103,7 @@ div[data-page="app"] {
 
 .leftPanel__upperBtns button:hover,
 .leftPanel__lowerBtns button:hover,
-.logoutContainer:hover {
+.logout:hover {
     background-color: var(--hover-color);
     cursor: pointer;
 }
@@ -119,11 +119,11 @@ button>p {
     font-size: 1.2rem;
 }
 
-.logoutContainer:hover>svg {
+.logout:hover>svg {
     stroke: var(--warning-color);
 }
 
-.logoutContainer:hover .logOut {
+.logout:hover .logOut {
     color: var(--warning-color);
 }
 
@@ -190,7 +190,7 @@ button>p {
 }
 
 .userContainer,
-.logoutContainer {
+.logout {
     padding: 0;
     border: 0;
     display: grid;
@@ -200,17 +200,17 @@ button>p {
     color: var(--primary-text-color);
 }
 
-.logoutContainer {
+.logout {
     transition: background-color 0.125s ease 0.05s;
 }
 
 .userContainer>svg,
-.logoutContainer>svg {
+.logout>svg {
     align-self: center;
     justify-self: center;
 }
 
-.logoutContainer>svg {
+.logout>svg {
     transition: stroke 0.125s ease 0.05s;
 }
 
