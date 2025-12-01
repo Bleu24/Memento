@@ -76,6 +76,12 @@ div[data-page="app"] {
     gap: 8px;
 }
 
+.leftPanel__lowerBtns {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
 .settings {
     width: 100%;
 }
@@ -92,17 +98,14 @@ div[data-page="app"] {
     grid-template-columns: 1fr 3fr;
     background-color: transparent;
     color: var(--primary-text-color);
-    transition:
-        background-color 0.125s ease 0.1s,
-        color 0.3s ease 0.1s;
-    /* delay = 0.2s */
+    transition: background-color 0.125s ease 0.05s;
 }
 
 .leftPanel__upperBtns button:hover,
-.leftPanel__lowerBtns button:hover {
+.leftPanel__lowerBtns button:hover,
+.logoutContainer:hover {
     background-color: var(--hover-color);
     cursor: pointer;
-    color: var(--primary-background-color);
 }
 
 button>svg {
@@ -114,6 +117,14 @@ button>p {
     justify-self: start;
     align-self: center;
     font-size: 1.2rem;
+}
+
+.logoutContainer:hover>svg {
+    stroke: var(--warning-color);
+}
+
+.logoutContainer:hover .logOut {
+    color: var(--warning-color);
 }
 
 .mainPanel {
@@ -178,7 +189,8 @@ button>p {
     height: 100%;
 }
 
-.userContainer {
+.userContainer,
+.logoutContainer {
     padding: 0;
     border: 0;
     display: grid;
@@ -188,9 +200,18 @@ button>p {
     color: var(--primary-text-color);
 }
 
-.userContainer>svg {
+.logoutContainer {
+    transition: background-color 0.125s ease 0.05s;
+}
+
+.userContainer>svg,
+.logoutContainer>svg {
     align-self: center;
     justify-self: center;
+}
+
+.logoutContainer>svg {
+    transition: stroke 0.125s ease 0.05s;
 }
 
 .userInfo {
@@ -206,4 +227,8 @@ button>p {
 
 .userEmail {
     font-size: 12px;
+}
+
+.logOut {
+    transition: color 0.125s ease 0.05s;
 }
