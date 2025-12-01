@@ -1,4 +1,4 @@
-import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home, CircleUser } from "lucide";
+import { createElement, LayoutDashboard, ListTodo, FolderClosed, Bolt, Home, CircleUser, LogOut } from "lucide";
 import { render } from "../../utils/pageRouter.js";
 import { UIService } from "../../services/UIService.js";
 import { AppNav } from "./AppNav.js";
@@ -15,8 +15,12 @@ export const LeftPanel = (function () {
     const userInfo = document.createElement("div");
     const userName = document.createElement("h5");
     const userEmail = document.createElement("p");
+    const logOutContainer = document.createElement("button");
+    const logOut = document.createElement("p");
+
 
     const userIcon = createElement(CircleUser);
+    const logoutIcon = createElement(LogOut);
 
     const navButtons = [
         { icon: createElement(LayoutDashboard), name: "Dashboard" },
@@ -25,8 +29,6 @@ export const LeftPanel = (function () {
         { icon: createElement(Home), name: "Home" },
         { icon: createElement(Bolt), name: "Settings" }
     ]
-
-    //TODO: display user info
 
     const inMemBtns = [];
 
@@ -65,7 +67,6 @@ export const LeftPanel = (function () {
                 break;
             case "tasks":
                 UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
-                UIService.render(AppNav, {})
                 break;
             case "projects":
                 UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
@@ -92,6 +93,9 @@ export const LeftPanel = (function () {
         if (props) {
             userName.textContent = props.name;
             userEmail.textContent = props.email;
+            logOut.textContent = "Log Out"
+            logOutContainer.append(logoutIcon, logOut);
+            sideNav.appendChild(logOutContainer);
         } else {
             userName.textContent = "Guest";
 
@@ -102,10 +106,14 @@ export const LeftPanel = (function () {
         renderUserInfo();
     });
 
+
     userContainer.className = "userContainer";
+    logOutContainer.className = "logoutContainer";
     userInfo.className = "userInfo";
     userName.className = "userName";
     userEmail.className = "userEmail";
+    logOut.className = "logOut";
+
 
     upperBtnsDiv.className = "leftPanel__upperBtns";
     lowerBtnsDiv.className = "leftPanel__lowerBtns";
@@ -114,6 +122,7 @@ export const LeftPanel = (function () {
 
     userContainer.append(userIcon, userInfo);
     userInfo.append(userName, userEmail);
+
 
     sideNav.appendChild(upperBtnsDiv);
     sideNav.appendChild(lowerBtnsDiv);
