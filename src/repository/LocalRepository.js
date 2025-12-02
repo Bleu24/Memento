@@ -17,7 +17,8 @@ export const LocalRepository = (function () {
             level: target.getLevel(),
             projects: target.getProjects(),
             tasks: target.getTasks(),
-            isLoggedIn: target.isLoggedIn
+            isLoggedIn: target.isLoggedIn,
+            tab: target.getTab()
         }
 
         const stringify = JSON.stringify(state);
@@ -44,6 +45,7 @@ export const LocalRepository = (function () {
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
                 parsedObj.tasks.forEach(t => user.addTask(t));
                 parsedObj.projects.forEach(p => user.addProject(p));
+                user.setTab(parsedObj.tab);
                 users.push(user);
             } catch (error) {
                 console.error("LocalRepository: failed to parse", key, error);
@@ -65,6 +67,7 @@ export const LocalRepository = (function () {
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
             parsedObj.tasks.forEach(t => user.addTask(t));
             parsedObj.projects.forEach(p => user.addProject(p));
+            user.setTab(parsedObj.tab);
             return user;
 
         } catch (error) {
@@ -82,6 +85,7 @@ export const LocalRepository = (function () {
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
             parsedObj.tasks.forEach(t => user.addTask(t));
             parsedObj.projects.forEach(p => user.addProject(p));
+            user.setTab(parsedObj.tab);
             return user;
 
         } catch (error) {
