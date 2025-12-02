@@ -69,25 +69,21 @@ export const LeftPanel = (function () {
             case "dashboard":
                 UIService.render(AppNav, { title: "Dashboard", subTitle: "This is a dashboard tab" });
                 user.setTab("dashboard");
-                MainPanel.el.removeChild(MainPanel.el.firstChild);
                 UIService.render(MainPanel, user);
                 break;
             case "tasks":
                 UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
-                user.setTab("dashboard");
-                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                user.setTab("tasks");
                 UIService.render(MainPanel, user);
                 break;
             case "projects":
                 UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
-                user.setTab("dashboard");
-                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                user.setTab("projects");
                 UIService.render(MainPanel, user);
                 break;
             case "settings":
                 UIService.render(AppNav, { title: "Settings", subTitle: "Settings Tab" });
-                user.setTab("dashboard");
-                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                user.setTab("settings");
                 UIService.render(MainPanel, user);
             case "logout":
                 AuthenticationService.clearSession(user);
