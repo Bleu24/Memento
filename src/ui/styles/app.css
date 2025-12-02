@@ -232,3 +232,19 @@ button>p {
 .logOut {
     transition: color 0.125s ease 0.05s;
 }
+
+.main__dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    justify-items: center;
+    align-items: center;
+    height: 100%
+}
+
+.chart {
+    width: 600px;
+    border: 1px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 1rem;
+}
