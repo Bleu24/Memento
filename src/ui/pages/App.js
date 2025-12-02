@@ -4,6 +4,7 @@ import { MainPanel } from "../components/MainPanel.js";
 import { Notifications } from "../../classes/Notifications.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
+import { UIService } from "../../services/UIService.js";
 
 export const App = (function () {
     const app = document.createElement("div");
@@ -22,9 +23,9 @@ export const App = (function () {
 })();
 
 const handleAppHydration = (userData) => {
-    LeftPanel.render(userData);
-    MainPanel.render(userData);
-    AppNav.render(userData); //saves previously clicked tab (user-specific)
+    UIService.render(LeftPanel, user);
+    UIService.render(MainPanel, user);
+    UIService.render(AppNav, user); //saves previously clicked tab (user-specific)
 }
 
 Notifications.subscribe("app:hydrate", handleAppHydration);
