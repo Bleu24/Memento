@@ -4,6 +4,7 @@ import { LocalRepository } from "../../repository/LocalRepository.js";
 import { render } from "../../utils/pageRouter.js";
 import { createElement, ClipboardCopy, ClipboardCheck } from "lucide";
 import { Notifications } from "../../classes/Notifications.js";
+import { AuthenticationService } from "../../services/AuthenticationService.js";
 
 const displayIdModal = (id) => {
     const bg = document.createElement('div');
@@ -94,7 +95,7 @@ export const SignUp = (function () {
 
     emailInput.placeholder = "johndoe@example.com";
     nameInput.placeholder = "John Doe";
-                      
+
     form.appendChild(emailGroup);
     emailGroup.appendChild(emailLabel);
     emailGroup.appendChild(emailInput);
@@ -128,6 +129,9 @@ export const SignUp = (function () {
         const email = formData.get("email");
         const name = formData.get("name");
         const id = crypto.randomUUID();
+
+        if (AuthenticationService.isTaken({ id, email, name })) return null;
+
         const user = new User(id, email, name, 0, 0, true);
         const modal = displayIdModal(id);
 
