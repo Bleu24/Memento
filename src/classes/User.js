@@ -2,6 +2,7 @@ import { createProjectHolder } from "../factories/projectHolderFactory.js";
 import { createExpHolder } from "../factories/expHolderFactory.js";
 import { createTaskHolder } from "../factories/taskHolderFactory.js";
 import { createLevelHolder } from "../factories/levelHolderFactory.js";
+import { createTabHolder } from "../factories/tabHolderFactory.js";
 
 
 export class User {
@@ -13,14 +14,16 @@ export class User {
     constructor(id, email, name, xp, level, isLoggedIn) {
         const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
         const invalidLevel = typeof level !== "number" || level < 0 || Number.isNaN(level);
+        const invalidStatus = typeof isLoggedIn !== "boolean";
         if (invalidXp) xp = 0;
         if (invalidLevel) level = 0;
+        if (invalidStatus) isLoggedIn = false;
         const xpHolder = createExpHolder(xp);
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
         this.#isLoggedIn = isLoggedIn;
-        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder));
+        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"));
     }
 
     get name() {
@@ -28,10 +31,11 @@ export class User {
     }
 
     set name(name) {
-        if (name) this.#name = name;
-        else {
-            console.error("Name must be truthy!");
+        if (typeof name !== 'string') {
+            console.error(`${name} must be a string`);
+            return;
         }
+        this.#name = name;
     }
 
     get id() {
@@ -43,6 +47,10 @@ export class User {
     }
 
     set isLoggedIn(val) {
+        if (typeof val !== 'boolean') {
+            console.error(`${val} is not boolean!`);
+            return;
+        }
         this.#isLoggedIn = val;
     }
 
