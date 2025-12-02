@@ -1,4 +1,3 @@
-import { cloneDeep } from "lodash";
 import { LocalRepository } from "../repository/LocalRepository.js";
 import { Authenticator } from "../classes/Authenticator.js";
 
@@ -13,5 +12,9 @@ export const AuthenticationService = (function () {
         auth.logout(user);
     }
 
-    return { authenticate, clearSession };
+    const isTaken = (user) => {
+        return auth.isTaken(user);
+    }
+
+    return { authenticate, clearSession, isTaken };
 })();
