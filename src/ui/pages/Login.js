@@ -1,9 +1,8 @@
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { render } from "../../utils/pageRouter.js";
-import { Notifications } from "../../classes/Notifications.js";
 import { AuthenticationService } from "../../services/AuthenticationService.js";
-import { Authenticator } from "../../classes/Authenticator.js";
+
 
 export const Login = (function () {
     const login = document.createElement("div");
