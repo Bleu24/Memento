@@ -12,6 +12,14 @@ export const MainPanel = (function () {
     //Refactor Main Panel divide to 4 parts
     const render = (user) => {
 
+        if (main.hasChildNodes()) {
+            const children = Array.from(main.children);
+
+            for (const child of children) {
+                child.remove();
+            }
+        }
+
         const tab = user.getTab();
         switch (tab) {
             case "dashboard":
