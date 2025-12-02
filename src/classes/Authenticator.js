@@ -49,5 +49,32 @@ export class Authenticator {
         } else return success;
     }
 
+    isTaken(user) {
+        let success = false;
+        const loadedUsers = this.repo.loadAll();
+
+        for (const u of loadedUsers) {
+            if (u.email === user.email && u.name === user.name) {
+                success = true;
+                console.error(`Both email: ${user.email} and username: ${user.name} are already taken!`);
+                return success;
+            }
+
+            if (u.email === user.email) {
+                success = true;
+                console.error(`Email: ${user.email} is already taken`);
+                return success;
+            }
+
+            if (u.name === user.name) {
+                success = true;
+                console.error(`Username: ${user.name} is already taken`);
+                return success;
+            }
+        }
+
+        return success;
+    }
+
 
 }
