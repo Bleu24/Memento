@@ -5,6 +5,7 @@ import { AppNav } from "./AppNav.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { AuthenticationService } from "../../services/AuthenticationService.js";
+import { MainPanel } from "./MainPanel.js";
 
 
 export const LeftPanel = (function () {
@@ -59,27 +60,43 @@ export const LeftPanel = (function () {
 
         const classString = clickedButton.className;
 
+        const user = UserService.loadLoggedInProfile(LocalRepository);
+
         switch (classString) {
             case "home":
                 render("home");
                 break;
             case "dashboard":
                 UIService.render(AppNav, { title: "Dashboard", subTitle: "This is a dashboard tab" });
+                user.setTab("dashboard");
+                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                UIService.render(MainPanel, user);
                 break;
             case "tasks":
                 UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
+                user.setTab("dashboard");
+                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                UIService.render(MainPanel, user);
                 break;
             case "projects":
                 UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
+                user.setTab("dashboard");
+                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                UIService.render(MainPanel, user);
                 break;
             case "settings":
                 UIService.render(AppNav, { title: "Settings", subTitle: "Settings Tab" });
+                user.setTab("dashboard");
+                MainPanel.el.removeChild(MainPanel.el.firstChild);
+                UIService.render(MainPanel, user);
             case "logout":
-                AuthenticationService.clearSession(UserService.loadLoggedInProfile(LocalRepository));
+                AuthenticationService.clearSession(user);
                 render("home");
             default:
                 break;
         }
+
+        UserService.saveProfileToStorage(LocalRepository, user);
     }
 
     panel.addEventListener('click', navigate);
