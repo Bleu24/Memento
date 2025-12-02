@@ -10,18 +10,25 @@ export const MainPanel = (function () {
 
     //Refactor Main Panel divide to 4 parts
     const render = (user) => {
-        const userTasks = user.getTasks();
-        const userCompletedTasks = user.getCompletedTasks();
 
-        const displayedTasks = displayTasks("All Tasks", userTasks);
-        const displayedCompleteTasks = displayCompleteTasks("Completed Tasks", userCompletedTasks);
+        const tab = user.getTab();
+        switch (tab) {
+            case "tasks":
+                const userTasks = user.getTasks();
+                const userCompletedTasks = user.getCompletedTasks();
 
-        if (userTasks.length <= 0) console.log("No tasks yet!");
+                const displayedTasks = displayTasks("All Tasks", userTasks);
+                const displayedCompleteTasks = displayCompleteTasks("Completed Tasks", userCompletedTasks);
 
-        if (userCompletedTasks.length <= 0) console.log("Work your ass off!");
+                if (userTasks.length <= 0) console.log("No tasks yet!");
 
-        main.appendChild(displayedTasks);
-        main.appendChild(displayedCompleteTasks);
+                if (userCompletedTasks.length <= 0) console.log("Work your ass off!");
+
+                main.appendChild(displayedTasks);
+                main.appendChild(displayedCompleteTasks);
+                break;
+        }
+
     }
 
     return { el: main, render };
