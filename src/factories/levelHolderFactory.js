@@ -1,9 +1,9 @@
 export const createLevelHolder = (xpHolder) => {
 
     const MAX_LEVEL = 50; //tweakable
-    const threshold = 100;
-    const leftoverXp = 0;
-    const runningXp = 0;
+    let threshold = 100;
+    let leftoverXp = 0;
+    let runningXp = 0;
     let level = 0;
 
     const onLevelUp = () => {
@@ -13,24 +13,32 @@ export const createLevelHolder = (xpHolder) => {
 
         threshold += 100;
         level += 1;
+        leftoverXp = 0; // not sure if I should be setting this to zero
     }
 
+    // TODO: polish computation of xp
     const computeXP = () => {
         const xp = xpHolder.getXP();
         if (xp >= threshold) {
             leftoverXp = xp - threshold;
             runningXp = runningXp + xp + leftoverXp;
+            xpHolder.setXP(runningXp);
             onLevelUp();
+            return { runningXp, leftoverXp };
         } else {
             runningXp += xp;
+            xpHolder.setXP(runningXp);
+            return runningXp;
         }
     }
 
 
-
-
+    // TODO: polish apis
+    const getLeftoverXp = () => leftoverXp
+    const getRunningXp = () => runningXp;
+    const getThreshold = () => threshold;
     const getLevel = () => level;
 
 
-    return { getLevel, computeXP }
+    return { getLevel, getThreshold, getRunningXp, getLeftoverXp, computeXP };
 }
