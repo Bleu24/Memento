@@ -5,6 +5,7 @@ import { Notifications } from "../../classes/Notifications.js";
 import { UserService } from "../../services/UserService.js";
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { UIService } from "../../services/UIService.js";
+import { seedUser } from "../../../seeders/seedUser.js";
 
 export const App = (function () {
     const app = document.createElement("div");
@@ -13,6 +14,7 @@ export const App = (function () {
 
     window.addEventListener('load', (e) => {
         const loadedProfile = UserService.loadLoggedInProfile(LocalRepository);
+        // seedUser(loadedProfile);
         Notifications.emit("app:hydrate", loadedProfile);
     });
 
@@ -23,9 +25,9 @@ export const App = (function () {
 })();
 
 const handleAppHydration = (userData) => {
-    UIService.render(LeftPanel, user);
-    UIService.render(MainPanel, user);
-    UIService.render(AppNav, user); //saves previously clicked tab (user-specific)
+    UIService.render(LeftPanel, userData);
+    UIService.render(MainPanel, userData);
+    UIService.render(AppNav, userData); //saves previously clicked tab (user-specific)
 }
 
 Notifications.subscribe("app:hydrate", handleAppHydration);
