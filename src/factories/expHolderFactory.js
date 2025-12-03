@@ -13,6 +13,10 @@ export const createExpHolder = (initialXp) => {
         return xp;
     }
 
-    return { addXP, reduceXP, getXP };
+    const setXP = (value) => {
+        xp = value;
+    }
+
+    return { addXP, reduceXP, getXP, setXP };
 
 };
