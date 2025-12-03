@@ -11,6 +11,22 @@ export const UserService = (function () {
         user.removeTask(task);
     }
 
+    const assignProject = (project, user) => {
+        user.addProject(project);
+    }
+
+    const removeProject = (project, user) => {
+        user.removeProject(project);
+    }
+
+    const assignTaskToProject = (tasks, project) => {
+        project.addTask(tasks);
+    }
+
+    const removeTaskFromProject = (tasks, project) => {
+        project.removeTask(tasks);
+    }
+
     const completeTask = (task, user) => {
         user.completeTask(task);
         Notifications.emit("task:completed", { task, user });
@@ -56,6 +72,10 @@ export const UserService = (function () {
     return {
         assignTask,
         removeTask,
+        assignProject,
+        removeProject,
+        assignTaskToProject,
+        removeTaskFromProject,
         completeTask,
         saveProfileToStorage,
         loadProfileFromStorage,
