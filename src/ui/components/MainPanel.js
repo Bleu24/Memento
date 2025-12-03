@@ -23,7 +23,7 @@ export const MainPanel = (function () {
         const tab = user.getTab();
         switch (tab) {
             case "dashboard":
-                main.appendChild(Dashboard);
+                main.appendChild(Dashboard.el);
                 break;
             case "tasks":
                 const userTasks = user.getTasks();
