@@ -1,4 +1,4 @@
-import { createTaskHolder } from "../factories/taskHolderFactory";
+import { createTaskHolder } from "../factories/taskHolderFactory.js";
 
 export class Project {
     #id;
