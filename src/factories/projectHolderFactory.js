@@ -2,23 +2,20 @@ export const createProjectHolder = () => {
 
     let projects = [];
 
+    const serialized = (project) => {
+        const { addTask, serialize, createTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks, ...rest } = project;
+        return structuredClone(rest);
+    }
+
     const addProject = (project) => {
-        projects.push(project);
+        projects.push(serialized(project));
     }
 
     const removeProject = (selectedProject) => {
         projects = projects.filter(project => project.id !== selectedProject.id);
     }
 
-    const addTasksToProject = (tasks, selectedProject) => {
-        projects.forEach(project => {
-            if (project.id === selectedProject.id) {
-                project.push(tasks);
-            }
-        });
-    }
-
     const getProjects = () => structuredClone(projects);
 
-    return { addProject, removeProject, addTasksToProject, getProjects };
+    return { addProject, removeProject, getProjects };
 }
