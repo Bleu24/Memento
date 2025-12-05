@@ -6,10 +6,23 @@ export const AppNav = (function () {
     const tabLabel = document.createElement('h4');
     const suppLabel = document.createElement('p');
 
-    const render = (props) => {
-        const { title, subTitle } = props;
-        tabLabel.textContent = title;
-        suppLabel.textContent = subTitle;
+    const proper = (tabName) => `${tabName[0].toUpperCase() + tabName.slice(1)}`;
+
+    const render = (user) => {
+
+        if (!user) return;
+
+        const tab = user.getTab();
+        switch (tab) {
+            case "dashboard":
+                tabLabel.textContent = proper(tab);
+                suppLabel.textContent = "View your progress";
+                break;
+            case "tasks":
+                tabLabel.textContent = proper(tab);
+                suppLabel.textContent = "View your tasks";
+                break;
+        }
     }
 
 
