@@ -15,7 +15,11 @@ export const App = (function () {
     window.addEventListener('load', (e) => {
         const loadedProfile = UserService.loadLoggedInProfile(LocalRepository);
         // seedUser(loadedProfile);
-        Notifications.emit("app:hydrate", loadedProfile);
+        if (loadedProfile) Notifications.emit("app:hydrate", loadedProfile);
+        else {
+            console.error(loadedProfile);
+            return;
+        }
     });
 
     app.appendChild(AppNav.el);
