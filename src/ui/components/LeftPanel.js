@@ -62,32 +62,37 @@ export const LeftPanel = (function () {
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
 
+
+        user.setTab(classString);
+
         switch (classString) {
             case "home":
                 render("home");
                 break;
             case "dashboard":
-                UIService.render(AppNav, { title: "Dashboard", subTitle: "This is a dashboard tab" });
-                user.setTab("dashboard");
+                UIService.render(AppNav, user);
+
                 UIService.render(MainPanel, user);
                 break;
             case "tasks":
-                UIService.render(AppNav, { title: "Tasks", subTitle: "This is a tasks tab" });
-                user.setTab("tasks");
+
+                UIService.render(AppNav, user);
                 UIService.render(MainPanel, user);
                 break;
             case "projects":
-                UIService.render(AppNav, { title: "Projects", subTitle: "You're in the projects tab" });
-                user.setTab("projects");
+                UIService.render(AppNav, user);
+
                 UIService.render(MainPanel, user);
                 break;
             case "settings":
-                UIService.render(AppNav, { title: "Settings", subTitle: "Settings Tab" });
-                user.setTab("settings");
+                UIService.render(AppNav, user);
+
                 UIService.render(MainPanel, user);
+                break;
             case "logout":
                 AuthenticationService.clearSession(user);
                 render("home");
+                return; // dont use break because it will save the profile again
             default:
                 break;
         }
@@ -97,19 +102,19 @@ export const LeftPanel = (function () {
 
     panel.addEventListener('click', navigate);
 
-    const renderUserInfo = (props) => {
+    const renderUserInfo = (user) => {
 
-        if (!props) {
+        if (!user) {
             try {
-                props = UserService.loadLoggedInProfile(LocalRepository);
+                user = UserService.loadLoggedInProfile(LocalRepository);
             } catch (e) {
                 console.error("User loaded unsuccesfully:", e);
             }
         }
 
-        if (props) {
-            userName.textContent = props.name;
-            userEmail.textContent = props.email;
+        if (user) {
+            userName.textContent = user.name;
+            userEmail.textContent = user.email;
             logOut.textContent = "Log Out"
             logOutContainer.append(logoutIcon, logOut);
             sideNav.appendChild(logOutContainer);
