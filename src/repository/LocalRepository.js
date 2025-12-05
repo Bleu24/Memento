@@ -40,7 +40,6 @@ export const LocalRepository = (function () {
             if (!loadedObj) continue;
 
             try {
-                console.log(key);
                 const parsedObj = JSON.parse(loadedObj);
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
                 parsedObj.tasks.forEach(t => user.addTask(t));
@@ -93,6 +92,10 @@ export const LocalRepository = (function () {
         }
     }
 
+    const clearCurrentUser = () => {
+        localStorage.removeItem("currentUser");
+    }
 
-    return { save, loadAll, load, loadCurrentUser, getUserKey };
+
+    return { save, loadAll, load, loadCurrentUser, getUserKey, clearCurrentUser };
 })();
