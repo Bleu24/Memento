@@ -1,6 +1,7 @@
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { UserService } from "../../services/UserService.js";
 import { createChart } from "./Chart.js";
+import { Percent } from "lucide";
 
 export const Dashboard = (function () {
     const div = document.createElement("div");
@@ -10,6 +11,7 @@ export const Dashboard = (function () {
     const progBar = document.createElement("progress");
     const min = document.createElement("h2");
     const max = document.createElement("h2");
+    const cards = document.createElement("div");
 
 
     // TODO: finalize updateProgress method
@@ -23,7 +25,7 @@ export const Dashboard = (function () {
             min.textContent = `${level}`;
             max.textContent = `${level + 1}`;
             progBar.max = threshold;
-            progBar.value = 20;
+            progBar.value = 1;
         }
     }
 
@@ -36,6 +38,7 @@ export const Dashboard = (function () {
     progBar.className = "progress__bar";
     min.className = "progress__min";
     max.className = "progress__max";
+    cards.className = "cards";
 
     progressLabel.htmlFor = "xp";
 
@@ -47,6 +50,7 @@ export const Dashboard = (function () {
 
     div.appendChild(progressLabel);
     div.appendChild(progress);
+    div.appendChild(cards);
 
     updateProgress(UserService.loadLoggedInProfile(LocalRepository));
 
