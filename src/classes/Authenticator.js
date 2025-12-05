@@ -1,3 +1,4 @@
+import { LocalRepository } from "../repository/LocalRepository.js";
 import { UserService } from "../services/UserService.js";
 import { Notifications } from "./Notifications.js";
 
@@ -44,6 +45,7 @@ export class Authenticator {
         if (this.isExistingUser(user)) {
             user.isLoggedIn = false;
             UserService.saveProfileToStorage(this.repo, user);
+            LocalRepository.clearCurrentUser();
             success = true;
             return success;
         } else return success;
