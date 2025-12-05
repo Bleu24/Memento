@@ -59,10 +59,8 @@ export const LeftPanel = (function () {
         if (!(clickedButton instanceof HTMLButtonElement)) return;
 
         const classString = clickedButton.className;
-
+        
         const user = UserService.loadLoggedInProfile(LocalRepository);
-
-
         user.setTab(classString);
 
         switch (classString) {
@@ -71,22 +69,18 @@ export const LeftPanel = (function () {
                 break;
             case "dashboard":
                 UIService.render(AppNav, user);
-
                 UIService.render(MainPanel, user);
                 break;
             case "tasks":
-
                 UIService.render(AppNav, user);
                 UIService.render(MainPanel, user);
                 break;
             case "projects":
                 UIService.render(AppNav, user);
-
                 UIService.render(MainPanel, user);
                 break;
             case "settings":
                 UIService.render(AppNav, user);
-
                 UIService.render(MainPanel, user);
                 break;
             case "logout":
