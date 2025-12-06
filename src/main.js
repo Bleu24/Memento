@@ -3,6 +3,23 @@ import './styles.css';
 import './ui/styles/app.css';
 import './utils/subscriptions.js';
 import { render } from './utils/pageRouter.js';
+import { Notifications } from './classes/Notifications.js';
+import { UserService } from './services/UserService.js';
+import { LocalRepository } from './repository/LocalRepository.js';
+
+
+document.addEventListener("DOMContentLoaded", (e) => {
+    const loadedProfile = UserService.loadLoggedInProfile(LocalRepository);
+
+    if (loadedProfile)  Notifications.emit("app:hydrate", loadedProfile);
+
+    // TODO: remove for production
+    else {
+        console.error(`User is : ${loadedProfile}`);
+        return;
+    }
+});
+
 
 const savedTab = localStorage.getItem("activeTab");
 render(savedTab || "home");
