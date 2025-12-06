@@ -1,7 +1,8 @@
 import { LocalRepository } from "../../repository/LocalRepository.js";
 import { UserService } from "../../services/UserService.js";
+import { createDashboardCard } from "./Card.js";
 import { createChart } from "./Chart.js";
-import { Percent } from "lucide";
+import { createElement, Percent, ListTodo } from "lucide";
 
 export const Dashboard = (function () {
     const div = document.createElement("div");
@@ -14,18 +15,21 @@ export const Dashboard = (function () {
     const cards = document.createElement("div");
 
 
+    let incompleteTasksCard = document.createElement('div');
+
+
     // TODO: finalize updateProgress method
     const updateProgress = (user) => {
         if (user) {
             const level = user.getLevel();
             const threshold = user.getThreshold();
-            const runningXp = user.getRunningXp();
-            const leftoverXp = user.getLeftoverXp();
 
             min.textContent = `${level}`;
             max.textContent = `${level + 1}`;
             progBar.max = threshold;
-            progBar.value = 1;
+            progBar.value = user.computeXP();
+
+            cards.append(incompleteTasksCard = createDashboardCard(createElement(ListTodo), "Unfinished Tasks", user, "FFUKC"));
         }
     }
 
@@ -52,7 +56,7 @@ export const Dashboard = (function () {
     div.appendChild(progress);
     div.appendChild(cards);
 
-    updateProgress(UserService.loadLoggedInProfile(LocalRepository));
 
-    return { el: div, updateProgress };
+
+    return { el: div, render: updateProgress };
 })();
