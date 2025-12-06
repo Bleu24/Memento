@@ -20,7 +20,7 @@ export function createCard(icon, heading, body) {
     return card;
 }
 
-export function createDBTopCards(icon, label, data, text) {
+export function createDashboardCard(icon, label, data, text) {
     const card = document.createElement("div");
     const svg = createElement(icon);
     const cardLabel = document.createElement("h2");
