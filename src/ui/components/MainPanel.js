@@ -1,6 +1,4 @@
 import { displayTasks, displayCompleteTasks } from "./Tasks.js";
-import { Task } from "../../classes/Task.js";
-import { UserService } from "../../services/UserService.js"
 import { Dashboard } from "./Dashboard.js";
 
 export const MainPanel = (function () {
@@ -24,6 +22,7 @@ export const MainPanel = (function () {
         switch (tab) {
             case "dashboard":
                 main.appendChild(Dashboard.el);
+                Dashboard.render(user);
                 break;
             case "tasks":
                 const userTasks = user.getTasks();
