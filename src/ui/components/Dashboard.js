@@ -2,7 +2,7 @@ import { LocalRepository } from "../../repository/LocalRepository.js";
 import { UserService } from "../../services/UserService.js";
 import { createDashboardCard } from "./Card.js";
 import { createChart } from "./Chart.js";
-import { createElement, Percent, ListTodo } from "lucide";
+import { createElement, Percent, ListTodo, SquareCheckBig } from "lucide";
 
 export const Dashboard = (function () {
     const div = document.createElement("div");
@@ -16,6 +16,7 @@ export const Dashboard = (function () {
 
 
     let incompleteTasksCard = document.createElement('div');
+    let completeTasksCard = document.createElement('div');
 
 
     // TODO: finalize updateProgress method
@@ -29,7 +30,17 @@ export const Dashboard = (function () {
             progBar.max = threshold;
             progBar.value = user.computeXP();
 
-            cards.append(incompleteTasksCard = createDashboardCard(createElement(ListTodo), "Unfinished Tasks", user, "FFUKC"));
+            incompleteTasksCard = createDashboardCard({ svg: ListTodo, options: { stroke: '#18F2B2' } }, "Unfinished Tasks", user.getTasks().length, user.getTasks().length ? "Work your ass off!" : "Good job! No work for today!");
+            completeTasksCard = createDashboardCard({ svg: SquareCheckBig, options: { stroke: '#18F2B2' } }, "Finished Tasks", user.getCompletedTasks().length, user.getCompletedTasks().length ? "Good job! Keep on going!" : "Work your ass off!");
+            
+
+            if (cards.hasChildNodes()) return;
+
+            cards.appendChild(incompleteTasksCard);
+            cards.appendChild(completeTasksCard);
+            cards.appendChild(completeTasksCard);
+
+
         }
     }
 
