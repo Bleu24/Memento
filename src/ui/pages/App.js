@@ -12,19 +12,10 @@ export const App = (function () {
     app.dataset.page = "app";
     app.dataset.status = "active";
 
-    window.addEventListener('load', (e) => {
-        const loadedProfile = UserService.loadLoggedInProfile(LocalRepository);
-        // seedUser(loadedProfile);
-        if (loadedProfile) Notifications.emit("app:hydrate", loadedProfile);
-        else {
-            console.error(loadedProfile);
-            return;
-        }
-    });
-
     app.appendChild(AppNav.el);
     app.appendChild(LeftPanel.el);
     app.appendChild(MainPanel.el);
+
     return app;
 })();
 
