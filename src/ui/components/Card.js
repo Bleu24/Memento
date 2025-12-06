@@ -22,21 +22,24 @@ export function createCard(icon, heading, body) {
 
 export function createDashboardCard(icon, label, data, text) {
     const card = document.createElement("div");
-    const svg = createElement(icon);
+    const svg = createElement(icon.svg);
     const cardLabel = document.createElement("h2");
     const cardText = document.createElement("p");
     const cardHeading = document.createElement("div");
     const cardBody = document.createElement("div");
     const dataHolder = document.createElement("div");
 
+    svg.style.stroke = icon.options.stroke || "red";
+
     card.className = "card";
     cardLabel.className = "card__label";
+    dataHolder.className = "card__data";
     cardText.className = "card__text";
     cardHeading.className = "card__header";
     svg.classList.add("card__icon");
     cardBody.className = "card__body";
 
-    cardHeading.append(svg, cardLabel);
+    cardHeading.append(cardLabel, svg);
     cardBody.append(dataHolder, cardText);
     card.append(cardHeading, cardBody);
 
