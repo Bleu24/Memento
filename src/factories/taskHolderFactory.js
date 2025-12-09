@@ -32,8 +32,6 @@ export const createTaskHolder = () => {
         });
     }
 
-
-
     const completeTask = (completedTask) => {
         completedTasks.push(serialize(completedTask));
         tasks = tasks.filter(task => task.id !== completedTask.id);
