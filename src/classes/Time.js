@@ -19,7 +19,7 @@ export class Time {
         const start = startOfWeek(date);
 
         for (let i = 0; i < 7; i++) {
-            week.push(addDays(start, i));
+            week.push(addDays(start, i).toDateString());
         }
 
         return [...week];
@@ -30,7 +30,7 @@ export class Time {
         const start = startOfWeek(this.#dateNow);
 
         for (let i = 0; i < 7; i++) {
-            week.push(addDays(start, i));
+            week.push(addDays(start, i).toDateString());
         }
 
         return [...this.#weekNow];
