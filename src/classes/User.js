@@ -24,7 +24,7 @@ export class User {
         this.#email = email;
         this.#name = name;
         this.#isLoggedIn = isLoggedIn;
-        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"), createStreakHolder());
+        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"), createStreakHolder(undefined));
     }
 
     get name() {
