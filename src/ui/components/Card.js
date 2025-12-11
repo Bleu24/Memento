@@ -49,7 +49,3 @@ export function createDashboardCard(icon, label, data, text) {
 
     return card;
 }
-
-export function createStreakCard(label, data) {
-
-}
