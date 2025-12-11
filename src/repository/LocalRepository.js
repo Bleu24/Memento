@@ -41,10 +41,11 @@ export const LocalRepository = (function () {
 
             try {
                 const parsedObj = JSON.parse(loadedObj);
-                const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
+                const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
                 parsedObj.tasks.forEach(t => user.addTask(t));
                 parsedObj.projects.forEach(p => user.addProject(p));
                 user.setTab(parsedObj.tab);
+                user.isLoggedIn = parsedObj.isLoggedIn;
                 users.push(user);
             } catch (error) {
                 console.error("LocalRepository: failed to parse", key, error);
@@ -63,10 +64,11 @@ export const LocalRepository = (function () {
 
         try {
             const parsedObj = JSON.parse(loadedObj);
-            const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
+            const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => user.addTask(t));
             parsedObj.projects.forEach(p => user.addProject(p));
             user.setTab(parsedObj.tab);
+            user.isLoggedIn = parsedObj.isLoggedIn;
             return user;
 
         } catch (error) {
@@ -81,10 +83,11 @@ export const LocalRepository = (function () {
 
         try {
             const parsedObj = JSON.parse(loadedObj);
-            const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level, parsedObj.isLoggedIn);
+            const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => user.addTask(t));
             parsedObj.projects.forEach(p => user.addProject(p));
             user.setTab(parsedObj.tab);
+            user.isLoggedIn = parsedObj.isLoggedIn;
             return user;
 
         } catch (error) {
