@@ -4,12 +4,21 @@ export const createStreakHolder = (dataObj) => {
     let currentStreak = dataObj.currentStreak || 0;
     let longestStreak = dataObj.longestStreak || 0;
     let inStreak = dataObj.inStreak || false;
+    let lastActivty = 
 
-    const checkStreakInWeek = () => {
-        
+    const resetStreak = () => {
+        currentStreak = 0;
     }
 
-    const logStreak = () => {
-        
+    const logActivity = () => {
+        currentStreak++;
     }
+
+    const hardResetStreak = () => {
+        currentStreak = 0;
+        longestStreak = 0;
+        inStreak = false;
+    }
+
+    return { resetStreak, logActivity, hardResetStreak };
 }
