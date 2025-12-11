@@ -23,6 +23,7 @@ export const MainPanel = (function () {
             case "dashboard":
                 main.appendChild(Dashboard.el);
                 Dashboard.render(user);
+                break;
             case "tasks":
                 const userTasks = user.getTasks();
                 const userCompletedTasks = user.getCompletedTasks();
