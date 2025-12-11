@@ -3,6 +3,7 @@ import { createExpHolder } from "../factories/expHolderFactory.js";
 import { createTaskHolder } from "../factories/taskHolderFactory.js";
 import { createLevelHolder } from "../factories/levelHolderFactory.js";
 import { createTabHolder } from "../factories/tabHolderFactory.js";
+import { createStreakHolder } from "../factories/streakHolderFactory.js";
 
 
 export class User {
@@ -23,7 +24,7 @@ export class User {
         this.#email = email;
         this.#name = name;
         this.#isLoggedIn = isLoggedIn;
-        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"));
+        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"), createStreakHolder());
     }
 
     get name() {
