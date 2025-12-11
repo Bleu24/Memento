@@ -1,10 +1,11 @@
+import { Streak } from "../classes/Streak.js";
 import { Time } from "../classes/Time.js";
 
 export const createStreakHolder = (dataObj) => {
+    const streaks = [];
     let currentStreak = dataObj.currentStreak || 0;
     let longestStreak = dataObj.longestStreak || 0;
     let inStreak = dataObj.inStreak || false;
-    let lastActivty = 
 
     const resetStreak = () => {
         currentStreak = 0;
@@ -12,6 +13,7 @@ export const createStreakHolder = (dataObj) => {
 
     const logActivity = () => {
         currentStreak++;
+        streaks.push(new Streak(Time.dateNow, true));
     }
 
     const hardResetStreak = () => {
@@ -20,5 +22,13 @@ export const createStreakHolder = (dataObj) => {
         inStreak = false;
     }
 
-    return { resetStreak, logActivity, hardResetStreak };
+    const getLongestStreak = () => {
+        if (currentStreak > longestStreak) {
+            longestStreak = currentStreak;
+        }
+
+        return longestStreak;
+    }
+
+    return { resetStreak, logActivity, hardResetStreak, getLongestStreak };
 }
