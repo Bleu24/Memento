@@ -11,7 +11,7 @@ export const createTaskHolder = () => {
     }
 
     const createTask = (title, description, dueDate, priority) => {
-        return new Task(null, title, description, dueDate, priority)
+        return new Task(null, title, description, dueDate, priority);
     }
 
     const addTask = (task) => {
