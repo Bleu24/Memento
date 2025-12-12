@@ -1,9 +1,10 @@
-import { format, differenceInCalendarDays, addDays, startOfWeek } from "date-fns";
+import { format, differenceInCalendarDays, addDays, startOfWeek, getDay } from "date-fns";
 
 export class Time {
 
     static #dateNow;
     static #weekNow;
+    static #dayNow;
 
     static get dateNow() {
         this.#dateNow = new Date(Date.now());
@@ -34,5 +35,18 @@ export class Time {
         }
 
         return [...this.#weekNow];
+    }
+
+    static get dayNow() {
+        const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let currentDay = null;
+
+        days.forEach(day => {
+            if (days.indexOf(day) === getDay(this.dateNow)) {
+                currentDay = day;
+            }
+        });
+
+        return currentDay;
     }
 }
