@@ -323,4 +323,35 @@ button>p {
     font-size: 2rem;
     font-weight: 900;
     font-family: var(--heading-font);
+    flex-grow: 1;
+}
+
+.week {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    align-self: center;
+    height: 85%;
+
+}
+
+.week span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    justify-content: center;
+}
+
+.week span>svg {
+    width: 32px;
+    height: 32px;
+    border: 1.5px solid var(--border-color);
+    padding: 0.2rem;
+    border-radius: 999px;
+}
+
+.week .node__text {
+    font-size: 0.85rem;
+    font-weight: 400;
 }
