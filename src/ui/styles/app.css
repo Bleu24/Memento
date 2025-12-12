@@ -355,3 +355,7 @@ button>p {
     font-size: 0.85rem;
     font-weight: 400;
 }
+
+.card.kpi {
+    grid-column: span 3;
+}
