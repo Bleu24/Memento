@@ -1,10 +1,12 @@
+import { format } from "date-fns";
+
 export class Streak {
-    #date; 
+    #date;
     #status;
 
     constructor(date, status) {
-        if(!(date instanceof Date) && !status) {
-            this.#date = new Date(Date.now());
+        if (!(date instanceof Date) && !status) {
+            this.#date = format(new Date(Date.now()), "dd-MM-yy");
             this.#status = true;
             return;
         }
