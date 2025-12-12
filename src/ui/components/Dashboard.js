@@ -1,10 +1,15 @@
 import { createDashboardCard } from "./Card.js";
-import { ListTodo, SquareCheckBig, Zap } from "lucide";
+import { ListTodo, SquareCheckBig, Zap, Trophy, ChartLine, Percent } from "lucide";
 import { createDayNodes } from "./DayNodes.js";
+
+const percentage = (num, denom) => {
+    let quotient = 0;
+    quotient = denom ? `${(num / denom) * 100}%` : `${0}%`;
+    return quotient;
+}
 
 export const Dashboard = (function () {
     const div = document.createElement("div");
-    const charts = document.createElement("div");
     const progressLabel = document.createElement("label");
     const progress = document.createElement("div");
     const progBar = document.createElement("progress");
@@ -16,6 +21,9 @@ export const Dashboard = (function () {
     let incompleteTasksCard = document.createElement('div');
     let completeTasksCard = document.createElement('div');
     let streakCard = document.createElement('div');
+    let taskCard = document.createElement('div');
+    let chartCard = document.createElement('div');
+    let completionCard = document.createElement('div');
 
 
     // TODO: finalize updateProgress method
@@ -32,18 +40,29 @@ export const Dashboard = (function () {
             incompleteTasksCard = createDashboardCard({ svg: ListTodo, options: { stroke: '#18F2B2' } }, "Unfinished Tasks", user.getTasks().length, user.getTasks().length ? "Work your ass off!" : "Good job! No work for today!");
             completeTasksCard = createDashboardCard({ svg: SquareCheckBig, options: { stroke: '#18F2B2' } }, "Finished Tasks", user.getCompletedTasks().length, user.getCompletedTasks().length ? "Good job! Keep on going!" : "Work your ass off!");
             streakCard = createDashboardCard({ svg: Zap, options: { stroke: '#18F2B2' } }, "Streaks", createDayNodes(), "FUCK");
+            taskCard = createDashboardCard({ svg: Trophy, options: { stroke: '#18F2B2' } }, "Relevant Tasks", 0, "Your top 3 important tasks");
+            chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI", 0, "Describes how well you perform");
+            completionCard = createDashboardCard({ svg: Percent, options: { stroke: '#18F2B2' } }, "Completion Rate", percentage(user.getCompletedTasks().length, user.getTasks().length), "Your completion rate in percent");
+
+            const cardsArr = [
+                incompleteTasksCard,
+                completeTasksCard,
+                streakCard,
+                taskCard,
+                chartCard,
+                completionCard
+            ]
 
             if (cards.hasChildNodes()) return;
 
-            cards.appendChild(incompleteTasksCard);
-            cards.appendChild(completeTasksCard);
-            cards.appendChild(streakCard);
+            for (const card of cardsArr) {
+                cards.appendChild(card);
+            }
         }
     }
 
 
     div.className = "main__dashboard";
-    charts.className = "charts";
     progressLabel.className = "progress__heading";
     progress.className = "progress";
     progBar.id = "xp";
