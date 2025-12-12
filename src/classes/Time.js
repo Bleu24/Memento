@@ -8,7 +8,7 @@ export class Time {
 
     static get dateNow() {
         this.#dateNow = new Date(Date.now());
-        return format(this.#dateNow, "dd-MM-yy");
+        return this.#dateNow;
     }
 
     static getDifferenceFromNow(date) {
@@ -39,14 +39,13 @@ export class Time {
 
     static get dayNow() {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-        let currentDay = null;
 
         days.forEach(day => {
             if (days.indexOf(day) === getDay(this.dateNow)) {
-                currentDay = day;
+                this.#dayNow = day;
             }
         });
 
-        return currentDay;
+        return this.#dayNow;
     }
 }
