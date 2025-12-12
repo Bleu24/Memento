@@ -44,7 +44,13 @@ export function createDashboardCard(icon, label, data, text) {
     card.append(cardHeading, cardBody);
 
     cardLabel.textContent = label;
-    dataHolder.textContent = data;
+
+    if (data && data instanceof HTMLElement) {
+        dataHolder.appendChild(data);
+    } else {
+        dataHolder.textContent = data;
+    }
+
     cardText.textContent = text;
 
     return card;
