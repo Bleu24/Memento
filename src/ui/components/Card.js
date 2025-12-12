@@ -31,7 +31,12 @@ export function createDashboardCard(icon, label, data, text) {
 
     svg.style.stroke = icon.options.stroke || "red";
 
-    card.className = "card";
+    if (label.toLowerCase() === "kpi") {
+        card.className = `card ${label.toLowerCase()}`;
+    } else {
+        card.className = "card";
+    }
+
     cardLabel.className = "card__label";
     dataHolder.className = "card__data";
     cardText.className = "card__text";
