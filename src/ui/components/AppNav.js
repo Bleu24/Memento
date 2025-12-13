@@ -22,6 +22,10 @@ export const AppNav = (function () {
                 tabLabel.textContent = proper(tab);
                 suppLabel.textContent = "View your tasks";
                 break;
+            case "projects":
+                tabLabel.textContent = proper(tab);
+                suppLabel.textContent = "View your projects";
+                break;
         }
     }
 
