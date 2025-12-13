@@ -3,6 +3,7 @@ import { Notifications } from "./Notifications.js";
 
 export class Task {
     #id;
+    #completedAt;
 
 
     constructor(id, title, description, dueDate, priority) {
@@ -16,5 +17,14 @@ export class Task {
     get id() {
         return this.#id;
     }
+
+    get completedAt() {
+        return this.#completedAt;
+    }
+
+    set completedAt(date) {
+        this.#completedAt = date;
+    }
+
 
 }
