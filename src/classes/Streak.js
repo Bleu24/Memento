@@ -14,4 +14,16 @@ export class Streak {
         this.#date = date;
         this.#status = date;
     }
+
+    get status() {
+        return this.#status;
+    }
+
+    get date() {
+        return this.#date;
+    }
+
+    static hasActivity(streak) {
+
+    }
 }
