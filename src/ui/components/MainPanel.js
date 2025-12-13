@@ -1,4 +1,4 @@
-import { displayTasks, displayCompleteTasks } from "./Tasks.js";
+import { Tasks } from "./Tasks.js";
 import { Dashboard } from "./Dashboard.js";
 
 export const MainPanel = (function () {
@@ -25,18 +25,8 @@ export const MainPanel = (function () {
                 Dashboard.render(user);
                 break;
             case "tasks":
-                const userTasks = user.getTasks();
-                const userCompletedTasks = user.getCompletedTasks();
-
-                const displayedTasks = displayTasks("All Tasks", userTasks);
-                const displayedCompleteTasks = displayCompleteTasks("Completed Tasks", userCompletedTasks);
-
-                if (userTasks.length <= 0) console.log("No tasks yet!");
-
-                if (userCompletedTasks.length <= 0) console.log("Work your ass off!");
-
-                main.appendChild(displayedTasks);
-                main.appendChild(displayedCompleteTasks);
+                main.appendChild(Tasks.el);
+                Tasks.render(user);
                 break;
         }
 
