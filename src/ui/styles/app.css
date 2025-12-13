@@ -129,7 +129,12 @@ button>p {
 
 .mainPanel {
     grid-column: span 10;
+    position: relative;
+    overflow: auto;
+}
 
+.mainPanel::-webkit-scrollbar {
+    display: none;
 }
 
 .taskList__item {
@@ -267,6 +272,7 @@ button>p {
     border: 1px solid var(--border-color);
     border-radius: 10px;
     gap: 1.5rem;
+    background-color: var(--secondary-background-color);
 }
 
 .progress__heading {
@@ -358,4 +364,121 @@ button>p {
 
 .card.kpi {
     grid-column: span 3;
+}
+
+.tasksContainer__taskList {
+    width: 100%;
+    height: auto;
+}
+
+.task__btn {
+    height: 100px;
+    width: 100%;
+    background-color: transparent;
+    border: 2px dashed var(--border-color);
+    color: var(--border-color);
+    font-size: 1.5rem;
+}
+
+.task__btn:hover {
+    cursor: pointer;
+}
+
+.task__btn>svg {
+    height: 40px;
+    width: 40px;
+}
+
+.modal__overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.taskForm {
+    height: auto;
+    width: 550px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: var(--secondary-background-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.taskForm div {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.taskForm div input {
+    padding: 0.5rem 0.5rem;
+    background-color: var(--primary-background-color);
+    border-radius: 0.35rem;
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+}
+
+.taskForm>div:nth-child(2)>input {
+    height: 50px;
+}
+
+.taskForm ::placeholder,
+.taskForm>div:nth-child(3)>input::placeholder {
+    color: var(--secondary-text-color);
+}
+
+.taskForm>div:nth-child(3)>input::-webkit-calendar-picker-indicator {
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="15" viewBox="0 0 24 24"><path fill="%23bbbbbb" d="M20 3h-1V1h-2v2H7V1H5v2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 18H4V8h16v13z"/></svg>');
+}
+
+.taskForm>div:nth-child(4) div {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    background-color: var(--primary-background-color);
+    padding: 1rem;
+    border-radius: 1rem;
+    border: 1px solid var(--border-color);
+}
+
+.taskForm>div:nth-child(4) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.taskForm button {
+    height: 40px;
+    background-color: var(--primary-background-color);
+    border: 1px solid var(--border-color);
+    color: var(--primary-text-color);
+    border-radius: 0.35rem;
+}
+
+.taskForm button:hover {
+    cursor: pointer;
+}
+
+fieldset {
+    border: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    min-inline-size: auto;
+    flex: 1 0 0;
+}
+
+legend {
+    padding: 0;
+    margin-bottom: 1rem;
 }
