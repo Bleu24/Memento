@@ -84,6 +84,11 @@ body {
     font-family: var(--text-font);
     color: var(--primary-text-color);
     background-color: var(--primary-background-color);
+    overflow: auto;
+}
+
+body::-webkit-scrollbar {
+    display: none;
 }
 
 h1,
