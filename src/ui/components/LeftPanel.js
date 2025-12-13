@@ -59,7 +59,7 @@ export const LeftPanel = (function () {
         if (!(clickedButton instanceof HTMLButtonElement)) return;
 
         const classString = clickedButton.className;
-        
+
         const user = UserService.loadLoggedInProfile(LocalRepository);
         user.setTab(classString);
 
