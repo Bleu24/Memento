@@ -1,20 +1,28 @@
-import Chart from 'chart.js/auto';
+import Chart from 'chart.js/auto'; // might change this to a specific one to allow tree-shaking
 
-export const createChart = (icon, title, option) => {
-    const { type, data, options } = option;
+export const createChart = (config) => {
     const div = document.createElement("div");
-    const heading = document.createElement("h1");
     const canvas = document.createElement("canvas");
 
     div.className = "chart";
-    heading.className = "chart__heading";
     canvas.className = "chart__canvas";
 
-    title = "test";
-    heading.textContent = title;
-    new Chart(canvas, { type, data, options });
 
-    div.appendChild(heading);
+    new Chart(canvas,
+        {
+            type: config.type,
+            data: {
+                labels: config.date,
+                datasets: {
+                    label: "Tasks completed each week",
+                    data: config.data
+                }
+            }
+
+        }
+    );
+
+
     div.appendChild(canvas);
     return div;
 }
