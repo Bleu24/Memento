@@ -4,7 +4,7 @@ export const createLevelHolder = (xpHolder) => {
     let threshold = 100;
     let leftoverXp = 0;
     let runningXp = 0;
-    let level = 0;
+    let level = 1;
 
     const onLevelUp = () => {
         const isMaxLevel = level >= MAX_LEVEL;
@@ -12,7 +12,7 @@ export const createLevelHolder = (xpHolder) => {
         if (isMaxLevel) return;
 
         threshold += 100;
-        level += 1;
+        level++;
         leftoverXp = 0; // not sure if I should be setting this to zero
     }
 
