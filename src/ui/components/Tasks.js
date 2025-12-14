@@ -80,6 +80,16 @@ const displayTaskModal = () => {
     formContainer.appendChild(form);
     bg.appendChild(formContainer);
 
+    bg.addEventListener('click', (e) => {
+        if (e.target.closest(".modal__overlay")) {
+            bg.remove()
+        }
+    })
+
+    form.addEventListener('click', (e) => {
+        e.stopPropagation();
+    })
+
     form.addEventListener('submit', (e) => {
         e.preventDefault();
         const formData = new FormData(form);
@@ -98,10 +108,11 @@ const displayTaskModal = () => {
 }
 
 const handleClick = (e) => {
-    if (e.target.closest(".task__btn")) {
-        MainPanel.el.appendChild(displayTaskModal());
-    }
 
+    if (e.target.closest(".task__btn")) {
+        const taskModal = displayTaskModal();
+        MainPanel.el.appendChild(taskModal);
+    }
     return
 }
 
@@ -135,6 +146,7 @@ export const Tasks = (function () {
     // TODO: Add conditional rendering
     const render = (user) => {
         const tasks = user.getTasks();
+        const tasksNodes = []
 
         tasks.forEach(task => {
             const taskItem = document.createElement('li');
@@ -173,8 +185,11 @@ export const Tasks = (function () {
             rightSideOfItem.append(dueDate, prio, edit);
 
             taskItem.append(leftSideOfItem, rightSideOfItem);
-            taskList.appendChild(taskItem);
+
+            tasksNodes.push(taskItem);
         });
+
+        taskList.replaceChildren(...tasksNodes);
 
         taskList.appendChild(addTaskBtn);
         addTaskBtn.appendChild(plus);
@@ -182,7 +197,7 @@ export const Tasks = (function () {
         taskCounter.textContent = tasks.length;
     }
 
-    addTaskBtn.addEventListener('click', handleClick);
+    taskList.addEventListener('click', handleClick);
 
     header.append(heading, taskCounter);
     tasksDiv.appendChild(header);
