@@ -142,8 +142,7 @@ export const Tasks = (function () {
         ['high', 'red']
     ];
 
-
-    // TODO: Add conditional rendering
+    
     const render = (user) => {
         const tasks = user.getTasks();
         const tasksNodes = []
