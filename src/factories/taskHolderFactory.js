@@ -33,10 +33,19 @@ export const createTaskHolder = () => {
         tasks.forEach(task => {
             if (task.id === selectedTask.id) {
                 for (const key in task) {
+                    if (key === "id" || key === "completedAt") continue;
                     task[key] = changes[key];
                 }
             }
         });
+    }
+
+    const getTask = (id) => {
+        for (const task of tasks) {
+            if (task.id === id) {
+                return task;
+            }
+        }
     }
 
     const completeTask = (completedTask) => {
@@ -47,5 +56,5 @@ export const createTaskHolder = () => {
     const getTasks = () => structuredClone(tasks);
     const getCompletedTasks = () => structuredClone(completedTasks);
 
-    return { createTask, addTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks };
+    return { createTask, addTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks, getTask };
 }
