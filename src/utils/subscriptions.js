@@ -3,7 +3,7 @@ import { createExpHolder } from "../factories/expHolderFactory.js";
 
 
 const onTaskCreated = (task) => {
-    let BASE_XP = null;
+    let BASE_XP = 0;
 
 
     if (!task) {
@@ -15,7 +15,7 @@ const onTaskCreated = (task) => {
         BASE_XP = 10;
         Object.assign(task, createExpHolder(BASE_XP));
     }
-    else if (task.priority === 'medium') {
+    else if (task.priority === 'mid') {
         BASE_XP = 20;
         Object.assign(task, createExpHolder(BASE_XP));
     }
