@@ -61,7 +61,8 @@ export const LeftPanel = (function () {
         const classString = clickedButton.className;
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
-        user.setTab(classString);
+        
+        if (user) user.setTab(classString);
 
         switch (classString) {
             case "home":
