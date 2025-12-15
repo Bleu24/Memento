@@ -7,6 +7,14 @@ export const UserService = (function () {
         user.addTask(task);
     }
 
+    const editTask = (task, newTask, user) => {
+        user.editTask(task, newTask);
+    }
+
+    const retrieveTask = (taskId, user) => {
+        return user.getTask(taskId);
+    }
+
     const removeTask = (task, user) => {
         user.removeTask(task);
     }
@@ -54,23 +62,13 @@ export const UserService = (function () {
         return task;
     }
 
-    const getTasksForUser = (user) => {
-        return user.getTasks();
-    }
-
-    const getCompletedTasksForUser = (user) => {
-        return user.getCompletedTasks();
-    }
-
-    const getProjectsForUser = (user) => {
-        return user.getProjects();
-    }
-
 
 
 
     return {
         assignTask,
+        editTask,
+        retrieveTask,
         removeTask,
         assignProject,
         removeProject,
@@ -81,9 +79,6 @@ export const UserService = (function () {
         loadProfileFromStorage,
         loadLoggedInProfile,
         loadAllProfiles,
-        createTaskForUser,
-        getTasksForUser,
-        getCompletedTasksForUser,
-        getProjectsForUser
+        createTaskForUser
     };
 })();   
