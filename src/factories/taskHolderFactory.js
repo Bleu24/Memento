@@ -6,8 +6,15 @@ export const createTaskHolder = () => {
     let completedTasks = [];
 
     const serialize = (task) => {
-        const { addXP, reduceXP, getXP, ...rest } = task;
-        return structuredClone(rest);
+        const { addXP, reduceXP, getXP, setXP, ...rest } = task;
+
+        const serializedTask = {
+            ...rest,
+            id: task.id ? task.id : crypto.randomUUID(),
+            completedAt: task.completedAt ? task.completeTask : null,
+        };
+
+        return structuredClone(serializedTask);
     }
 
     const createTask = (title, description, dueDate, priority) => {
