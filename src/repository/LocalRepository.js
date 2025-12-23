@@ -1,4 +1,6 @@
+import { Notifications } from "../classes/Notifications.js";
 import { User } from "../classes/User.js";
+import { UserService } from "../services/UserService.js";
 
 export const LocalRepository = (function () {
 
@@ -42,7 +44,10 @@ export const LocalRepository = (function () {
             try {
                 const parsedObj = JSON.parse(loadedObj);
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-                parsedObj.tasks.forEach(t => user.addTask(t));
+                parsedObj.tasks.forEach(t => {
+                    Notifications.emit("task:created", t);
+                    user.addTask(t);
+                });
                 parsedObj.projects.forEach(p => user.addProject(p));
                 user.setTab(parsedObj.tab);
                 user.isLoggedIn = parsedObj.isLoggedIn;
@@ -65,7 +70,10 @@ export const LocalRepository = (function () {
         try {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-            parsedObj.tasks.forEach(t => user.addTask(t));
+            parsedObj.tasks.forEach(t => {
+                Notifications.emit("task:created", t);
+                user.addTask(t);
+            });
             parsedObj.projects.forEach(p => user.addProject(p));
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
@@ -84,7 +92,13 @@ export const LocalRepository = (function () {
         try {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-            parsedObj.tasks.forEach(t => user.addTask(t));
+            parsedObj.tasks.forEach(t => {
+                const { id, title, description, dueDate, priority } = t
+                const taskProps = [id, title, description, dueDate, priority];
+                
+                task = UserService.createTaskForUser(user, taskProps);
+                user.addTask(t);
+            });
             parsedObj.projects.forEach(p => user.addProject(p));
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
