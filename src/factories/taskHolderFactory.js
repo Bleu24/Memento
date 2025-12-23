@@ -12,13 +12,14 @@ export const createTaskHolder = () => {
             ...rest,
             id: task.id ? task.id : crypto.randomUUID(),
             completedAt: task.completedAt ? task.completeTask : null,
+            xp: getXP()
         };
 
         return structuredClone(serializedTask);
     }
 
-    const createTask = (title, description, dueDate, priority) => {
-        return new Task(null, title, description, dueDate, priority);
+    const createTask = (id, title, description, dueDate, priority) => {
+        return new Task(id, title, description, dueDate, priority);
     }
 
     const addTask = (task) => {
