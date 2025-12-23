@@ -132,7 +132,9 @@ button>p {
     overflow: auto;
 }
 
-.mainPanel::-webkit-scrollbar {
+.mainPanel::-webkit-scrollbar,
+.tasksContainer::-webkit-scrollbar,
+.projectsContainer::-webkit-scrollbar {
     display: none;
 }
 
@@ -171,12 +173,15 @@ button>p {
     gap: 8px;
 }
 
-.tasksContainer {
+.tasksContainer,
+.projectsContainer {
     height: 100%;
     padding: 1% 2%;
+    overflow: auto;
 }
 
-.taskHeader {
+.taskHeader,
+.projectHeader {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -184,7 +189,8 @@ button>p {
     margin-bottom: 2%;
 }
 
-.taskHeader>span {
+.taskHeader>span,
+.projectHeader>span {
     font-size: 1.25rem;
     border: 1px solid var(--border-color);
     border-radius: 99px;
@@ -192,7 +198,8 @@ button>p {
     width: 2%;
 }
 
-.tasksContainer__taskCounter {
+.tasksContainer__taskCounter,
+.projectsContainer__projectCounter {
     width: 16px;
     height: 100%;
 }
@@ -378,7 +385,7 @@ button>p {
 }
 
 .task__btn {
-    height: 100px;
+    height: 70px;
     width: 100%;
     background-color: transparent;
     border: 2px dashed var(--border-color);
@@ -386,13 +393,24 @@ button>p {
     font-size: 1.5rem;
 }
 
-.task__btn:hover {
+.project__btn {
+    height: 150px;
+    width: 450px;
+    background-color: transparent;
+    border: 2px dashed var(--border-color);
+    color: var(--border-color);
+    font-size: 1.5rem;
+}
+
+.task__btn:hover,
+.project__btn:hover {
     cursor: pointer;
 }
 
-.task__btn>svg {
-    height: 40px;
-    width: 40px;
+.task__btn>svg,
+.project__btn>svg {
+    height: 32px;
+    width: 32px;
 }
 
 .modal__overlay {
@@ -410,7 +428,8 @@ button>p {
     -webkit-backdrop-filter: blur(50px);
 }
 
-.taskForm {
+.taskForm,
+.projectForm {
     height: auto;
     width: 550px;
     display: flex;
@@ -422,17 +441,20 @@ button>p {
     border: 1px solid var(--border-color);
 }
 
-.taskForm__title {
+.taskForm__title,
+.projectForm__title {
     text-align: center;
 }
 
-.taskForm div {
+.taskForm div,
+.projectForm div {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.taskForm div input {
+.taskForm div input,
+.projectForm div input {
     padding: 0.5rem 0.5rem;
     background-color: var(--primary-background-color);
     border-radius: 0.35rem;
