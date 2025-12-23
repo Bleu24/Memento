@@ -1,5 +1,6 @@
 import { Tasks } from "./Tasks.js";
 import { Dashboard } from "./Dashboard.js";
+import { Projects } from "./Projects.js";
 
 export const MainPanel = (function () {
 
@@ -28,6 +29,9 @@ export const MainPanel = (function () {
                 main.appendChild(Tasks.el);
                 Tasks.render(user);
                 break;
+            case "projects":
+                main.appendChild(Projects.el);
+                Projects.render(user);
         }
 
     }
