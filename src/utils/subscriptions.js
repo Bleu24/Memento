@@ -23,8 +23,6 @@ const onTaskCreated = (task) => {
         BASE_XP = 30
         Object.assign(task, createExpHolder(BASE_XP));
     }
-
-    console.log(`Task XP: ${task.getXP()}`);
 }
 
 
@@ -36,7 +34,7 @@ const onTaskCompleted = (data) => {
     user.addXP(xp)
 
     console.log(`User Obtained: ${user.getXP()} XP`);
-    console.log(`Completed Tasks:`, user.getCompletedTasks())
+    console.log(`Completed Tasks:`, user.getCompletedTasks());
 }
 
 
