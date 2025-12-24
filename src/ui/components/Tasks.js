@@ -1,4 +1,4 @@
-import { createElement, Dot, Ellipsis, CirclePlus } from "lucide";
+import { createElement, Dot, Ellipsis, CirclePlus, X, User } from "lucide";
 import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from "../../services/UserService";
 import { LocalRepository } from "../../repository/LocalRepository";
@@ -117,7 +117,8 @@ const displayTaskModal = (mode) => {
 
         switch (mode) {
             case "create":
-                const newTask = UserService.createTaskForUser(user, taskInfo);
+                const id = crypto.randomUUID();
+                const newTask = UserService.createTaskForUser(user, [id, ...taskInfo]);
                 UserService.assignTask(newTask, user);
                 break;
             case "edit":
@@ -134,7 +135,6 @@ const displayTaskModal = (mode) => {
                     },
                     user
                 );
-
                 break;
             default:
                 break;
@@ -155,7 +155,7 @@ const displayTaskModal = (mode) => {
 
 const handleClick = (e) => {
     let taskModal = "";
-    const taskItem = e.target.closest(".taskList__item");
+    const taskItem = e.target.closest(".taskList__container");
     const taskBtn = e.target.closest(".task__btn");
 
     if (taskBtn) {
@@ -171,7 +171,9 @@ const handleClick = (e) => {
     }
 
     if (taskItem) {
-        const edit = taskItem.querySelector(".edit");
+        const edit = e.target.closest(".edit");
+        const del = e.target.closest(".delete");
+
         if (edit) {
             taskModal = displayTaskModal("edit");
             MainPanel.el.appendChild(taskModal);
@@ -192,6 +194,17 @@ const handleClick = (e) => {
             dateInput.value = task.dueDate;
             radioInput.checked = true;
             form.id = id;
+            UserService.saveProfileToStorage(LocalRepository, user);
+        }
+
+        if (del) {
+            const user = UserService.loadLoggedInProfile(LocalRepository);
+            const id = taskItem.querySelector("input[type='checkbox']").id;
+            const task = UserService.retrieveTask(id, user);
+
+            UserService.removeTask(task, user);
+            UserService.saveProfileToStorage(LocalRepository, user);
+            Tasks.render(user);
         }
     }
 
@@ -230,10 +243,14 @@ export const Tasks = (function () {
         const tasksNodes = []
 
         tasks.forEach(task => {
-            const taskItem = document.createElement('li');
+            const del = createElement(X);
+            const taskContainer = document.createElement('li');
+            const taskItem = document.createElement('div');
             const leftSideOfItem = document.createElement('div');
             const rightSideOfItem = document.createElement('div');
 
+            del.setAttribute('class', 'delete');
+            taskContainer.className = "taskList__container";
             taskItem.className = "taskList__item";
             leftSideOfItem.className = "item__left";
             rightSideOfItem.className = "item__right";
@@ -268,8 +285,9 @@ export const Tasks = (function () {
             rightSideOfItem.append(dueDate, prio, edit);
 
             taskItem.append(leftSideOfItem, rightSideOfItem);
+            taskContainer.append(taskItem, del);
 
-            tasksNodes.push(taskItem);
+            tasksNodes.push(taskContainer);
         });
 
         taskList.replaceChildren(...tasksNodes);
