@@ -1,3 +1,4 @@
+import { id } from "date-fns/locale";
 import { Task } from "../classes/Task.js";
 
 export const createTaskHolder = () => {
@@ -11,7 +12,7 @@ export const createTaskHolder = () => {
         const serializedTask = {
             ...rest,
             id: task.id ? task.id : crypto.randomUUID(),
-            completedAt: task.completedAt ? task.completeTask : null,
+            completedAt: task.completedAt ? task.completedAt : null,
             xp: getXP()
         };
 
@@ -19,7 +20,8 @@ export const createTaskHolder = () => {
     }
 
     const createTask = (id, title, description, dueDate, priority) => {
-        return new Task(id, title, description, dueDate, priority);
+        if (id) return new Task(id, title, description, dueDate, priority);
+        else return new Task(null, title, description, dueDate, priority);
     }
 
     const addTask = (task) => {
@@ -37,6 +39,11 @@ export const createTaskHolder = () => {
                     if (key === "id" || key === "completedAt") continue;
                     task[key] = changes[key];
                 }
+                task.xp =
+                    task.priority === 'high' ? 30 :
+                        task.priority === 'mid' ? 20 :
+                            task.priority === 'low' ? 10 :
+                                0;
             }
         });
     }
