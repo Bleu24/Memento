@@ -1,4 +1,4 @@
-import { createElement, Dot, Ellipsis, CirclePlus, X, User } from "lucide";
+import { createElement, Dot, Ellipsis, CirclePlus, X } from "lucide";
 import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from "../../services/UserService";
 import { LocalRepository } from "../../repository/LocalRepository";
