@@ -10,12 +10,17 @@ export class Task {
         this.#id = id ? id : crypto.randomUUID();
         this.title = title;
         this.description = description;
-        this.dueDate = format(dueDate, "dd-MM-yy");
+        this.dueDate = format(dueDate, "yyyy-MM-dd");
         this.priority = priority;
     }
 
     get id() {
         return this.#id;
+    }
+
+    set id(id) {
+        if (typeof id !== "string" || !id) return id = crypto.randomUUID();
+        this.#id = id;
     }
 
     get completedAt() {
