@@ -138,6 +138,22 @@ button>p {
     display: none;
 }
 
+.taskList__container {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+svg.delete {
+    stroke: var(--border-color);
+}
+
+svg.delete:hover {
+    stroke: var(--warning-color);
+    cursor: pointer;
+}
+
 .taskList__item {
     display: flex;
     gap: 8px;
@@ -147,6 +163,7 @@ button>p {
     padding: 0.85rem;
     border: 1px solid var(--border-color);
     border-radius: 0.5rem;
+    flex: 1 0 0;
 }
 
 .item__left {
@@ -391,6 +408,10 @@ button>p {
     border: 2px dashed var(--border-color);
     color: var(--border-color);
     font-size: 1.5rem;
+}
+
+.task__btn:hover {
+    cursor: pointer;
 }
 
 .project__btn {
