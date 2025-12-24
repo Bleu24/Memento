@@ -8,7 +8,8 @@ export const UserService = (function () {
     }
 
     const editTask = (task, newTask, user) => {
-        user.editTask(task, newTask);
+        const editedTask = user.editTask(task, newTask);
+        Notifications.emit("task:edited", editedTask);
     }
 
     const retrieveTask = (taskId, user) => {
