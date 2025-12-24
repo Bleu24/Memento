@@ -2,7 +2,7 @@ import { Notifications } from "../classes/Notifications.js";
 import { createExpHolder } from "../factories/expHolderFactory.js";
 
 
-const onTaskCreated = (task) => {
+const applyXP = (task) => {
     let BASE_XP = 0;
 
 
@@ -39,5 +39,5 @@ const onTaskCompleted = (data) => {
 
 
 
-Notifications.subscribe("task:created", onTaskCreated);
+Notifications.subscribe("task:created", applyXP);
 Notifications.subscribe("task:completed", onTaskCompleted);
