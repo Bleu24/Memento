@@ -1,5 +1,7 @@
-import { CirclePlus, createElement } from 'lucide';
+import { CirclePlus, createElement, Folder } from 'lucide';
 import { MainPanel } from '../components/MainPanel.js';
+import { UserService } from '../../services/UserService.js';
+import { LocalRepository } from '../../repository/LocalRepository.js';
 
 const displayProjectModal = (mode) => {
     const bg = document.createElement('div');
@@ -8,8 +10,6 @@ const displayProjectModal = (mode) => {
     const formTitle = document.createElement('h1');
     const row1 = document.createElement('div');
     const row2 = document.createElement('div');
-    const row3 = document.createElement('div');
-    const row4 = document.createElement('div');
     const submit = document.createElement('button');
 
     bg.className = "modal__overlay";
@@ -40,20 +40,9 @@ const displayProjectModal = (mode) => {
     descInput.type = "text";
     row2.append(descLabel, descInput);
 
-    // row 3
-    const dateLabel = document.createElement('label');
-    const dateInput = document.createElement('input');
-    dateLabel.textContent = "Date: ";
-    dateLabel.setAttribute("for", "date");
-    dateInput.id = "date";
-    dateInput.name = "date";
-    dateInput.type = "text";
-    dateInput.required = true;
-    row3.append(dateLabel, dateInput);
-
 
     // row 4
-   
+
     switch (mode) {
         case "create":
             submit.textContent = "Create";
@@ -65,7 +54,7 @@ const displayProjectModal = (mode) => {
             break;
     }
 
-    form.append(formTitle, row1, row2, row3, row4, submit);
+    form.append(formTitle, row1, row2, submit);
     formContainer.appendChild(form);
     bg.appendChild(formContainer);
 
@@ -79,13 +68,8 @@ const displayProjectModal = (mode) => {
 
     form.addEventListener('click', (e) => {
         e.stopPropagation();
+    });
 
-        if (e.target.closest("input#date")) {
-            dateInput.setAttribute("type", "date");
-        } else {
-            dateInput.setAttribute("type", "text");
-        }
-    })
 
     form.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -95,7 +79,8 @@ const displayProjectModal = (mode) => {
 
         switch (mode) {
             case "create":
-                const newProject = UserService.createProjectForUser(user, projectInfo);
+                const id = crypto.randomUUID();
+                const newProject = UserService.createProjectForUser(user, [id, ...projectInfo]);
                 UserService.assignProject(newProject, user);
                 break;
             case "edit":
@@ -142,10 +127,9 @@ const handleClick = (e) => {
 
         const titleInput = document.querySelector("input#title");
         const descInput = document.querySelector("input#description");
-        const dateInput = document.querySelector("input#date");
         titleInput.placeholder = "Coding: To-Do App";
         descInput.placeholder = "Debugging line 43 col 23";
-        dateInput.placeholder = "08/19/2025";
+
     }
 
     if (projectItem) {
@@ -161,14 +145,10 @@ const handleClick = (e) => {
             const form = document.querySelector("form");
             const titleInput = document.querySelector("input#title");
             const descInput = document.querySelector("input#description");
-            const dateInput = document.querySelector("input#date");
-            const radioInput = document.querySelector(`input#${project.priority}`);
 
 
             titleInput.value = project.title;
             descInput.value = project.description;
-            dateInput.value = project.dueDate;
-            radioInput.checked = true;
             form.id = id;
         }
     }
@@ -201,46 +181,30 @@ export const Projects = (function () {
         const projectsNodes = []
 
         projects.forEach(project => {
-            const projectItem = document.createElement('li');
-            const leftSideOfItem = document.createElement('div');
-            const rightSideOfItem = document.createElement('div');
+            const projectContainer = document.createElement('li');
+            const projectItem = document.createElement('div');
+            const projectHeader = document.createElement('div');
+            const projectTitle = document.createElement('h2');
+            const projectIcon = createElement(Folder);
+            const projectDescription = document.createElement('div');
 
+            projectContainer.className = "projectList__container";
             projectItem.className = "projectList__item";
-            leftSideOfItem.className = "item__left";
-            rightSideOfItem.className = "item__right";
+            projectHeader.className = "projectItem__header";
+            projectDescription.className = "projectItem__description";
 
-            //left side elements
-            const checkBox = document.createElement('input');
-            checkBox.type = 'checkbox';
-            checkBox.id = project.id;
-            checkBox.name = 'user__project';
-            const projectTitle = document.createElement('label');
+            projectItem.id = project.id;
+
             projectTitle.textContent = project.title;
-            projectTitle.setAttribute("for", checkBox.id);
+            projectDescription.textContent = project.desc;
 
-            //right side elements
-            const dueDate = document.createElement('time');
-            dueDate.textContent = project.dueDate;
+            projectHeader.append(projectTitle, projectIcon);
 
-            const prio = createElement(Dot);
-            const edit = createElement(Ellipsis);
+            projectItem.append(projectHeader, projectDescription);
 
-            edit.classList.add("edit");
+            projectContainer.appendChild(projectItem);
 
-
-            for (const arr of prioMap) {
-                if (arr[0] === project.priority) {
-                    prio.style.setProperty('stroke', arr[1]);
-                }
-            }
-
-            // append nodes to corresponding parents
-            leftSideOfItem.append(checkBox, projectTitle);
-            rightSideOfItem.append(dueDate, prio, edit);
-
-            projectItem.append(leftSideOfItem, rightSideOfItem);
-
-            projectsNodes.push(projectItem);
+            projectsNodes.push(projectContainer);
         });
 
         projectList.replaceChildren(...projectsNodes);
