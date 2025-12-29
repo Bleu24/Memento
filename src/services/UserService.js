@@ -63,6 +63,15 @@ export const UserService = (function () {
         return task;
     }
 
+    const createProjectForUser = (user, props) => {
+        const project = user.createProject(...props);
+        return project;
+    }
+
+    const retrieveProject = (projectId, user) => {
+        return user.getProject(projectId);
+    }
+
 
 
 
@@ -80,6 +89,8 @@ export const UserService = (function () {
         loadProfileFromStorage,
         loadLoggedInProfile,
         loadAllProfiles,
-        createTaskForUser
+        createTaskForUser,
+        createProjectForUser,
+        retrieveProject
     };
 })();   
