@@ -138,11 +138,22 @@ button>p {
     display: none;
 }
 
-.taskList__container {
+.taskList__container,
+.projectList__container {
     list-style: none;
     display: flex;
     align-items: center;
     gap: 1rem;
+}
+
+svg.edit {
+    width: 24px;
+    height: 24px;
+}
+
+svg.edit:hover {
+    cursor: pointer;
+    stroke: var(--border-color);
 }
 
 svg.delete {
@@ -408,6 +419,7 @@ svg.delete:hover {
     border: 2px dashed var(--border-color);
     color: var(--border-color);
     font-size: 1.5rem;
+    border-radius: 0.5rem;
 }
 
 .task__btn:hover {
@@ -421,6 +433,7 @@ svg.delete:hover {
     border: 2px dashed var(--border-color);
     color: var(--border-color);
     font-size: 1.5rem;
+    border-radius: 1rem;
 }
 
 .task__btn:hover,
@@ -512,7 +525,8 @@ svg.delete:hover {
     justify-content: space-evenly;
 }
 
-.taskForm button {
+.taskForm button,
+.projectForm button {
     height: 40px;
     background-color: var(--primary-background-color);
     border: 1px solid var(--border-color);
@@ -520,7 +534,8 @@ svg.delete:hover {
     border-radius: 0.35rem;
 }
 
-.taskForm button:hover {
+.taskForm button:hover,
+.projectForm button:hover {
     cursor: pointer;
 }
 
@@ -538,4 +553,29 @@ fieldset {
 legend {
     padding: 0;
     margin-bottom: 1rem;
+}
+
+.projectList__item {
+    height: 150px;
+    width: 450px;
+    background-color: var(--secondary-background-color);
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 1rem;
+    gap: 1rem;
+}
+
+.projectItem__header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.projectsContainer__projectList {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-auto-rows: auto;
+    justify-items: center;
+    row-gap: 2rem;
 }
