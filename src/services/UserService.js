@@ -24,6 +24,10 @@ export const UserService = (function () {
         user.addProject(project);
     }
 
+    const editProject = (project, newProject, user) => {
+        user.editProject(project, newProject);
+    }
+
     const removeProject = (project, user) => {
         user.removeProject(project);
     }
@@ -81,6 +85,7 @@ export const UserService = (function () {
         retrieveTask,
         removeTask,
         assignProject,
+        editProject,
         removeProject,
         assignTaskToProject,
         removeTaskFromProject,
