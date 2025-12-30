@@ -579,3 +579,28 @@ legend {
     justify-items: center;
     row-gap: 2rem;
 }
+
+.titleContainer {
+    display: flex;
+    gap: 0.875rem;
+}
+
+.titleContainer>svg {
+    stroke: var(--primary-color);
+    height: 24px;
+    width: 24px;
+}
+
+.titleContainer+svg {
+    height: 24px;
+    width: 24px;
+}
+
+.titleContainer+svg:hover {
+    cursor: pointer;
+    stroke: var(--primary-color);
+}
+
+.projectList__item svg.delete {
+    align-self: end;
+}
