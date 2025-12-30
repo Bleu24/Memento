@@ -21,6 +21,17 @@ export const createProjectHolder = () => {
         projects.push(serialized(project));
     }
 
+    const editProject = (selectedProject, changes) => {
+        projects.forEach(project => {
+            if (project.id === selectedProject.id) {
+                for (const key in project) {
+                    if (key === 'id') continue;
+                    project[key] = changes[key];
+                }
+            }
+        })
+    }
+
     const removeProject = (selectedProject) => {
         projects = projects.filter(project => project.id !== selectedProject.id);
     }
@@ -40,5 +51,5 @@ export const createProjectHolder = () => {
 
     const getProjects = () => structuredClone(projects);
 
-    return { createProject, addProject, removeProject, getProject, getProjects };
+    return { createProject, addProject, editProject, removeProject, getProject, getProjects };
 }
