@@ -1,4 +1,4 @@
-import { CirclePlus, createElement, Folder } from 'lucide';
+import { CirclePlus, createElement, Folder, SquarePen, Trash } from 'lucide';
 import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from '../../services/UserService.js';
 import { LocalRepository } from '../../repository/LocalRepository.js';
@@ -91,9 +91,7 @@ const displayProjectModal = (mode) => {
                     retrievedProject,
                     {
                         title: projectInfo[0],
-                        description: projectInfo[1],
-                        dueDate: projectInfo[2],
-                        priority: projectInfo[3]
+                        desc: projectInfo[1]
                     },
                     user
                 );
@@ -133,13 +131,15 @@ const handleClick = (e) => {
     }
 
     if (projectItem) {
-        const edit = projectItem.querySelector(".edit");
+        const edit = e.target.closest(".edit");
+        const del = e.target.closest(".delete");
+
         if (edit) {
             projectModal = displayProjectModal("edit");
             MainPanel.el.appendChild(projectModal);
 
             const user = UserService.loadLoggedInProfile(LocalRepository);
-            const id = projectItem.querySelector("input[type='checkbox']").id;
+            const id = projectItem.id;
             const project = UserService.retrieveProject(id, user);
 
             const form = document.querySelector("form");
@@ -148,8 +148,18 @@ const handleClick = (e) => {
 
 
             titleInput.value = project.title;
-            descInput.value = project.description;
+            descInput.value = project.desc;
             form.id = id;
+        }
+
+        if (del) {
+            const user = UserService.loadLoggedInProfile(LocalRepository);
+            const id = projectItem.id;
+            const project = UserService.retrieveProject(id, user);
+
+            UserService.removeProject(project, user);
+            UserService.saveProfileToStorage(LocalRepository, user);
+            Projects.render(user);
         }
     }
 
@@ -181,26 +191,34 @@ export const Projects = (function () {
         const projectsNodes = []
 
         projects.forEach(project => {
+            const del = createElement(Trash);
             const projectContainer = document.createElement('li');
             const projectItem = document.createElement('div');
             const projectHeader = document.createElement('div');
+            const titleContainer = document.createElement('div');
             const projectTitle = document.createElement('h2');
             const projectIcon = createElement(Folder);
+            const projectEdit = createElement(SquarePen);
             const projectDescription = document.createElement('div');
 
             projectContainer.className = "projectList__container";
             projectItem.className = "projectList__item";
             projectHeader.className = "projectItem__header";
             projectDescription.className = "projectItem__description";
+            titleContainer.className = "titleContainer";
+            projectEdit.classList.add('edit');
+            del.classList.add('delete');
 
             projectItem.id = project.id;
 
             projectTitle.textContent = project.title;
             projectDescription.textContent = project.desc;
 
-            projectHeader.append(projectTitle, projectIcon);
+            titleContainer.append(projectIcon, projectTitle);
 
-            projectItem.append(projectHeader, projectDescription);
+            projectHeader.append(titleContainer, projectEdit);
+
+            projectItem.append(projectHeader, projectDescription, del);
 
             projectContainer.appendChild(projectItem);
 
