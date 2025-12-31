@@ -86,7 +86,6 @@ const displayProjectModal = (mode) => {
             case "edit":
                 const projectId = form.id
                 const retrievedProject = UserService.retrieveProject(projectId, user)
-
                 UserService.editProject(
                     retrievedProject,
                     {
@@ -95,12 +94,10 @@ const displayProjectModal = (mode) => {
                     },
                     user
                 );
-
                 break;
             default:
                 break;
         }
-
 
         UserService.saveProfileToStorage(LocalRepository, user);
         Projects.render(user);
@@ -150,6 +147,7 @@ const handleClick = (e) => {
             titleInput.value = project.title;
             descInput.value = project.desc;
             form.id = id;
+            return;
         }
 
         if (del) {
@@ -160,10 +158,15 @@ const handleClick = (e) => {
             UserService.removeProject(project, user);
             UserService.saveProfileToStorage(LocalRepository, user);
             Projects.render(user);
+            return;
         }
-    }
 
-    return;
+        
+
+
+
+
+    }
 }
 
 export const Projects = (function () {
@@ -172,9 +175,8 @@ export const Projects = (function () {
     const heading = document.createElement("h2");
     const projectCounter = document.createElement("span");
     const projectList = document.createElement("ul");
-    const addProjectBtn = document.createElement('button');
+    const addProjectBtn = document.createElement('button'); 
     const plus = createElement(CirclePlus);
-
 
     header.className = "projectHeader";
     projectsDiv.className = "projectsContainer";
