@@ -604,3 +604,8 @@ legend {
 .projectList__item svg.delete {
     align-self: end;
 }
+
+.projectList__item:hover {
+    cursor: pointer;
+    border-color: var(--light-border-color);
+}
