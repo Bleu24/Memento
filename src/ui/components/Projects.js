@@ -3,6 +3,7 @@ import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from '../../services/UserService.js';
 import { LocalRepository } from '../../repository/LocalRepository.js';
 import { Tasks } from './Tasks.js';
+import { UIService } from '../../services/UIService.js';
 
 const displayProjectModal = (mode) => {
     const bg = document.createElement('div');
@@ -163,7 +164,7 @@ const handleClick = (e) => {
         }
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
-        Tasks.render(UserService.retrieveProject(projectItem.id, user));
+       
 
 
     }
