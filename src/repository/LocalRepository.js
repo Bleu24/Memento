@@ -50,7 +50,13 @@ export const LocalRepository = (function () {
                     const task = UserService.createTaskForUser(user, taskProps);
                     user.addTask(task);
                 });
-                parsedObj.projects.forEach(p => user.addProject(p));
+                parsedObj.projects.forEach(p => {
+                    const { id, title, desc } = p;
+                    const projProps = [id, title, desc];
+
+                    const project = UserService.createProjectForUser(user, projProps);
+                    user.addProject(project);
+                });
                 user.setTab(parsedObj.tab);
                 user.isLoggedIn = parsedObj.isLoggedIn;
                 users.push(user);
@@ -79,7 +85,13 @@ export const LocalRepository = (function () {
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
             });
-            parsedObj.projects.forEach(p => user.addProject(p));
+            parsedObj.projects.forEach(p => {
+                const { id, title, desc } = p;
+                const projProps = [id, title, desc];
+
+                const project = UserService.createProjectForUser(user, projProps);
+                user.addProject(project);
+            });
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
             return user;
@@ -104,7 +116,13 @@ export const LocalRepository = (function () {
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
             });
-            parsedObj.projects.forEach(p => user.addProject(p));
+            parsedObj.projects.forEach(p => {
+                const { id, title, desc } = p;
+                const projProps = [id, title, desc];
+
+                const project = UserService.createProjectForUser(user, projProps);
+                user.addProject(project);
+            });
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
             return user;
