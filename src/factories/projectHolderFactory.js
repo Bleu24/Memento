@@ -7,7 +7,7 @@ export const createProjectHolder = () => {
     const serialized = (project) => {
         const { addTask, serialize, createTask, removeTask, editTask, completeTask, getTask, getTasks, getCompletedTasks, ...rest } = project;
 
-        const serializedProject = { id: project.id ? project.id : crypto.randomUUID(), ...rest };
+        const serializedProject = { id: project.id ? project.id : crypto.randomUUID(), ...rest, tasks: project.getTasks() };
 
         return serializedProject;
     }
@@ -29,7 +29,7 @@ export const createProjectHolder = () => {
                     project[key] = changes[key];
                 }
             }
-        })
+        });
     }
 
     const removeProject = (selectedProject) => {
