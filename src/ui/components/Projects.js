@@ -2,6 +2,7 @@ import { CirclePlus, createElement, Folder, SquarePen, Trash } from 'lucide';
 import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from '../../services/UserService.js';
 import { LocalRepository } from '../../repository/LocalRepository.js';
+import { Tasks } from './Tasks.js';
 
 const displayProjectModal = (mode) => {
     const bg = document.createElement('div');
@@ -161,9 +162,8 @@ const handleClick = (e) => {
             return;
         }
 
-        
-
-
+        const user = UserService.loadLoggedInProfile(LocalRepository);
+        Tasks.render(UserService.retrieveProject(projectItem.id, user));
 
 
     }
@@ -175,7 +175,7 @@ export const Projects = (function () {
     const heading = document.createElement("h2");
     const projectCounter = document.createElement("span");
     const projectList = document.createElement("ul");
-    const addProjectBtn = document.createElement('button'); 
+    const addProjectBtn = document.createElement('button');
     const plus = createElement(CirclePlus);
 
     header.className = "projectHeader";
