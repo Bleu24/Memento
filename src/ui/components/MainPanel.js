@@ -19,7 +19,8 @@ export const MainPanel = (function () {
             }
         }
 
-        const tab = user.getTab();
+
+        const tab = user.getTab?.() ?? "tasks";
         switch (tab) {
             case "dashboard":
                 main.appendChild(Dashboard.el);
