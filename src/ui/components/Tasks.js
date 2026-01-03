@@ -239,7 +239,7 @@ export const Tasks = (function () {
 
 
     const render = (user) => {
-        const tasks = user.getTasks?.() ?? user?.tasks;
+        const tasks = user.getTasks?.() ?? user.tasks;
         const tasksNodes = []
 
         tasks.forEach(task => {
