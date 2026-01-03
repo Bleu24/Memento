@@ -164,7 +164,7 @@ const handleClick = (e) => {
         }
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
-       
+        UIService.render(MainPanel, UserService.retrieveProject(projectItem.id, user));
 
 
     }
