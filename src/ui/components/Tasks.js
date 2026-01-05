@@ -113,17 +113,35 @@ const displayTaskModal = (mode) => {
         e.preventDefault();
         const formData = new FormData(form);
         const taskInfo = Array.from(formData.values());
+
+        const list = document.querySelector('.tasksContainer__taskList');
         const user = UserService.loadLoggedInProfile(LocalRepository);
+
+        let target = {};
+        let project = {};
+
+        if (!list.dataset.origin) {
+            target = user;
+        } else {
+            // deserialize project in user
+            const projectId = list.dataset.origin.split('project-')[1];
+            project = UserService.retrieveProject(projectId, user);
+
+            target = UserService.createProjectForUser(user, [project.id, project.title, project.desc]);
+
+        }
+
 
         switch (mode) {
             case "create":
                 const id = crypto.randomUUID();
-                const newTask = UserService.createTaskForUser(user, [id, ...taskInfo]);
-                UserService.assignTask(newTask, user);
+                const newTask = UserService.createTaskForUser(target, [id, ...taskInfo]);
+                UserService.assignTask(newTask, target);
+
                 break;
             case "edit":
                 const taskId = form.id
-                const retrievedTask = UserService.retrieveTask(taskId, user)
+                const retrievedTask = UserService.retrieveTask(taskId, target)
 
                 UserService.editTask(
                     retrievedTask,
@@ -133,16 +151,16 @@ const displayTaskModal = (mode) => {
                         dueDate: taskInfo[2],
                         priority: taskInfo[3]
                     },
-                    user
+                    target
                 );
                 break;
             default:
                 break;
         }
 
-
+        console.log(target.getTasks());
         UserService.saveProfileToStorage(LocalRepository, user);
-        Tasks.render(user);
+        Tasks.render(target);
 
         setTimeout(() => {
             bg.remove();
