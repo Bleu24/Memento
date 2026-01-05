@@ -58,7 +58,7 @@ export const UserService = (function () {
     }
 
     const loadAllProfiles = (repo) => {
-        return repo.loadAll();
+        return repo.loadAll(); 
     }
 
     const createTaskForUser = (user, props) => {
