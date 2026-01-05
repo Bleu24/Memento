@@ -164,7 +164,11 @@ const handleClick = (e) => {
         }
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
-        UIService.render(MainPanel, UserService.retrieveProject(projectItem.id, user));
+        const project = UserService.retrieveProject(projectItem.id, user);
+        UIService.render(MainPanel, project);
+
+        const list = document.querySelector(".tasksContainer__taskList");
+        list.setAttribute('data-origin', `project-${project.id}`);
 
 
     }
