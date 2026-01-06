@@ -4,7 +4,6 @@ import { Notifications } from "./Notifications.js";
 export class Task {
     #id;
     #completedAt;
-    belongsTo;
 
 
     constructor(id, title, description, dueDate, priority) {
@@ -31,19 +30,5 @@ export class Task {
     set completedAt(date) {
         this.#completedAt = date;
     }
-
-    set belongsTo(projectId) {
-        if (typeof projectId !== "string") {
-            console.error("project id is not a proper string");
-            return;
-        }
-
-        this.belongsTo = projectId;
-    }
-
-    get belongsTo() {
-        return this.belongsTo;
-    }
-
 
 }
