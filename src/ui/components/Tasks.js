@@ -158,8 +158,7 @@ const displayTaskModal = (mode) => {
                 break;
         }
 
-        console.log(target.getTasks());
-        UserService.saveProfileToStorage(LocalRepository, user);
+        UserService.saveProfileToS6torage(LocalRepository, user);
         Tasks.render(target);
 
         setTimeout(() => {
