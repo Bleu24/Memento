@@ -126,9 +126,7 @@ const displayTaskModal = (mode) => {
             // deserialize project in user
             const projectId = list.dataset.origin.split('project-')[1];
             project = UserService.retrieveProject(projectId, user);
-
             target = UserService.createProjectForUser(user, [project.id, project.title, project.desc]);
-
         }
 
 
@@ -158,7 +156,7 @@ const displayTaskModal = (mode) => {
                 break;
         }
 
-        UserService.saveProfileToS6torage(LocalRepository, user);
+        UserService.saveProfileToStorage(LocalRepository, user);
         Tasks.render(target);
 
         setTimeout(() => {
@@ -255,8 +253,8 @@ export const Tasks = (function () {
     ];
 
 
-    const render = (user) => {
-        const tasks = user.getTasks?.() ?? user.tasks;
+    const render = (taskHolder) => {
+        const tasks = taskHolder.getTasks?.() ?? taskHolder.tasks;
         const tasksNodes = []
 
         tasks.forEach(task => {
