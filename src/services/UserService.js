@@ -1,10 +1,12 @@
 import { Notifications } from "../classes/Notifications.js";
+import { LocalRepository } from "../repository/LocalRepository.js";
+import { Project } from "../classes/Project.js";
 
 export const UserService = (function () {
 
 
-    const assignTask = (task, user) => {
-        user.addTask(task);
+    const assignTask = (task, taskHolder) => {
+        taskHolder.addTask(task);
     }
 
     const editTask = (task, newTask, user) => {
@@ -58,7 +60,7 @@ export const UserService = (function () {
     }
 
     const loadAllProfiles = (repo) => {
-        return repo.loadAll(); 
+        return repo.loadAll();
     }
 
     const createTaskForUser = (user, props) => {
