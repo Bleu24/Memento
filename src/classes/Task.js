@@ -10,7 +10,7 @@ export class Task {
         this.#id = id ? id : crypto.randomUUID();
         this.title = title;
         this.description = description;
-        this.dueDate = format(dueDate, "yyyy-MM-dd");
+        this.dueDate = typeof dueDate === 'string' ? dueDate : format(dueDate, "yyyy-MM-dd");
         this.priority = priority;
     }
 
