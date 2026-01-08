@@ -56,6 +56,14 @@ export const LocalRepository = (function () {
 
                     const project = UserService.createProjectForUser(user, projProps);
                     user.addProject(project);
+
+                    p.tasks.forEach(t => {
+                        const { id, title, description, dueDate, priority } = t
+                        const taskProps = [id, title, description, dueDate, priority];
+
+                        const task = UserService.createTaskForUser(project, taskProps);
+                        project.addTask(task);
+                    });
                 });
                 user.setTab(parsedObj.tab);
                 user.isLoggedIn = parsedObj.isLoggedIn;
@@ -91,6 +99,14 @@ export const LocalRepository = (function () {
 
                 const project = UserService.createProjectForUser(user, projProps);
                 user.addProject(project);
+
+                p.tasks.forEach(t => {
+                    const { id, title, description, dueDate, priority } = t
+                    const taskProps = [id, title, description, dueDate, priority];
+
+                    const task = UserService.createTaskForUser(project, taskProps);
+                    project.addTask(task);
+                });
             });
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
@@ -122,6 +138,14 @@ export const LocalRepository = (function () {
 
                 const project = UserService.createProjectForUser(user, projProps);
                 user.addProject(project);
+
+                p.tasks.forEach(t => {
+                    const { id, title, description, dueDate, priority } = t
+                    const taskProps = [id, title, description, dueDate, priority];
+
+                    const task = UserService.createTaskForUser(project, taskProps);
+                    project.addTask(task);
+                });
             });
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
