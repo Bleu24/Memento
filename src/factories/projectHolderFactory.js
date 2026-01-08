@@ -26,7 +26,7 @@ export const createProjectHolder = () => {
             if (project.id === selectedProject.id) {
                 for (const key in project) {
                     if (key === 'id') continue;
-                    project[key] = changes[key];
+                    project[key] = changes[key];    
                 }
             }
         });
