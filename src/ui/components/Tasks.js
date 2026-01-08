@@ -136,6 +136,9 @@ const displayTaskModal = (mode) => {
                 const newTask = UserService.createTaskForUser(target, [id, ...taskInfo]);
                 UserService.assignTask(newTask, target);
 
+                if (target !== user) {
+                    project.tasks = target.getTasks();
+                }
                 break;
             case "edit":
                 const taskId = form.id
