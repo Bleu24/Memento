@@ -63,8 +63,8 @@ export const UserService = (function () {
         return repo.loadAll();
     }
 
-    const createTaskForUser = (user, props) => {
-        const task = user.createTask(...props);
+    const createTaskForUser = (taskHolder, props) => {
+        const task = taskHolder.createTask(...props);
         Notifications.emit("task:created", task);
         return task;
     }
