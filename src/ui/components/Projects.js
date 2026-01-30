@@ -192,7 +192,6 @@ export const Projects = (function () {
 
     heading.textContent = "Your projects";
 
-    // TODO: Make projects card type
     const render = (user) => {
         const projects = user.getProjects();
         const projectsNodes = []
