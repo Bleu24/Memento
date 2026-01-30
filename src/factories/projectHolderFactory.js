@@ -18,15 +18,15 @@ export const createProjectHolder = () => {
     }
 
     const addProject = (project) => {
-        projects.push(serialized(project));
+        projects.push(project);
     }
 
     const editProject = (selectedProject, changes) => {
         projects.forEach(project => {
             if (project.id === selectedProject.id) {
                 for (const key in project) {
-                    if (key === 'id') continue;
-                    project[key] = changes[key];    
+                    if (key === 'id' || typeof project[key] === "function") continue;
+                    project[key] = changes[key];
                 }
             }
         });
@@ -49,7 +49,7 @@ export const createProjectHolder = () => {
         }
     }
 
-    const getProjects = () => structuredClone(projects);
+    const getProjects = () => projects.map(p => serialized(p));
 
     return { createProject, addProject, editProject, removeProject, getProject, getProjects };
 }
