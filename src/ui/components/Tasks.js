@@ -118,15 +118,12 @@ const displayTaskModal = (mode) => {
         const user = UserService.loadLoggedInProfile(LocalRepository);
 
         let target = {};
-        let project = {};
 
         if (!list.dataset.origin) {
             target = user;
         } else {
-            // deserialize project in user
             const projectId = list.dataset.origin.split('project-')[1];
-            project = UserService.retrieveProject(projectId, user);
-            target = UserService.createProjectForUser(user, [project.id, project.title, project.desc]);
+            target = UserService.retrieveProject(projectId, user);
         }
 
 
@@ -135,10 +132,6 @@ const displayTaskModal = (mode) => {
                 const id = crypto.randomUUID();
                 const newTask = UserService.createTaskForUser(target, [id, ...taskInfo]);
                 UserService.assignTask(newTask, target);
-
-                if (target !== user) {
-                    project.tasks = target.getTasks();
-                }
                 break;
             case "edit":
                 const taskId = form.id
@@ -189,16 +182,26 @@ const handleClick = (e) => {
     }
 
     if (taskItem) {
+        const list = document.querySelector('.tasksContainer__taskList');
         const edit = e.target.closest(".edit");
         const del = e.target.closest(".delete");
+
+        const user = UserService.loadLoggedInProfile(LocalRepository);
+        let target = {};
+
+        if (!list.dataset.origin && user.getTab() === "tasks") {
+            target = user;
+        } else {
+            const projectId = list.dataset.origin.split('project-')[1];
+            target = UserService.retrieveProject(projectId, user);
+        }
 
         if (edit) {
             taskModal = displayTaskModal("edit");
             MainPanel.el.appendChild(taskModal);
 
-            const user = UserService.loadLoggedInProfile(LocalRepository);
             const id = taskItem.querySelector("input[type='checkbox']").id;
-            const task = UserService.retrieveTask(id, user);
+            const task = UserService.retrieveTask(id, target);
 
             const form = document.querySelector("form");
             const titleInput = document.querySelector("input#title");
@@ -216,13 +219,12 @@ const handleClick = (e) => {
         }
 
         if (del) {
-            const user = UserService.loadLoggedInProfile(LocalRepository);
             const id = taskItem.querySelector("input[type='checkbox']").id;
-            const task = UserService.retrieveTask(id, user);
+            const task = UserService.retrieveTask(id, target);
 
-            UserService.removeTask(task, user);
+            UserService.removeTask(task, target);
             UserService.saveProfileToStorage(LocalRepository, user);
-            Tasks.render(user);
+            Tasks.render(target);
         }
     }
 
