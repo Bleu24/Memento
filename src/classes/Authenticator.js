@@ -45,7 +45,7 @@ export class Authenticator {
         if (this.isExistingUser(user)) {
             user.isLoggedIn = false;
             UserService.saveProfileToStorage(this.repo, user);
-            LocalRepository.clearCurrentUser();
+            this.repo.clearCurrentUser();
             success = true;
             return success;
         } else return success;
