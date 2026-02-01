@@ -231,24 +231,50 @@ const handleClick = (e) => {
     return;
 }
 
-export const Tasks = (function () {
-    const tasksDiv = document.createElement("div");
+const createTaskList = (type) => {
+
     const header = document.createElement('header');
-    const heading = document.createElement("h2");
-    const taskCounter = document.createElement("span");
-    const taskList = document.createElement("ul");
+    const heading = document.createElement('h2');
+    const taskCounter = document.createElement('span');
+    const taskList = document.createElement('ul');
+
+    switch (type) {
+        case "normal":
+            header.className = "taskHeader";
+            heading.className = "tasksContainer__heading";
+            taskCounter.className = "tasksContainer__taskCounter";
+            taskList.className = "tasksContainer__taskList";
+            heading.textContent = "Your Tasks";
+            break;
+        case "completed":
+            header.className = "completedTaskHeader";
+            heading.className = "completedTasksContainer__heading";
+            taskCounter.className = "completedTasksContainer__taskCounter";
+            taskList.className = "completedTasksContainer__taskList";
+            heading.textContent = "Your Completed Tasks";
+            break;
+        default:
+            console.error("Invalid type");
+            return;
+    }
+
+    header.append(heading, taskCounter);
+
+    return { header, taskCounter, taskList };
+}
+
+
+export const Tasks = (function () {
+    const tasksDiv = document.createElement('div');
     const addTaskBtn = document.createElement('button');
     const plus = createElement(CirclePlus);
 
 
-    header.className = "taskHeader";
     tasksDiv.className = "tasksContainer";
-    heading.className = "tasksContainer__heading";
-    taskCounter.className = "tasksContainer__taskCounter";
-    taskList.className = "tasksContainer__taskList";
     addTaskBtn.className = "task__btn";
 
-    heading.textContent = "Your Tasks";
+    const normalTaskListObj = createTaskList("normal");
+    const completedTaskListObj = createTaskList("completed");
 
 
     const prioMap = [
@@ -310,19 +336,21 @@ export const Tasks = (function () {
             tasksNodes.push(taskContainer);
         });
 
-        taskList.replaceChildren(...tasksNodes);
+        normalTaskListObj.taskList.replaceChildren(...tasksNodes);
 
-        taskList.appendChild(addTaskBtn);
+        normalTaskListObj.taskList.appendChild(addTaskBtn);
         addTaskBtn.appendChild(plus);
 
-        taskCounter.textContent = tasks.length;
+        normalTaskListObj.taskCounter.textContent = tasks.length;
     }
 
-    taskList.addEventListener('click', handleClick);
+    normalTaskListObj.taskList.addEventListener('click', handleClick);
 
-    header.append(heading, taskCounter);
-    tasksDiv.appendChild(header);
-    tasksDiv.appendChild(taskList);
+
+    tasksDiv.appendChild(normalTaskListObj.header);
+    tasksDiv.appendChild(normalTaskListObj.taskList);
+    tasksDiv.appendChild(completedTaskListObj.header);
+    tasksDiv.appendChild(completedTaskListObj.taskList);
 
 
     return { el: tasksDiv, render };
