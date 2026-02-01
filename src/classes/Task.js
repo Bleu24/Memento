@@ -4,6 +4,7 @@ import { Notifications } from "./Notifications.js";
 export class Task {
     #id;
     #completedAt;
+    isDone = false;
 
 
     constructor(id, title, description, dueDate, priority) {
@@ -29,6 +30,15 @@ export class Task {
 
     set completedAt(date) {
         this.#completedAt = date;
+    }
+
+    get isDone() {
+        return this.isDone;
+    }
+
+    set isDone(status) {
+        if (typeof status !== "boolean") return;
+        this.isDone = status;
     }
 
 }
