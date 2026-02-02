@@ -185,6 +185,8 @@ const handleClick = (e) => {
         const list = document.querySelector('.tasksContainer__taskList');
         const edit = e.target.closest(".edit");
         const del = e.target.closest(".delete");
+        const checkbox = taskItem.querySelector("input[type='checkbox']");
+
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
         let target = {};
@@ -225,6 +227,13 @@ const handleClick = (e) => {
             UserService.removeTask(task, target);
             UserService.saveProfileToStorage(LocalRepository, user);
             Tasks.render(target);
+        }
+
+        if (checkbox) {
+            const id = checkbox.id;
+            const targetTask = UserService.retrieveTask(id, user);
+            UserService.completeTask(targetTask, user);
+            checkbox.checked = !checkbox.checked;
         }
     }
 
