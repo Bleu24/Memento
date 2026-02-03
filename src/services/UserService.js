@@ -44,7 +44,7 @@ export const UserService = (function () {
 
     const completeTask = (task, user) => {
         user.completeTask(task);
-        Notifications.emit("task:completed", { task, user });
+        // Notifications.emit("task:completed", { task, user });
     }
 
     const saveProfileToStorage = (repo, user) => {
