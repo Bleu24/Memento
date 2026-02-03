@@ -209,7 +209,8 @@ svg.delete:hover {
 }
 
 .taskHeader,
-.projectHeader {
+.projectHeader,
+.completedTaskHeader {
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -227,7 +228,8 @@ svg.delete:hover {
 }
 
 .tasksContainer__taskCounter,
-.projectsContainer__projectCounter {
+.projectsContainer__projectCounter,
+.completedTasksContainer__taskCounter {
     width: 16px;
     height: 100%;
 }
@@ -404,7 +406,8 @@ svg.delete:hover {
     grid-column: span 3;
 }
 
-.tasksContainer__taskList {
+.tasksContainer__taskList,
+.completedTasksContainer__taskList {
     width: 100%;
     height: auto;
     display: flex;
