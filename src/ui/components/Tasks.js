@@ -185,7 +185,7 @@ const handleClick = (e) => {
         const list = document.querySelector('.tasksContainer__taskList');
         const edit = e.target.closest(".edit");
         const del = e.target.closest(".delete");
-        const checkbox = taskItem.querySelector("input[type='checkbox']");
+        const checkbox = taskItem.closest("input[type='checkbox']");
 
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
@@ -295,7 +295,10 @@ export const Tasks = (function () {
 
     const render = (taskHolder) => {
         const tasks = taskHolder.getTasks?.() ?? taskHolder.tasks;
-        const tasksNodes = []
+        const tasksNodes = [];
+
+        const completedTasks = taskHolder.getCompletedTasks?.() ?? taskHolder.completedTasks;
+        const completedTasksNodes = [];
 
         tasks.forEach(task => {
             const del = createElement(X);
@@ -345,12 +348,63 @@ export const Tasks = (function () {
             tasksNodes.push(taskContainer);
         });
 
+        completedTasks.forEach(task => {
+            const del = createElement(X);
+            const taskContainer = document.createElement('li');
+            const taskItem = document.createElement('div');
+            const leftSideOfItem = document.createElement('div');
+            const rightSideOfItem = document.createElement('div');
+
+            del.setAttribute('class', 'delete');
+            taskContainer.className = "taskList__container";
+            taskItem.className = "taskList__item";
+            leftSideOfItem.className = "item__left";
+            rightSideOfItem.className = "item__right";
+
+            //left side elements
+            const checkBox = document.createElement('input');
+            checkBox.type = 'checkbox';
+            checkBox.id = task.id;
+            checkBox.name = 'user__task';
+            const taskTitle = document.createElement('label');
+            taskTitle.textContent = task.title;
+            taskTitle.setAttribute("for", checkBox.id);
+
+            //right side elements
+            const dueDate = document.createElement('time');
+            dueDate.textContent = task.dueDate;
+
+            const prio = createElement(Dot);
+            const edit = createElement(Ellipsis);
+
+            edit.classList.add("edit");
+
+
+            for (const arr of prioMap) {
+                if (arr[0] === task.priority) {
+                    prio.style.setProperty('stroke', arr[1]);
+                }
+            }
+
+            // append nodes to corresponding parents
+            leftSideOfItem.append(checkBox, taskTitle);
+            rightSideOfItem.append(dueDate, prio, edit);
+
+            taskItem.append(leftSideOfItem, rightSideOfItem);
+            taskContainer.append(taskItem, del);
+
+            completedTasksNodes.push(taskContainer);
+        });
+
         normalTaskListObj.taskList.replaceChildren(...tasksNodes);
+        completedTaskListObj.taskList.replaceChildren(...completedTasksNodes);
 
         normalTaskListObj.taskList.appendChild(addTaskBtn);
+
         addTaskBtn.appendChild(plus);
 
         normalTaskListObj.taskCounter.textContent = tasks.length;
+        completedTaskListObj.taskCounter.textContent = completedTasks.length;
     }
 
     normalTaskListObj.taskList.addEventListener('click', handleClick);
