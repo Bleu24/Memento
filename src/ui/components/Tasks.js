@@ -232,7 +232,13 @@ const handleClick = (e) => {
         if (checkbox) {
             const id = checkbox.id;
             const targetTask = UserService.retrieveTask(id, target);
-            UserService.completeTask(targetTask, target);
+
+            if (e.currentTarget.className === 'completedTasksContainer__taskList' && targetTask.isDone === true) {
+                UserService.undoComplete(targetTask, target);
+            } else {
+                UserService.completeTask(targetTask, target);
+            }
+
             UserService.saveProfileToStorage(LocalRepository, user);
             Tasks.render(target);
         }
@@ -412,6 +418,7 @@ export const Tasks = (function () {
     }
 
     normalTaskListObj.taskList.addEventListener('click', handleClick);
+    completedTaskListObj.taskList.addEventListener('click', handleClick);
 
 
     tasksDiv.appendChild(normalTaskListObj.header);
