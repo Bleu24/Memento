@@ -185,7 +185,7 @@ const handleClick = (e) => {
         const list = document.querySelector('.tasksContainer__taskList');
         const edit = e.target.closest(".edit");
         const del = e.target.closest(".delete");
-        const checkbox = taskItem.closest("input[type='checkbox']");
+        const checkbox = e.target.closest("input[type='checkbox']");
 
 
         const user = UserService.loadLoggedInProfile(LocalRepository);
@@ -231,9 +231,10 @@ const handleClick = (e) => {
 
         if (checkbox) {
             const id = checkbox.id;
-            const targetTask = UserService.retrieveTask(id, user);
-            UserService.completeTask(targetTask, user);
-            checkbox.checked = !checkbox.checked;
+            const targetTask = UserService.retrieveTask(id, target);
+            UserService.completeTask(targetTask, target);
+            UserService.saveProfileToStorage(LocalRepository, user);
+            Tasks.render(target);
         }
     }
 
@@ -366,9 +367,12 @@ export const Tasks = (function () {
             checkBox.type = 'checkbox';
             checkBox.id = task.id;
             checkBox.name = 'user__task';
+            checkBox.checked = true;
             const taskTitle = document.createElement('label');
             taskTitle.textContent = task.title;
             taskTitle.setAttribute("for", checkBox.id);
+            taskTitle.style.textDecoration = 'line-through';
+            taskTitle.style.color = '#9D9D9D';
 
             //right side elements
             const dueDate = document.createElement('time');
