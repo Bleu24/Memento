@@ -58,6 +58,12 @@ export const createTaskHolder = () => {
                 return task;
             }
         }
+
+        for (const ct of completedTasks) {
+            if (ct.id === id) {
+                return ct;
+            }
+        }
     }
 
     const completeTask = (completedTask) => {
@@ -66,8 +72,14 @@ export const createTaskHolder = () => {
         completedTasks.push(completedTask);
     }
 
+    const undoCompletion = (task) => {
+        task.isDone = false;
+        completedTasks = completedTasks.filter(ct => ct.id !== task.id);
+        tasks.push(task);
+    }
+
     const getTasks = () => structuredClone(tasks);
     const getCompletedTasks = () => structuredClone(completedTasks);
 
-    return { createTask, addTask, removeTask, editTask, completeTask, getTasks, getCompletedTasks, getTask };
+    return { createTask, addTask, removeTask, editTask, completeTask, undoCompletion, getTasks, getCompletedTasks, getTask };
 }
