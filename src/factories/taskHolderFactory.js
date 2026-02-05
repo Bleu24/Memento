@@ -25,7 +25,11 @@ export const createTaskHolder = () => {
     }
 
     const addTask = (task) => {
-        tasks.push(serialize(task));
+        if (task.isDone && task.isDone === true) completedTasks.push(serialize(task));
+        else {
+            task.isDone = false;
+            tasks.push(serialize(task));
+        }
     }
 
     const removeTask = (selectedTask) => {
@@ -59,6 +63,7 @@ export const createTaskHolder = () => {
     const completeTask = (completedTask) => {
         completedTask.isDone = true;
         tasks = tasks.filter(task => task.id !== completedTask.id);
+        completedTasks.push(completedTask);
     }
 
     const getTasks = () => structuredClone(tasks);
