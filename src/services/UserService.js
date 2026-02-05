@@ -47,6 +47,10 @@ export const UserService = (function () {
         // Notifications.emit("task:completed", { task, user });
     }
 
+    const undoComplete = (task, user) => {
+        user.undoCompletion(task);
+    }
+
     const saveProfileToStorage = (repo, user) => {
         repo.save(user);
     }
@@ -92,6 +96,7 @@ export const UserService = (function () {
         assignTaskToProject,
         removeTaskFromProject,
         completeTask,
+        undoComplete,
         saveProfileToStorage,
         loadProfileFromStorage,
         loadLoggedInProfile,
