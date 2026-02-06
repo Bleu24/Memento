@@ -75,6 +75,15 @@ export const LocalRepository = (function () {
                         task.isDone = isDone;
                         project.addTask(task);
                     });
+
+                    p.completedTasks.forEach(ct => {
+                        const { id, title, description, dueDate, priority, isDone } = ct
+                        const taskProps = [id, title, description, dueDate, priority];
+
+                        const task = UserService.createTaskForUser(user, taskProps);
+                        task.isDone = isDone;
+                        project.addTask(task);
+                    });
                 });
                 user.setTab(parsedObj.tab);
                 user.isLoggedIn = parsedObj.isLoggedIn;
@@ -128,6 +137,15 @@ export const LocalRepository = (function () {
                     task.isDone = isDone;
                     project.addTask(task);
                 });
+
+                p.completedTasks.forEach(ct => {
+                    const { id, title, description, dueDate, priority, isDone } = ct
+                    const taskProps = [id, title, description, dueDate, priority];
+
+                    const task = UserService.createTaskForUser(user, taskProps);
+                    task.isDone = isDone;
+                    project.addTask(task);
+                });
             });
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
@@ -174,6 +192,15 @@ export const LocalRepository = (function () {
                     const taskProps = [id, title, description, dueDate, priority];
 
                     const task = UserService.createTaskForUser(project, taskProps);
+                    task.isDone = isDone;
+                    project.addTask(task);
+                });
+
+                p.completedTasks.forEach(ct => {
+                    const { id, title, description, dueDate, priority, isDone } = ct
+                    const taskProps = [id, title, description, dueDate, priority];
+
+                    const task = UserService.createTaskForUser(user, taskProps);
                     task.isDone = isDone;
                     project.addTask(task);
                 });
