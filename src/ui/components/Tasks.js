@@ -191,7 +191,7 @@ const handleClick = (e) => {
         const user = UserService.loadLoggedInProfile(LocalRepository);
         let target = {};
 
-        if (!list.dataset.origin && user.getTab() === "tasks") {
+        if (user.getTab() === "tasks") {
             target = user;
         } else {
             const projectId = list.dataset.origin.split('project-')[1];
