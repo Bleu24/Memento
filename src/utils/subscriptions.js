@@ -11,7 +11,10 @@ const applyXP = (task) => {
         return;
     }
 
-    if (task.priority === 'low') {
+    if (task.isDone === true) {
+        Object.assign(task, createExpHolder(BASE_XP)); // assigns zero
+    }
+    else if (task.priority === 'low') {
         BASE_XP = 10;
         Object.assign(task, createExpHolder(BASE_XP));
     }
@@ -37,7 +40,16 @@ const onTaskCompleted = (data) => {
     console.log(`Completed Tasks:`, user.getCompletedTasks());
 }
 
+const onTaskUndo = (data) => {
+    const { task, user } = data;
+    const xp = task.priority === 'low' ? 10 : task.priority === 'mid' ? 20 : task.priority === 'high' ? 30 : 0;
+
+    user.reduceXP(xp);
+    task.addXP(xp);
+}
+
 
 
 Notifications.subscribe("task:created", applyXP);
 Notifications.subscribe("task:completed", onTaskCompleted);
+Notifications.subscribe("task:undo", onTaskUndo);
