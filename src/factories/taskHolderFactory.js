@@ -19,9 +19,17 @@ export const createTaskHolder = () => {
         return structuredClone(serializedTask);
     }
 
-    const createTask = (id, title, description, dueDate, priority) => {
-        if (id) return new Task(id, title, description, dueDate, priority);
-        else return new Task(null, title, description, dueDate, priority);
+    const createTask = (id, title, description, dueDate, priority, isDone) => {
+        if (id) {
+            const task = new Task(id, title, description, dueDate, priority);
+            task.isDone = isDone;
+            return task;
+        }
+        else {
+            const task = new Task(null, title, description, dueDate, priority);
+            task.isDone = isDone;
+            return task;
+        }
     }
 
     const addTask = (task) => {
