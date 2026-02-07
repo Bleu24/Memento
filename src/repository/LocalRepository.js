@@ -46,18 +46,16 @@ export const LocalRepository = (function () {
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
                 parsedObj.tasks.forEach(t => {
                     const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(user, taskProps);
-                    task.isDone = isDone;
                     user.addTask(task);
                 });
                 parsedObj.completedTasks.forEach(ct => {
                     const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(user, taskProps);
-                    task.isDone = isDone;
                     user.addTask(task);
                 });
                 parsedObj.projects.forEach(p => {
@@ -69,19 +67,17 @@ export const LocalRepository = (function () {
 
                     p.tasks.forEach(t => {
                         const { id, title, description, dueDate, priority, isDone } = t
-                        const taskProps = [id, title, description, dueDate, priority];
+                        const taskProps = [id, title, description, dueDate, priority, isDone];
 
                         const task = UserService.createTaskForUser(project, taskProps);
-                        task.isDone = isDone;
                         project.addTask(task);
                     });
 
                     p.completedTasks.forEach(ct => {
                         const { id, title, description, dueDate, priority, isDone } = ct
-                        const taskProps = [id, title, description, dueDate, priority];
+                        const taskProps = [id, title, description, dueDate, priority, isDone];
 
                         const task = UserService.createTaskForUser(user, taskProps);
-                        task.isDone = isDone;
                         project.addTask(task);
                     });
                 });
@@ -108,18 +104,16 @@ export const LocalRepository = (function () {
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => {
                 const { id, title, description, dueDate, priority, isDone } = t
-                const taskProps = [id, title, description, dueDate, priority];
+                const taskProps = [id, title, description, dueDate, priority, isDone];
 
                 const task = UserService.createTaskForUser(user, taskProps);
-                task.isDone = isDone;
                 user.addTask(task);
             });
             parsedObj.completedTasks.forEach(ct => {
                 const { id, title, description, dueDate, priority, isDone } = ct
-                const taskProps = [id, title, description, dueDate, priority];
+                const taskProps = [id, title, description, dueDate, priority, isDone];
 
                 const task = UserService.createTaskForUser(user, taskProps);
-                task.isDone = isDone;
                 user.addTask(task);
             });
             parsedObj.projects.forEach(p => {
@@ -131,19 +125,17 @@ export const LocalRepository = (function () {
 
                 p.tasks.forEach(t => {
                     const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(project, taskProps);
-                    task.isDone = isDone;
                     project.addTask(task);
                 });
 
                 p.completedTasks.forEach(ct => {
                     const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(user, taskProps);
-                    task.isDone = isDone;
                     project.addTask(task);
                 });
             });
@@ -166,18 +158,16 @@ export const LocalRepository = (function () {
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => {
                 const { id, title, description, dueDate, priority, isDone } = t
-                const taskProps = [id, title, description, dueDate, priority];
+                const taskProps = [id, title, description, dueDate, priority, isDone];
 
                 const task = UserService.createTaskForUser(user, taskProps);
-                task.isDone = isDone;
                 user.addTask(task);
             });
             parsedObj.completedTasks.forEach(ct => {
                 const { id, title, description, dueDate, priority, isDone } = ct
-                const taskProps = [id, title, description, dueDate, priority];
+                const taskProps = [id, title, description, dueDate, priority, isDone];
 
                 const task = UserService.createTaskForUser(user, taskProps);
-                task.isDone = isDone;
                 user.addTask(task);
             });
             parsedObj.projects.forEach(p => {
@@ -189,19 +179,17 @@ export const LocalRepository = (function () {
 
                 p.tasks.forEach(t => {
                     const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(project, taskProps);
-                    task.isDone = isDone;
                     project.addTask(task);
                 });
 
                 p.completedTasks.forEach(ct => {
                     const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority];
+                    const taskProps = [id, title, description, dueDate, priority, isDone];
 
                     const task = UserService.createTaskForUser(user, taskProps);
-                    task.isDone = isDone;
                     project.addTask(task);
                 });
             });
