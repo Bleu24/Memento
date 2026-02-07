@@ -49,6 +49,7 @@ export const UserService = (function () {
 
     const undoComplete = (task, user) => {
         user.undoCompletion(task);
+        Notifications.emit("task:undo", { task, user });
     }
 
     const saveProfileToStorage = (repo, user) => {
