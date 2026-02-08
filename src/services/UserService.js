@@ -42,13 +42,13 @@ export const UserService = (function () {
         project.removeTask(tasks);
     }
 
-    const completeTask = (task, user) => {
-        user.completeTask(task);
+    const completeTask = (task, taskHolder, user) => {
+        taskHolder.completeTask(task);
         Notifications.emit("task:completed", { task, user });
     }
 
-    const undoComplete = (task, user) => {
-        user.undoCompletion(task);
+    const undoComplete = (task, taskHolder, user) => {
+        taskHolder.undoCompletion(task);
         Notifications.emit("task:undo", { task, user });
     }
 
