@@ -29,13 +29,11 @@ export const Dashboard = (function () {
     // TODO: finalize updateProgress method
     const updateProgress = (user) => {
         if (user) {
-            const level = user.getLevel();
-            const threshold = user.getThreshold();
-
-            min.textContent = `${level}`;
-            max.textContent = `${level + 1}`;
-            progBar.max = threshold;
             progBar.value = user.computeXP();
+            min.textContent = `${user.getLevel()}`;
+            max.textContent = `${user.getLevel() + 1}`;
+            progBar.max = user.getThreshold();
+
 
             incompleteTasksCard = createDashboardCard({ svg: ListTodo, options: { stroke: '#18F2B2' } }, "Unfinished Tasks", user.getTasks().length, user.getTasks().length ? "Work your ass off!" : "Good job! No work for today!");
             completeTasksCard = createDashboardCard({ svg: SquareCheckBig, options: { stroke: '#18F2B2' } }, "Finished Tasks", user.getCompletedTasks().length, user.getCompletedTasks().length ? "Good job! Keep on going!" : "Work your ass off!");
