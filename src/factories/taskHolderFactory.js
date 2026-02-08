@@ -1,5 +1,5 @@
-import { id } from "date-fns/locale";
 import { Task } from "../classes/Task.js";
+import { format } from "date-fns";
 
 export const createTaskHolder = () => {
 
@@ -42,6 +42,7 @@ export const createTaskHolder = () => {
 
     const removeTask = (selectedTask) => {
         tasks = tasks.filter(task => task.id !== selectedTask.id);
+        completedTasks = completedTasks.filter(ct => ct.id !== selectedTask.id);
     }
 
     const editTask = (selectedTask, changes) => {
@@ -76,12 +77,14 @@ export const createTaskHolder = () => {
 
     const completeTask = (completedTask) => {
         completedTask.isDone = true;
+        completedTask.completedAt = Date.now();
         tasks = tasks.filter(task => task.id !== completedTask.id);
         completedTasks.push(completedTask);
     }
 
     const undoCompletion = (task) => {
         task.isDone = false;
+        task.completedAt = null;
         completedTasks = completedTasks.filter(ct => ct.id !== task.id);
         tasks.push(task);
     }
