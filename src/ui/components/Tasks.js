@@ -234,9 +234,9 @@ const handleClick = (e) => {
             const targetTask = UserService.retrieveTask(id, target);
 
             if (e.currentTarget.className === 'completedTasksContainer__taskList' && targetTask.isDone === true) {
-                UserService.undoComplete(targetTask, target);
+                UserService.undoComplete(targetTask, target, user);
             } else {
-                UserService.completeTask(targetTask, target);
+                UserService.completeTask(targetTask, target, user);
             }
 
             UserService.saveProfileToStorage(LocalRepository, user);
