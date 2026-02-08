@@ -29,7 +29,7 @@ export class Task {
     }
 
     set completedAt(date) {
-        this.#completedAt = date;
+        this.#completedAt = date ? format(date, "yyyy-MM-dd") : null;
     }
 
     get isDone() {
