@@ -11,6 +11,7 @@ export const createLevelHolder = (xpHolder, lvl) => {
     }
 
     const computeXP = () => {
+        level = 1;
         let currentXP = xpHolder.getXP();
         let threshold = getThreshold();
 
@@ -19,8 +20,6 @@ export const createLevelHolder = (xpHolder, lvl) => {
             level++;
             threshold = computeThreshold();
         }
-
-        while (currentXP > 0 )
 
         if (level >= MAX_LEVEL) currentXP = Math.min(currentXP, threshold);
 
