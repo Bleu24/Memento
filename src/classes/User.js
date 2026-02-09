@@ -17,14 +17,14 @@ export class User {
         const invalidLevel = typeof level !== "number" || level < 0 || Number.isNaN(level);
         const invalidStatus = typeof isLoggedIn !== "boolean";
         if (invalidXp) xp = 0;
-        if (invalidLevel) level = 0;
+        if (invalidLevel) level = 1;
         if (invalidStatus) isLoggedIn = false;
         const xpHolder = createExpHolder(xp);
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
         this.#isLoggedIn = isLoggedIn;
-        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"), createStreakHolder(undefined));
+        Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder, level), createTabHolder("dashboard"), createStreakHolder(undefined));
     }
 
     get name() {
