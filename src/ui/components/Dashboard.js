@@ -33,6 +33,7 @@ export const Dashboard = (function () {
             min.textContent = `${user.getLevel()}`;
             max.textContent = `${user.getLevel() + 1}`;
             progBar.max = user.getThreshold();
+    
 
 
             incompleteTasksCard = createDashboardCard({ svg: ListTodo, options: { stroke: '#18F2B2' } }, "Unfinished Tasks", user.getTasks().length, user.getTasks().length ? "Work your ass off!" : "Good job! No work for today!");
