@@ -61,6 +61,7 @@ export const createTaskHolder = () => {
         });
     }
 
+    // inefficient, might refactor
     const getTask = (id) => {
         for (const task of tasks) {
             if (task.id === id) {
@@ -91,7 +92,7 @@ export const createTaskHolder = () => {
 
     const getTasks = () => tasks.map(task => serialize(task));
     const getCompletedTasks = () => completedTasks.map(ct => serialize(ct));
-    const getTasksCount = () => tasks.length;
+    const getTasksCount = () => ({unfinished: tasks.length, completed: completedTasks.length});
 
     return { createTask, addTask, removeTask, editTask, completeTask, undoCompletion, getTasks, getCompletedTasks, getTask, getTasksCount };
 }
