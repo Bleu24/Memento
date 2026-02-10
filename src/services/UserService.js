@@ -83,6 +83,14 @@ export const UserService = (function () {
         return user.getProject(projectId);
     }
 
+    //TODO: return total count of tasks from tasks array and projects tasks array
+    const getTaskCount = (taskHolder) => {
+        let count = 0;
+
+        count = taskHolder.getTasksCount(); //initial count
+
+    }
+
 
 
 
