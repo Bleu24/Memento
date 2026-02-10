@@ -1,7 +1,7 @@
-export const createLevelHolder = (xpHolder, lvl) => {
+export const createLevelHolder = (xpHolder) => {
 
     const MAX_LEVEL = 50; //tweakable
-    let level = lvl;
+    let level = 1;
 
     const computeThreshold = () => {
         const baseXP = 100;
@@ -11,7 +11,6 @@ export const createLevelHolder = (xpHolder, lvl) => {
     }
 
     const computeXP = () => {
-        level = 1;
         let currentXP = xpHolder.getXP();
         let threshold = getThreshold();
 
