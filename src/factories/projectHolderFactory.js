@@ -5,7 +5,7 @@ export const createProjectHolder = () => {
     let projects = [];
 
     const serialized = (project) => {
-        const { addTask, serialize, createTask, removeTask, editTask, completeTask, undoCompletion, getTask, getTasks, getCompletedTasks, ...rest } = project;
+        const { addTask, serialize, createTask, removeTask, editTask, completeTask, undoCompletion, getTask, getTasks, getCompletedTasks, getTasksCount, ...rest } = project;
 
         const serializedProject = { id: project.id ? project.id : crypto.randomUUID(), ...rest, tasks: project.getTasks(), completedTasks: project.getCompletedTasks() };
 
