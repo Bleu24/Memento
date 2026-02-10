@@ -84,11 +84,20 @@ export const UserService = (function () {
     }
 
     //TODO: return total count of tasks from tasks array and projects tasks array
-    const getTaskCount = (taskHolder) => {
-        let count = 0;
+    const getTaskCount = (user) => {
+        let count = { unfinished: 0, completed: 0 };
 
-        count = taskHolder.getTasksCount(); //initial count
+        count.unfinished = user.getTasksCount().unfinished;
+        count.completed = user.getTasksCount().completed;
 
+        const projects = user.getProjects("live");
+
+        for (const proj of projects) {
+            count.unfinished += proj.getTasksCount().unfinished;
+            count.completed += proj.getTasksCount().completed;
+        }
+
+        return count;
     }
 
 
@@ -112,6 +121,7 @@ export const UserService = (function () {
         loadAllProfiles,
         createTaskForUser,
         createProjectForUser,
-        retrieveProject
+        retrieveProject,
+        getTaskCount
     };
 })();   
