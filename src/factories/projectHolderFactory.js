@@ -1,4 +1,5 @@
 import { Project } from '../classes/Project.js'
+import { cloneDeep } from 'lodash';
 
 export const createProjectHolder = () => {
 
@@ -49,7 +50,12 @@ export const createProjectHolder = () => {
         }
     }
 
-    const getProjects = () => projects.map(p => serialized(p));
+    const getProjects = (mode) => {
+
+        if (!mode) return projects.map(p => serialized(p));
+
+        if (mode === 'live') return cloneDeep(projects);
+    }
 
     return { createProject, addProject, editProject, removeProject, getProject, getProjects };
 }
