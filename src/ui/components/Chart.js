@@ -13,7 +13,9 @@ export const createChart = (config) => {
             type: config.type,
             data: {
                 datasets: [{
-                    data: config.data
+                    label: config.label,
+                    data: config.data,
+                    borderWidth: 1
                 }]
             },
             options: {
