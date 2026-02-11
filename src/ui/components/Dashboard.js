@@ -43,7 +43,16 @@ export const Dashboard = (function () {
             completeTasksCard = createDashboardCard({ svg: SquareCheckBig, options: { stroke: '#18F2B2' } }, "Finished Tasks", taskCountObj.completed, taskCountObj.completed ? "Good job! Keep on going!" : "Work your ass off!");
             streakCard = createDashboardCard({ svg: Zap, options: { stroke: '#18F2B2' } }, "Streaks", createDayNodes(), "");
             taskCard = createDashboardCard({ svg: Trophy, options: { stroke: '#18F2B2' } }, "Relevant Tasks", 0, "Your top 3 important tasks");
-            chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI", createChart({ type: 'bar', date: format(Date.now(), "PP"), data: user.getProjects() }), "Describes how well you perform");
+            chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI",
+                createChart(
+                    {
+                        type: 'line', 
+                        data: user.getProjects(),
+                        label: '# of tasks done per day'
+                    }),
+                "Describes how well you perform"
+            );
+
             completionCard = createDashboardCard({ svg: Percent, options: { stroke: '#18F2B2' } }, "Completion Rate", percentage(taskCountObj.completed, taskCountObj.unfinished + taskCountObj.completed), "Your completion rate in percent");
 
             const cardsArr = [
