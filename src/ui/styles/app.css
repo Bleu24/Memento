@@ -134,7 +134,8 @@ button>p {
 
 .mainPanel::-webkit-scrollbar,
 .tasksContainer::-webkit-scrollbar,
-.projectsContainer::-webkit-scrollbar {
+.projectsContainer::-webkit-scrollbar,
+.main__dashboard::-webkit-scrollbar {
     display: none;
 }
 
@@ -293,11 +294,13 @@ svg.delete:hover {
     padding: 1% 2%;
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly
+    justify-content: space-evenly;
+    overflow: auto;
 }
 
 .chart {
-    width: 600px;
+    width: 100%;
+    height: 85%;
     border: 1px solid var(--border-color);
     padding: 1rem;
     border-radius: 1rem;
@@ -346,6 +349,7 @@ svg.delete:hover {
     display: flex;
     flex-direction: column;
     height: 100%;
+    gap: 0.5rem;
 }
 
 .cards .card .card__header,
