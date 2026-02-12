@@ -46,7 +46,7 @@ export const Dashboard = (function () {
             chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI",
                 createChart(
                     {
-                        type: 'line', 
+                        type: 'bar', 
                         data: user.getProjects(),
                         label: '# of tasks done per day'
                     }),
