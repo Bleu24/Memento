@@ -45,15 +45,15 @@ export const LocalRepository = (function () {
                 const parsedObj = JSON.parse(loadedObj);
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
                 parsedObj.tasks.forEach(t => {
-                    const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(user, taskProps);
                     user.addTask(task);
                 });
                 parsedObj.completedTasks.forEach(ct => {
-                    const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(user, taskProps);
                     user.addTask(task);
@@ -66,16 +66,16 @@ export const LocalRepository = (function () {
                     user.addProject(project);
 
                     p.tasks.forEach(t => {
-                        const { id, title, description, dueDate, priority, isDone } = t
-                        const taskProps = [id, title, description, dueDate, priority, isDone];
+                        const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                        const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                         const task = UserService.createTaskForUser(project, taskProps);
                         project.addTask(task);
                     });
 
                     p.completedTasks.forEach(ct => {
-                        const { id, title, description, dueDate, priority, isDone } = ct
-                        const taskProps = [id, title, description, dueDate, priority, isDone];
+                        const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                        const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                         const task = UserService.createTaskForUser(user, taskProps);
                         project.addTask(task);
@@ -103,15 +103,15 @@ export const LocalRepository = (function () {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => {
-                const { id, title, description, dueDate, priority, isDone } = t
-                const taskProps = [id, title, description, dueDate, priority, isDone];
+                const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
             });
             parsedObj.completedTasks.forEach(ct => {
-                const { id, title, description, dueDate, priority, isDone } = ct
-                const taskProps = [id, title, description, dueDate, priority, isDone];
+                const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
@@ -124,16 +124,16 @@ export const LocalRepository = (function () {
                 user.addProject(project);
 
                 p.tasks.forEach(t => {
-                    const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(project, taskProps);
                     project.addTask(task);
                 });
 
                 p.completedTasks.forEach(ct => {
-                    const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(user, taskProps);
                     project.addTask(task);
@@ -157,15 +157,15 @@ export const LocalRepository = (function () {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
             parsedObj.tasks.forEach(t => {
-                const { id, title, description, dueDate, priority, isDone } = t
-                const taskProps = [id, title, description, dueDate, priority, isDone];
+                const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
             });
             parsedObj.completedTasks.forEach(ct => {
-                const { id, title, description, dueDate, priority, isDone } = ct
-                const taskProps = [id, title, description, dueDate, priority, isDone];
+                const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                 const task = UserService.createTaskForUser(user, taskProps);
                 user.addTask(task);
@@ -178,16 +178,16 @@ export const LocalRepository = (function () {
                 user.addProject(project);
 
                 p.tasks.forEach(t => {
-                    const { id, title, description, dueDate, priority, isDone } = t
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = t
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(project, taskProps);
                     project.addTask(task);
                 });
 
                 p.completedTasks.forEach(ct => {
-                    const { id, title, description, dueDate, priority, isDone } = ct
-                    const taskProps = [id, title, description, dueDate, priority, isDone];
+                    const { id, title, description, dueDate, priority, isDone, completedAt } = ct
+                    const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
 
                     const task = UserService.createTaskForUser(user, taskProps);
                     project.addTask(task);
