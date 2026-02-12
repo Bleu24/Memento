@@ -19,10 +19,11 @@ export const createTaskHolder = () => {
         return structuredClone(serializedTask);
     }
 
-    const createTask = (id, title, description, dueDate, priority, isDone) => {
+    const createTask = (id, title, description, dueDate, priority, isDone, completedAt) => {
         if (id) {
             const task = new Task(id, title, description, dueDate, priority);
             task.isDone = isDone;
+            task.completedAt = completedAt;
             return task;
         }
         else {
@@ -92,7 +93,7 @@ export const createTaskHolder = () => {
 
     const getTasks = () => tasks.map(task => serialize(task));
     const getCompletedTasks = () => completedTasks.map(ct => serialize(ct));
-    const getTasksCount = () => ({unfinished: tasks.length, completed: completedTasks.length});
+    const getTasksCount = () => ({ unfinished: tasks.length, completed: completedTasks.length });
 
     return { createTask, addTask, removeTask, editTask, completeTask, undoCompletion, getTasks, getCompletedTasks, getTask, getTasksCount };
 }
