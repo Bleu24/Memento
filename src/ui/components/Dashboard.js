@@ -4,6 +4,7 @@ import { createDayNodes } from "./DayNodes.js";
 import { UserService } from "../../services/UserService.js";
 import { createChart } from "./Chart.js";
 import { format } from "date-fns";
+import { displayThreeTasks } from "./TopThreeTasks.js";
 
 const percentage = (num, denom) => {
     let quotient = 0;
@@ -42,11 +43,11 @@ export const Dashboard = (function () {
             incompleteTasksCard = createDashboardCard({ svg: ListTodo, options: { stroke: '#18F2B2' } }, "Unfinished Tasks", taskCountObj.unfinished, taskCountObj.unfinished ? "Work your ass off!" : "Good job! No work for today!");
             completeTasksCard = createDashboardCard({ svg: SquareCheckBig, options: { stroke: '#18F2B2' } }, "Finished Tasks", taskCountObj.completed, taskCountObj.completed ? "Good job! Keep on going!" : "Work your ass off!");
             streakCard = createDashboardCard({ svg: Zap, options: { stroke: '#18F2B2' } }, "Streaks", createDayNodes(), "");
-            taskCard = createDashboardCard({ svg: Trophy, options: { stroke: '#18F2B2' } }, "Relevant Tasks", 0, "Your top 3 important tasks");
+            taskCard = createDashboardCard({ svg: Trophy, options: { stroke: '#18F2B2' } }, "Relevant Tasks", displayThreeTasks(user), "Your top 3 important tasks");
             chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI",
                 createChart(
                     {
-                        type: 'bar', 
+                        type: 'bar',
                         data: user.getProjects(),
                         label: '# of tasks done per day'
                     }),
