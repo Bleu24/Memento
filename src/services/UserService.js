@@ -100,6 +100,24 @@ export const UserService = (function () {
         return count;
     }
 
+    const retrieveAllTasks = (user) => {
+        let retrievedTasks = []
+
+        const userTasks = user.getTasks();
+        const userProjects = user.getProjects("live");
+
+
+        for (const ut of userTasks) retrievedTasks.push({ ...ut });
+
+        for (const up of userProjects) {
+            const projTasks = up.getTasks();
+
+            for (const pt of projTasks) retrievedTasks.push({ ...pt });
+        }
+
+        return [...retrievedTasks];
+    }
+
 
 
 
@@ -107,6 +125,7 @@ export const UserService = (function () {
         assignTask,
         editTask,
         retrieveTask,
+        retrieveAllTasks,
         removeTask,
         assignProject,
         editProject,
