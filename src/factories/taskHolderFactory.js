@@ -49,8 +49,7 @@ export const createTaskHolder = () => {
     const editTask = (selectedTask, changes) => {
         tasks.forEach(task => {
             if (task.id === selectedTask.id) {
-                for (const key in task) {
-                    if (key === "id" || key === "completedAt") continue;
+                for (const key in changes) {
                     task[key] = changes[key];
                 }
                 task.xp =
