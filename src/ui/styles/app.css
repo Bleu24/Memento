@@ -366,7 +366,8 @@ svg.delete:hover {
 }
 
 .card__text {
-    font-weight: 300;
+    font-weight: 250;
+    font-size: 0.95rem;
     color: var(--secondary-text-color);
 }
 
@@ -381,7 +382,7 @@ svg.delete:hover {
     display: flex;
     justify-content: center;
     gap: 1rem;
-    align-self: center;
+    align-items: center;
     height: 85%;
 
 }
@@ -392,6 +393,7 @@ svg.delete:hover {
     align-items: center;
     gap: 1rem;
     justify-content: center;
+    height: 100px;
 }
 
 .week span>svg {
@@ -617,4 +619,39 @@ legend {
 .projectList__item:hover {
     cursor: pointer;
     border-color: var(--light-border-color);
+}
+
+.recommendedTaskList .taskList__container .taskList__item {
+    font-size: 14px;
+    font-family: var(--text-font);
+    padding: 0.1rem 0.5rem;
+}
+
+.recommendedTaskList .taskList__container .taskList__item .item__left label {
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    width: 50px;
+}
+
+.recommendedTaskList .taskList__container .taskList__item svg {
+    height: 20px;
+    width: 20px;
+}
+
+.recommendationContainer {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.recommendedTaskList {
+    height: 100%;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+
 }
