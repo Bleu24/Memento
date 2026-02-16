@@ -11,6 +11,7 @@ export class User {
     #name;
     #id;
     #isLoggedIn;
+    completionRate;
 
     constructor(id, email, name, xp, level, isLoggedIn) {
         const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
@@ -57,5 +58,14 @@ export class User {
 
     get isLoggedIn() {
         return this.#isLoggedIn;
+    }
+
+    set completionRate(value) {
+        if (!value || typeof value !== 'number') return null;
+        this.completionRate = value;
+    }
+
+    get completionRate() {
+        return this.completionRate;
     }
 }
