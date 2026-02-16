@@ -54,7 +54,7 @@ export const Dashboard = (function () {
                 "Describes how well you perform"
             );
 
-            completionCard = createDashboardCard({ svg: Percent, options: { stroke: '#18F2B2' } }, "Completion Rate", percentage(taskCountObj.completed, taskCountObj.unfinished + taskCountObj.completed), "Your completion rate in percent");
+            completionCard = createDashboardCard({ svg: Percent, options: { stroke: '#18F2B2' } }, "Completion Rate", percentage(taskCountObj.completed, taskCountObj.unfinished + taskCountObj.completed) + user.completionRate, "Your completion rate in percent");
 
             const cardsArr = [
                 incompleteTasksCard,
