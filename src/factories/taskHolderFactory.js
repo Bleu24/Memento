@@ -94,5 +94,16 @@ export const createTaskHolder = () => {
     const getCompletedTasks = () => completedTasks.map(ct => serialize(ct));
     const getTasksCount = () => ({ unfinished: tasks.length, completed: completedTasks.length });
 
-    return { createTask, addTask, removeTask, editTask, completeTask, undoCompletion, getTasks, getCompletedTasks, getTask, getTasksCount };
+    return {
+        createTask,
+        addTask,
+        removeTask,
+        editTask,
+        completeTask,
+        undoCompletion,
+        getTasks,
+        getCompletedTasks,
+        getTask,
+        getTasksCount
+    };
 }
