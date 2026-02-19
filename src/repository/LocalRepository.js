@@ -20,8 +20,7 @@ export const LocalRepository = (function () {
             tasks: target.getTasks(),
             completedTasks: target.getCompletedTasks(),
             isLoggedIn: target.isLoggedIn,
-            tab: target.getTab(),
-            completionRate: target.completionRate
+            tab: target.getTab()
         }
 
         const stringify = JSON.stringify(state);
@@ -45,7 +44,6 @@ export const LocalRepository = (function () {
             try {
                 const parsedObj = JSON.parse(loadedObj);
                 const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-                user.completionRate = parsedObj.completionRate;
                 parsedObj.tasks.forEach(t => {
                     const { id, title, description, dueDate, priority, isDone, completedAt } = t
                     const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
@@ -104,7 +102,6 @@ export const LocalRepository = (function () {
         try {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-            user.completionRate = parsedObj.completionRate;
             parsedObj.tasks.forEach(t => {
                 const { id, title, description, dueDate, priority, isDone, completedAt } = t
                 const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
@@ -159,7 +156,6 @@ export const LocalRepository = (function () {
         try {
             const parsedObj = JSON.parse(loadedObj);
             const user = new User(parsedObj.id, parsedObj.email, parsedObj.name, parsedObj.xp, parsedObj.level);
-            user.completionRate = parseInt(parsedObj.completionRate);
             parsedObj.tasks.forEach(t => {
                 const { id, title, description, dueDate, priority, isDone, completedAt } = t
                 const taskProps = [id, title, description, dueDate, priority, isDone, completedAt];
