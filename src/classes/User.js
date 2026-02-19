@@ -10,21 +10,17 @@ export class User {
     #email;
     #name;
     #id;
-    #isLoggedIn;
-    completionRate;
+    #isLoggedIn = false;
 
-    constructor(id, email, name, xp, level, isLoggedIn) {
+    constructor(id, email, name, xp, level) {
         const invalidXp = typeof xp !== "number" || xp < 0 || Number.isNaN(xp);
         const invalidLevel = typeof level !== "number" || level < 0 || Number.isNaN(level);
-        const invalidStatus = typeof isLoggedIn !== "boolean";
         if (invalidXp) xp = 0;
         if (invalidLevel) level = 1;
-        if (invalidStatus) isLoggedIn = false;
         const xpHolder = createExpHolder(xp);
         this.#id = id ? id : crypto.randomUUID();
         this.#email = email;
         this.#name = name;
-        this.#isLoggedIn = isLoggedIn;
         Object.assign(this, xpHolder, createProjectHolder(), createTaskHolder(), createLevelHolder(xpHolder), createTabHolder("dashboard"), createStreakHolder(undefined));
     }
 
@@ -60,12 +56,4 @@ export class User {
         return this.#isLoggedIn;
     }
 
-    set completionRate(value) {
-        if (!value || typeof value !== 'number') return null;
-        this.completionRate = value;
-    }
-
-    get completionRate() {
-        return this.completionRate;
-    }
 }
