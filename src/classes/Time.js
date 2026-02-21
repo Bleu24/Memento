@@ -11,8 +11,8 @@ export class Time {
         return this.#dateNow;
     }
 
-    static getDifferenceFromNow(date) {
-        return differenceInCalendarDays(this.#dateNow, date);
+    static isConsecutive(late, early) {
+        return differenceInCalendarDays(late, early) === 1 ? true : false;
     }
 
     static getWeekOfDate(date) {
@@ -31,7 +31,7 @@ export class Time {
         const start = startOfWeek(this.#dateNow);
 
         for (let i = 0; i < 7; i++) {
-            week.push(addDays(start, i).toDateString());
+            this.#weekNow.push(addDays(start, i).toDateString());
         }
 
         return [...this.#weekNow];
