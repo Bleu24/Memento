@@ -2,6 +2,7 @@ import { createElement, Dot, Ellipsis, CirclePlus, X } from "lucide";
 import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from "../../services/UserService";
 import { LocalRepository } from "../../repository/LocalRepository";
+import { format } from "date-fns";
 
 const displayTaskModal = (mode) => {
     const bg = document.createElement('div');
@@ -178,7 +179,7 @@ const handleClick = (e) => {
         const dateInput = document.querySelector("input#date");
         titleInput.placeholder = "Coding: To-Do App";
         descInput.placeholder = "Debugging line 43 col 23";
-        dateInput.placeholder = "08/19/2025";
+        dateInput.placeholder = format(Date.now(), "dd/MM/yyyy");
     }
 
     if (taskItem) {
