@@ -1,4 +1,6 @@
+import { Streak } from "../classes/Streak.js";
 import { User } from "../classes/User.js";
+import { StreakService } from "../services/StreakService.js";
 import { UserService } from "../services/UserService.js";
 
 export const LocalRepository = (function () {
@@ -19,6 +21,7 @@ export const LocalRepository = (function () {
             projects: target.getProjects(),
             tasks: target.getTasks(),
             completedTasks: target.getCompletedTasks(),
+            streaks: target.getStreaks(),
             isLoggedIn: target.isLoggedIn,
             tab: target.getTab()
         }
@@ -149,6 +152,7 @@ export const LocalRepository = (function () {
 
     }
 
+    // TODO: Add streaks object
     const loadCurrentUser = () => {
         const loadedObj = localStorage.getItem('currentUser');
         if (!loadedObj) return null;
@@ -193,6 +197,13 @@ export const LocalRepository = (function () {
                     project.addTask(task);
                 });
             });
+            parsedObj.streaks.forEach(s => {
+                const { date, tasksCompleted } = s;
+
+                const streak = new Streak(date, tasksCompleted);
+                user.addStreak(streak);
+            });
+
             user.setTab(parsedObj.tab);
             user.isLoggedIn = parsedObj.isLoggedIn;
             return user;
