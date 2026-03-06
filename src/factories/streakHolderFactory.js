@@ -1,11 +1,19 @@
 import { Streak } from "../classes/Streak.js";
 import { Time } from "../classes/Time.js";
-import { deepCopy } from "../utils/deepCopy.js";
+import { format } from "date-fns";
 
 export const createStreakHolder = (dataObj) => {
     let streaks = [];
     let currentStreak = dataObj?.currentStreak || 0;
     let longestStreak = dataObj?.longestStreak || 0;
+
+    const serialize = (streak) => {
+        const { logTask, undoLog, ...rest } = streak;
+
+        const serializedStreak = { ...rest };
+
+        return structuredClone(serializedStreak);
+    }
 
     const resetStreak = () => {
         currentStreak = 0;
@@ -14,13 +22,22 @@ export const createStreakHolder = (dataObj) => {
     const logActivity = () => {
         const today = Time.dateNow;
 
-        let todayStreak = streaks.find(s => s.dateFormatted === format(today, "dd-MM-yy"));
+        let todayStreak = streaks.find(s => s.dateFormatted === format(today, "yyyy-MM-dd"));
 
         if (!todayStreak) {
             todayStreak = new Streak(today);
             streaks.push(todayStreak);
         }
         todayStreak.logTask();
+        calculateStreak();
+    }
+
+    const undoLog = () => {
+        const today = Time.dateNow;
+
+        let todayStreak = streaks.find(s => s.dateFormatted === format(today, "yyyy-MM-dd"));
+
+        todayStreak.undoLog();
         calculateStreak();
     }
 
@@ -52,14 +69,23 @@ export const createStreakHolder = (dataObj) => {
                     else currentStreak = 1;
                 }
             } else currentStreak = 0;
-            
+
             if (currentStreak > longestStreak) {
                 longestStreak = currentStreak;
             }
         }
     }
 
-    const getStreaks = () => deepCopy(streaks);
+    const getStreaks = () => streaks.map(s => serialize(s));
 
-    return { resetStreak, logActivity, hardResetStreak, getLongestStreak, addStreak };
+    return {
+        resetStreak,
+        logActivity,
+        undoLog,
+        hardResetStreak,
+        getLongestStreak,
+        addStreak,
+        getStreaks,
+        serialize
+    };
 }
