@@ -11,7 +11,7 @@ export class Task {
         this.#id = id ? id : crypto.randomUUID();
         this.title = title;
         this.description = description;
-        this.dueDate = typeof dueDate === 'string' ? dueDate : format(dueDate, "yyyy-MM-dd");
+        this.dueDate = typeof dueDate === 'string' ? dueDate : format(dueDate, "MM-dd-yyyy");
         this.priority = priority;
     }
 
@@ -29,7 +29,7 @@ export class Task {
     }
 
     set completedAt(date) {
-        this.#completedAt = date ? format(date, "yyyy-MM-dd") : null;
+        this.#completedAt = date ? format(date, "MM-dd-yyyy") : null;
     }
 
     get isDone() {
