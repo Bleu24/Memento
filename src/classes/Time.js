@@ -2,13 +2,10 @@ import { format, differenceInCalendarDays, addDays, startOfWeek, getDay } from "
 
 export class Time {
 
-    static #dateNow;
-    static #weekNow;
-    static #dayNow;
 
     static get dateNow() {
-        this.#dateNow = new Date(Date.now());
-        return this.#dateNow;
+        const date = new Date(Date.now()).toISOString().split('T')[0];
+        return date;
     }
 
     static isConsecutive(late, early) {
@@ -27,25 +24,26 @@ export class Time {
     }
 
     static get weekNow() {
-        this.#weekNow = [];
-        const start = startOfWeek(this.#dateNow);
+        const week = [];
+        const start = startOfWeek(Time.dateNow);
 
         for (let i = 0; i < 7; i++) {
-            this.#weekNow.push(addDays(start, i).toDateString());
+            week.push(addDays(start, i).toDateString());
         }
 
-        return [...this.#weekNow];
+        return [...week];
     }
 
     static get dayNow() {
         const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        let selectedDay = "";
 
         days.forEach(day => {
-            if (days.indexOf(day) === getDay(this.dateNow)) {
-                this.#dayNow = day;
+            if (days.indexOf(day) === getDay(Time.dateNow)) {
+                selectedDay = day;
             }
         });
 
-        return this.#dayNow;
+        return selectedDay;
     }
 }
