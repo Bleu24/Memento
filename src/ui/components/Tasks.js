@@ -3,6 +3,7 @@ import { MainPanel } from '../components/MainPanel.js';
 import { UserService } from "../../services/UserService";
 import { LocalRepository } from "../../repository/LocalRepository";
 import { format } from "date-fns";
+import { StreakService } from "../../services/StreakService.js";
 
 const displayTaskModal = (mode) => {
     const bg = document.createElement('div');
@@ -179,7 +180,7 @@ const handleClick = (e) => {
         const dateInput = document.querySelector("input#date");
         titleInput.placeholder = "Coding: To-Do App";
         descInput.placeholder = "Debugging line 43 col 23";
-        dateInput.placeholder = format(Date.now(), "dd/MM/yyyy");
+        dateInput.placeholder = format(Date.now(), "MM/dd/yyyy");
     }
 
     if (taskItem) {
@@ -236,8 +237,10 @@ const handleClick = (e) => {
 
             if (e.currentTarget.className === 'completedTasksContainer__taskList' && targetTask.isDone === true) {
                 UserService.undoComplete(targetTask, target, user);
+                StreakService.undoLogActivity(user)
             } else {
                 UserService.completeTask(targetTask, target, user);
+                StreakService.logActivity(user);
             }
 
             UserService.saveProfileToStorage(LocalRepository, user);
@@ -332,7 +335,7 @@ export const Tasks = (function () {
 
             //right side elements
             const dueDate = document.createElement('time');
-            dueDate.textContent = task.dueDate;
+            dueDate.textContent = format(task.dueDate, 'MMM do');
 
             const prio = createElement(Dot);
             const edit = createElement(Ellipsis);
