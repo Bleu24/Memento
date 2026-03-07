@@ -29,6 +29,7 @@ export const MainPanel = (function () {
             case "tasks":
                 main.appendChild(Tasks.el);
                 Tasks.render(user);
+                Tasks.resetOrigin();
                 break;
             case "projects":
                 main.appendChild(Projects.el);
