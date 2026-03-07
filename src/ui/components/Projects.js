@@ -168,7 +168,9 @@ const handleClick = (e) => {
         UIService.render(MainPanel, project);
 
         const list = document.querySelector(".tasksContainer__taskList");
+        const completedList = document.querySelector(".completedTasksContainer__taskList");
         list.setAttribute('data-origin', `project-${project.id}`);
+        completedList.setAttribute('data-origin', `project-${project.id}`);
 
 
     }
