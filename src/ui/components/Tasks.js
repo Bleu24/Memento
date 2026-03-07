@@ -4,6 +4,7 @@ import { UserService } from "../../services/UserService";
 import { LocalRepository } from "../../repository/LocalRepository";
 import { format } from "date-fns";
 import { StreakService } from "../../services/StreakService.js";
+import { User } from "../../classes/User.js";
 
 const displayTaskModal = (mode) => {
     const bg = document.createElement('div');
@@ -386,7 +387,7 @@ export const Tasks = (function () {
 
             //right side elements
             const dueDate = document.createElement('time');
-            dueDate.textContent = task.dueDate;
+            dueDate.textContent = format(task.dueDate, 'MMM do');
 
             const prio = createElement(Dot);
             const edit = createElement(Ellipsis);
@@ -421,6 +422,14 @@ export const Tasks = (function () {
         completedTaskListObj.taskCounter.textContent = completedTasks.length;
     }
 
+    const resetOrigin = () => {
+        const list = document.querySelector('.tasksContainer__taskList');
+        const completedList = document.querySelector('.completedTasksContainer__taskList');
+
+        list.removeAttribute('data-origin');
+        completedList.removeAttribute('data-origin');
+    }
+
     normalTaskListObj.taskList.addEventListener('click', handleClick);
     completedTaskListObj.taskList.addEventListener('click', handleClick);
 
@@ -431,5 +440,5 @@ export const Tasks = (function () {
     tasksDiv.appendChild(completedTaskListObj.taskList);
 
 
-    return { el: tasksDiv, render };
+    return { el: tasksDiv, render, resetOrigin };
 })();
