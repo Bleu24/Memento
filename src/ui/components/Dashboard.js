@@ -2,7 +2,7 @@ import { createDashboardCard } from "./Card.js";
 import { ListTodo, SquareCheckBig, Zap, Trophy, ChartLine, Percent } from "lucide";
 import { createDayNodes } from "./DayNodes.js";
 import { UserService } from "../../services/UserService.js";
-import { createChart } from "./Chart.js";
+import { createChart, getWeeklyTaskChartConfig } from "./Chart.js";
 import { format } from "date-fns";
 import { displayThreeTasks } from "./TopThreeTasks.js";
 import { StreakService } from "../../services/StreakService.js";
@@ -47,12 +47,7 @@ export const Dashboard = (function () {
             streakCard = createDashboardCard({ svg: Zap, options: { stroke: '#18F2B2' } }, "Streaks", createDayNodes(streaks), "");
             taskCard = createDashboardCard({ svg: Trophy, options: { stroke: '#18F2B2' } }, "Relevant Tasks", displayThreeTasks(user), displayThreeTasks(user) ? "Your top 3 important tasks" : "No new tasks");
             chartCard = createDashboardCard({ svg: ChartLine, options: { stroke: '#18F2B2' } }, "KPI",
-                createChart(
-                    {
-                        type: 'bar',
-                        data: user.getProjects(),
-                        label: '# of tasks done per day'
-                    }),
+                createChart(getWeeklyTaskChartConfig(streaks)),
                 "Describes how well you perform"
             );
 
