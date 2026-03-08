@@ -37,21 +37,18 @@ export function createDayNodes(streaks) {
 
     const weekNodes = Array.from(container.children);
 
-    for (let i = 0; i < streaks.length; i++) {
-        const streakDate = streaks[i].date;
-        const targetNode = weekNodes.find(wn => wn.dataset.date === streakDate);
-        const nodeDate = targetNode.dataset.date;
+    for (const node of weekNodes) {
+        const nodeDate = node.dataset.date;
+        const streak = streaks.find(s => s.date === nodeDate);
 
-        if (streakDate === nodeDate && streaks[i].tasksCompleted >= 3) {
-            const flameSvg = targetNode.querySelector('svg');
-            const text = targetNode.querySelector('p');
+        if (streak && streak.tasksCompleted >= 3) {
+            const flameSvg = node.querySelector('svg');
+            const text = node.querySelector('p');
             flameSvg.style.stroke = '#f2a618';
             text.style.color = '#f2a618';
 
-            if (nodeDate === Time.dateNow) targetNode.style.border = "1px solid #f2a618";
-
+            if (nodeDate === Time.dateNow) node.style.border = "1px solid #f2a618";
         }
-
     }
 
 
